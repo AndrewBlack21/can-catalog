@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Leaf, ShieldCheck } from "lucide-react";
+import { Leaf } from "lucide-react";
 export default function Header({ admin = false }) {
   return (
     <header className="site-header">
@@ -13,13 +13,9 @@ export default function Header({ admin = false }) {
         </span>
       </Link>
       <nav>
-        {admin ? (
+        {admin && (
           <Link className="text-link" to="/">
             Ver catálogo ↗
-          </Link>
-        ) : (
-          <Link className="admin-link" to="/admin/login">
-            <ShieldCheck size={15} /> Área administrativa
           </Link>
         )}
       </nav>
