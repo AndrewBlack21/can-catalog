@@ -73,11 +73,11 @@ export default function DashboardPage() {
     return () => { alive = false; listener.subscription.unsubscribe(); };
   }, []);
 
-  if (!isSupabaseConfigured) return <Navigate to="/admin/login" replace />;
+  if (!isSupabaseConfigured) return <Navigate to="/adm" replace />;
   if (checkingAccess || session === undefined) return <div className="empty-state">Verificando sessão e permissões...</div>;
-  if (!session || !authorized) return <Navigate to="/admin/login" replace />;
+  if (!session || !authorized) return <Navigate to="/adm" replace />;
 
-  async function logout() { await supabase.auth.signOut(); navigate('/admin/login'); }
+  async function logout() { await supabase.auth.signOut(); navigate('/adm'); }
   function resetForm() { setEditingId(null); setForm(blankProduct); setFiles([]); setError(''); setNotice(''); }
   function editProduct(product) {
     setEditingId(product.id);
