@@ -16,6 +16,7 @@ const slugify = (value) => value.toLocaleLowerCase('pt-BR').normalize('NFD').rep
 export default function DashboardPage() {
   const [session, setSession] = useState(undefined);
   const [authorized, setAuthorized] = useState(false);
+  const [checkingAccess, setCheckingAccess] = useState(true);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState('');
@@ -40,13 +41,30 @@ export default function DashboardPage() {
   useEffect(() => {
     if (!isSupabaseConfigured) return;
     let alive = true;
-    supabase.auth.getSession().then(async ({ data }) => {
+    supabase.auth.getSession().then(async ({ data, error: sessionError }) => {
       if (!alive) return;
-      setSession(data.session);
-      if (data.session) {
-        const { data: admin, error: adminError } = await supabase.from('catalog_admins').select('user_id').eq('user_id', data.session.user.id).maybeSingle();
-        if (alive && !adminError && admin) { setAuthorized(true); await loadData(); }
-        else if (alive) setAuthorized(false);
+      const currentSession = sessionError ? null : data.session;
+      setSession(currentSession);
+      if (!currentSession) {
+        setAuthorized(false);
+        setCheckingAccess(false);
+        return;
+      }
+      const { data: admin, error: adminError } = await supabase
+        .from('catalog_admins')
+        .select('user_id')
+        .eq('user_id', currentSession.user.id)
+        .maybeSingle();
+      if (!alive) return;
+      const isAdmin = !adminError && Boolean(admin);
+      setAuthorized(isAdmin);
+      if (isAdmin) await loadData();
+      if (alive) setCheckingAccess(false);
+    }).catch(() => {
+      if (alive) {
+        setSession(null);
+        setAuthorized(false);
+        setCheckingAccess(false);
       }
     });
     const { data: listener } = supabase.auth.onAuthStateChange((_event, next) => {
@@ -56,7 +74,7 @@ export default function DashboardPage() {
   }, []);
 
   if (!isSupabaseConfigured) return <Navigate to="/admin/login" replace />;
-  if (session === undefined) return <div className="empty-state">Verificando sessão...</div>;
+  if (checkingAccess || session === undefined) return <div className="empty-state">Verificando sessão e permissões...</div>;
   if (!session || !authorized) return <Navigate to="/admin/login" replace />;
 
   async function logout() { await supabase.auth.signOut(); navigate('/admin/login'); }
