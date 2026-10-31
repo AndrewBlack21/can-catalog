@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { ImagePlus, LogOut, PackagePlus, Pencil, RefreshCw, Save, ShieldCheck, Trash2, X } from 'lucide-react';
+import { Calculator, ImagePlus, LogOut, PackagePlus, Pencil, RefreshCw, Save, ShieldCheck, Trash2, X } from 'lucide-react';
 import Header from '../../components/Header.jsx';
 import { isSupabaseConfigured, supabase } from '../../lib/supabase.js';
 import { formatCurrency } from '../../utils/formatCurrency.js';
@@ -157,7 +157,7 @@ export default function DashboardPage() {
   }
 
   return <><Header admin/><main className="admin-main">
-    <div className="admin-title-row"><div><span className="eyebrow"><ShieldCheck size={14}/> PAINEL RESTRITO</span><h1>Seu catálogo,<br/><em>sob controle.</em></h1><p>Gerencie os produtos que aparecem na vitrine CAN Group.</p></div><button className="button button-outline" onClick={logout}><LogOut size={16}/> Sair</button></div>
+    <div className="admin-title-row"><div><span className="eyebrow"><ShieldCheck size={14}/> PAINEL RESTRITO</span><h1>Seu catálogo,<br/><em>sob controle.</em></h1><p>Gerencie os produtos que aparecem na vitrine CAN Group.</p></div><div className="admin-title-actions"><button className="button button-dark" onClick={() => navigate("/adm/orcamento-3d")}><Calculator size={16}/> Orçamento 3D</button><button className="button button-outline" onClick={logout}><LogOut size={16}/> Sair</button></div></div>
     <div className="stats-grid"><div className="stat-card"><span>Produtos cadastrados</span><strong>{products.length}</strong></div><div className="stat-card"><span>Publicados</span><strong>{products.filter(p => p.published).length}</strong></div><div className="stat-card"><span>Categorias ativas</span><strong>{categories.filter(c => c.active).length}</strong></div></div>
     {error && <div className="form-error" role="alert">{error}</div>}{notice && <div className="admin-success" role="status">{notice}</div>}
     <section className="admin-editor">
