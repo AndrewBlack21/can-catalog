@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
-import { Leaf } from "lucide-react";
+import companyLogo from "../assets/can-logo-outline.svg";
 export default function Header({ admin = false }) {
   return (
     <header className="site-header">
       <Link to="/" className="brand">
-        <span className="brand-mark">
-          <Leaf size={22} />
-        </span>
+        <img className="brand-logo" src={companyLogo} alt="CAN Group" />
         <span>
           <strong>CAN GROUP</strong>
           <small>IMPRESSÃO 3D · PERSONALIZADOS</small>
