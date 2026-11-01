@@ -1,10 +1,13 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
   Search,
   Sparkles,
   MessageCircle,
+  ChevronLeft,
+  ChevronRight,
+  Star,
 } from "lucide-react";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
@@ -19,6 +22,7 @@ export default function CatalogPage() {
   const [category, setCategory] = useState("all");
   const [loading, setLoading] = useState(isSupabaseConfigured);
   const [error, setError] = useState("");
+  const featuredTrackRef = useRef(null);
 
   useEffect(() => {
     if (!isSupabaseConfigured) return;
@@ -52,6 +56,16 @@ export default function CatalogPage() {
       active = false;
     };
   }, []);
+
+  const featuredProducts = useMemo(
+    () => products.filter((p) => p.featured && p.availability !== "unavailable"),
+    [products],
+  );
+
+  const scrollFeatured = (direction) => {
+    if (!featuredTrackRef.current) return;
+    featuredTrackRef.current.scrollBy({ left: direction * featuredTrackRef.current.clientWidth * 0.82, behavior: "smooth" });
+  };
 
   const visibleProducts = useMemo(
     () =>
@@ -137,6 +151,25 @@ export default function CatalogPage() {
                 painel.
               </span>
             </div>
+          )}
+          {!loading && !error && featuredProducts.length > 0 && (
+            <section className="featured-section" aria-label="Produtos em destaque">
+              <div className="featured-heading">
+                <div>
+                  <span className="eyebrow"><Star size={14} fill="currentColor" /> ESCOLHAS CAN GROUP</span>
+                  <h2>Em <em>destaque.</em></h2>
+                  <p>Peças que merecem aparecer primeiro.</p>
+                </div>
+                <div className="featured-controls">
+                  <button type="button" aria-label="Ver destaques anteriores" onClick={() => scrollFeatured(-1)}><ChevronLeft size={19}/></button>
+                  <button type="button" aria-label="Ver próximos destaques" onClick={() => scrollFeatured(1)}><ChevronRight size={19}/></button>
+                </div>
+              </div>
+              <div className="featured-track" ref={featuredTrackRef}>
+                {featuredProducts.map((p) => <div className="featured-slide" key={p.id}><ProductCard product={p} /></div>)}
+              </div>
+              <div className="featured-hint">Deslize para explorar <span>← →</span></div>
+            </section>
           )}
           {isSupabaseConfigured && (
             <div className="catalog-tools">
