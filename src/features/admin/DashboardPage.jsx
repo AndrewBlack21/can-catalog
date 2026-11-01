@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Calculator, ImagePlus, LogOut, PackagePlus, Pencil, RefreshCw, Save, ShieldCheck, Trash2, X } from 'lucide-react';
+import { Calculator, ImagePlus, LogOut, PackagePlus, Pencil, RefreshCw, Save, ShieldCheck, Star, Trash2, X } from 'lucide-react';
 import Header from '../../components/Header.jsx';
 import { isSupabaseConfigured, supabase } from '../../lib/supabase.js';
 import { formatCurrency } from '../../utils/formatCurrency.js';
@@ -129,6 +129,13 @@ export default function DashboardPage() {
     resetForm();
     setNotice(editingId ? 'Produto atualizado com sucesso.' : 'Produto cadastrado com sucesso.');
   }
+  async function setFeatured(product, featured) {
+    setBusy(true); setError(""); setNotice("");
+    const { error: err } = await supabase.from("products").update({ featured }).eq("id", product.id);
+    if (err) setError("Não foi possível atualizar o destaque.");
+    else { await loadData(); setNotice(featured ? "Produto adicionado aos destaques." : "Produto removido dos destaques."); }
+    setBusy(false);
+  }
   async function setPublished(product, published) {
     setBusy(true); setError(''); setNotice('');
     const { error: err } = await supabase.from('products').update({ published }).eq('id', product.id);
@@ -180,7 +187,7 @@ export default function DashboardPage() {
     </section>
     <section className="admin-categories"><div><h2>Categorias</h2><p>Crie categorias para organizar a vitrine.</p></div><form onSubmit={addCategory}><input value={categoryName} onChange={e => setCategoryName(e.target.value)} required maxLength={80} placeholder="Nova categoria"/><button className="button button-dark" disabled={busy}><PackagePlus size={16}/> Adicionar</button></form><div className="admin-category-list">{categories.map(c => <span key={c.id}>{c.name}{!c.active && ' (inativa)'}</span>)}</div></section>
     <section className="admin-products"><div className="admin-section-heading"><div><h2>Produtos cadastrados</h2><p>Edite os dados, gerencie as fotos e publique ou oculte os itens.</p></div><button className="button button-outline" onClick={loadData} disabled={busy}><RefreshCw size={15}/> Atualizar</button></div>
-      <div className="admin-product-list">{products.map(p => <article className="admin-product-row" key={p.id}><div className="admin-product-thumb">{p.product_images?.[0]?.storage_path ? <img src={storageImageUrl(p.product_images[0].storage_path)} alt=""/> : <ImagePlus size={22}/>}</div><div className="admin-product-copy"><strong>{p.name}</strong><small>{p.categories?.name || 'Sem categoria'} · {p.price_mode === 'quote' ? 'Sob consulta' : formatCurrency(p.price)}</small><span className={p.published ? 'admin-status published' : 'admin-status'}>{p.published ? 'Publicado' : 'Oculto'}</span></div><div className="admin-product-actions"><button className="button button-outline" onClick={() => editProduct(p)} disabled={busy}><Pencil size={15}/> Editar</button><button className="button button-outline" onClick={() => setPublished(p, !p.published)} disabled={busy}>{p.published ? 'Ocultar' : 'Publicar'}</button><button className="admin-delete-button" aria-label={'Excluir ' + p.name} onClick={() => deleteProduct(p)} disabled={busy}><Trash2 size={16}/></button></div></article>)}</div>
+      <div className="admin-product-list">{products.map(p => <article className="admin-product-row" key={p.id}><div className="admin-product-thumb">{p.product_images?.[0]?.storage_path ? <img src={storageImageUrl(p.product_images[0].storage_path)} alt=""/> : <ImagePlus size={22}/>}</div><div className="admin-product-copy"><strong>{p.name}</strong><small>{p.categories?.name || 'Sem categoria'} · {p.price_mode === 'quote' ? 'Sob consulta' : formatCurrency(p.price)}</small><span className={p.published ? 'admin-status published' : 'admin-status'}>{p.published ? 'Publicado' : 'Oculto'}</span></div><div className="admin-product-actions"><button className="button button-outline" onClick={() => editProduct(p)} disabled={busy}><Pencil size={15}/> Editar</button><button className="button button-outline" onClick={() => setPublished(p, !p.published)} disabled={busy}>{p.published ? 'Ocultar' : 'Publicar'}</button><button className={p.featured ? "button button-featured is-featured" : "button button-featured"} onClick={() => setFeatured(p, !p.featured)} disabled={busy} aria-pressed={!!p.featured}><Star size={14} fill={p.featured ? "currentColor" : "none"}/>{p.featured ? "Em destaque" : "Destacar"}</button><button className="admin-delete-button" aria-label={'Excluir ' + p.name} onClick={() => deleteProduct(p)} disabled={busy}><Trash2 size={16}/></button></div></article>)}</div>
       {!products.length && <div className="empty-state"><PackagePlus size={24}/><h3>Nenhum produto cadastrado</h3><p>Use o formulário acima para adicionar os primeiros produtos reais.</p></div>}
     </section>
   </main></>;
