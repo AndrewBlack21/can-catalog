@@ -12,6 +12,10 @@ const blankProduct = {
   featured: false, published: false, makerworld_url: '', filament_weight_g: ''
 };
 const slugify = (value) => value.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const getProductPrintDetails = (product) => {
+  const details = product?.product_print_details;
+  return Array.isArray(details) ? details[0] || null : details || null;
+};
 
 export default function DashboardPage() {
   const [session, setSession] = useState(undefined);
@@ -80,6 +84,7 @@ export default function DashboardPage() {
   async function logout() { await supabase.auth.signOut(); navigate('/adm'); }
   function resetForm() { setEditingId(null); setForm(blankProduct); setFiles([]); setError(''); setNotice(''); }
   function editProduct(product) {
+    const printDetails = getProductPrintDetails(product);
     setEditingId(product.id);
     setForm({
       name: product.name || '', slug: product.slug || '', category_id: product.category_id || '',
@@ -87,8 +92,8 @@ export default function DashboardPage() {
       price: product.price ?? '', availability: product.availability || 'available',
       stock_quantity: product.stock_quantity ?? '', customization_enabled: !!product.customization_enabled,
       featured: !!product.featured, published: !!product.published,
-      makerworld_url: product.product_print_details?.[0]?.makerworld_url || '',
-      filament_weight_g: product.product_print_details?.[0]?.filament_weight_g ?? ''
+      makerworld_url: printDetails?.makerworld_url || '',
+      filament_weight_g: printDetails?.filament_weight_g ?? ''
     });
     setFiles([]);
     setError('');
@@ -214,7 +219,7 @@ export default function DashboardPage() {
     </section>
     <section className="admin-categories"><div><h2>Categorias</h2><p>Crie categorias para organizar a vitrine.</p></div><form onSubmit={addCategory}><input value={categoryName} onChange={e => setCategoryName(e.target.value)} required maxLength={80} placeholder="Nova categoria"/><button className="button button-dark" disabled={busy}><PackagePlus size={16}/> Adicionar</button></form><div className="admin-category-list">{categories.map(c => <span key={c.id}>{c.name}{!c.active && ' (inativa)'}</span>)}</div></section>
     <section className="admin-products"><div className="admin-section-heading"><div><h2>Produtos cadastrados</h2><p>Edite os dados, gerencie as fotos e publique ou oculte os itens.</p></div><button className="button button-outline" onClick={loadData} disabled={busy}><RefreshCw size={15}/> Atualizar</button></div>
-      <div className="admin-product-list">{products.map(p => <article className="admin-product-row" key={p.id}><div className="admin-product-thumb">{p.product_images?.[0]?.storage_path ? <img src={storageImageUrl(p.product_images[0].storage_path)} alt=""/> : <ImagePlus size={22}/>}</div><div className="admin-product-copy"><strong>{p.name}</strong><small>{p.categories?.name || 'Sem categoria'} · {p.price_mode === 'quote' ? 'Sob consulta' : formatCurrency(p.price)}</small><span className={p.published ? 'admin-status published' : 'admin-status'}>{p.published ? 'Publicado' : 'Oculto'}</span>{(p.product_print_details?.[0]?.makerworld_url || p.product_print_details?.[0]?.filament_weight_g != null) && <div className="admin-product-print-summary">{p.product_print_details?.[0]?.makerworld_url && <a href={p.product_print_details[0].makerworld_url} target="_blank" rel="noreferrer">Abrir MakerWorld</a>}{p.product_print_details?.[0]?.filament_weight_g != null && <span><strong>{Number(p.product_print_details[0].filament_weight_g).toLocaleString('pt-BR', { maximumFractionDigits: 2 })} g</strong> de filamento</span>}</div>}</div><div className="admin-product-actions"><button className="button button-outline" onClick={() => editProduct(p)} disabled={busy}><Pencil size={15}/> Editar</button><button className="button button-outline" onClick={() => setPublished(p, !p.published)} disabled={busy}>{p.published ? 'Ocultar' : 'Publicar'}</button><button className={p.featured ? "button button-featured is-featured" : "button button-featured"} onClick={() => setFeatured(p, !p.featured)} disabled={busy} aria-pressed={!!p.featured}><Star size={14} fill={p.featured ? "currentColor" : "none"}/>{p.featured ? "Em destaque" : "Destacar"}</button><button className="admin-delete-button" aria-label={'Excluir ' + p.name} onClick={() => deleteProduct(p)} disabled={busy}><Trash2 size={16}/></button></div></article>)}</div>
+      <div className="admin-product-list">{products.map(p => <article className="admin-product-row" key={p.id}><div className="admin-product-thumb">{p.product_images?.[0]?.storage_path ? <img src={storageImageUrl(p.product_images[0].storage_path)} alt=""/> : <ImagePlus size={22}/>}</div><div className="admin-product-copy"><strong>{p.name}</strong><small>{p.categories?.name || 'Sem categoria'} · {p.price_mode === 'quote' ? 'Sob consulta' : formatCurrency(p.price)}</small><span className={p.published ? 'admin-status published' : 'admin-status'}>{p.published ? 'Publicado' : 'Oculto'}</span>{(getProductPrintDetails(p)?.makerworld_url || getProductPrintDetails(p)?.filament_weight_g != null) && <div className="admin-product-print-summary">{getProductPrintDetails(p)?.makerworld_url && <a href={getProductPrintDetails(p).makerworld_url} target="_blank" rel="noreferrer">Abrir MakerWorld</a>}{getProductPrintDetails(p)?.filament_weight_g != null && <span><strong>{Number(getProductPrintDetails(p).filament_weight_g).toLocaleString('pt-BR', { maximumFractionDigits: 2 })} g</strong> de filamento</span>}</div>}</div><div className="admin-product-actions"><button className="button button-outline" onClick={() => editProduct(p)} disabled={busy}><Pencil size={15}/> Editar</button><button className="button button-outline" onClick={() => setPublished(p, !p.published)} disabled={busy}>{p.published ? 'Ocultar' : 'Publicar'}</button><button className={p.featured ? "button button-featured is-featured" : "button button-featured"} onClick={() => setFeatured(p, !p.featured)} disabled={busy} aria-pressed={!!p.featured}><Star size={14} fill={p.featured ? "currentColor" : "none"}/>{p.featured ? "Em destaque" : "Destacar"}</button><button className="admin-delete-button" aria-label={'Excluir ' + p.name} onClick={() => deleteProduct(p)} disabled={busy}><Trash2 size={16}/></button></div></article>)}</div>
       {!products.length && <div className="empty-state"><PackagePlus size={24}/><h3>Nenhum produto cadastrado</h3><p>Use o formulário acima para adicionar os primeiros produtos reais.</p></div>}
     </section>
   </main></>;
