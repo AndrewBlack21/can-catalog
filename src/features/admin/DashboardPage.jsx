@@ -9,7 +9,7 @@ import { storageImageUrl } from '../../utils/storageImageUrl.js';
 const blankProduct = {
   name: '', slug: '', category_id: '', description: '', price_mode: 'fixed', price: '',
   availability: 'available', stock_quantity: '', customization_enabled: false,
-  featured: false, published: false
+  featured: false, published: false, makerworld_url: '', filament_weight_g: ''
 };
 const slugify = (value) => value.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
@@ -30,7 +30,7 @@ export default function DashboardPage() {
 
   async function loadData() {
     const [p, c] = await Promise.all([
-      supabase.from('products').select('*, categories(name), product_images(*)').order('created_at', { ascending: false }),
+      supabase.from('products').select('*, categories(name), product_images(*), product_print_details(*)').order('created_at', { ascending: false }),
       supabase.from('categories').select('*').order('sort_order')
     ]);
     if (p.error) setError('Falha ao carregar produtos. Confira as permissões RLS.');
@@ -86,7 +86,9 @@ export default function DashboardPage() {
       description: product.description || '', price_mode: product.price_mode || 'fixed',
       price: product.price ?? '', availability: product.availability || 'available',
       stock_quantity: product.stock_quantity ?? '', customization_enabled: !!product.customization_enabled,
-      featured: !!product.featured, published: !!product.published
+      featured: !!product.featured, published: !!product.published,
+      makerworld_url: product.product_print_details?.[0]?.makerworld_url || '',
+      filament_weight_g: product.product_print_details?.[0]?.filament_weight_g ?? ''
     });
     setFiles([]);
     setError('');
@@ -105,6 +107,14 @@ export default function DashboardPage() {
       stock_quantity: form.stock_quantity === '' ? null : Number(form.stock_quantity),
       customization_enabled: form.customization_enabled, featured: form.featured, published: form.published
     };
+    const makerworldUrl = form.makerworld_url.trim();
+    if (makerworldUrl && !/^https?:\\/\\//i.test(makerworldUrl)) {
+      setError('O link do MakerWorld deve começar com https:// ou http://.'); setBusy(false); return;
+    }
+    const filamentWeight = form.filament_weight_g === '' ? null : Number(form.filament_weight_g);
+    if (filamentWeight !== null && (!Number.isFinite(filamentWeight) || filamentWeight < 0)) {
+      setError('Informe uma quantidade de gramas válida.'); setBusy(false); return;
+    }
     if (payload.price_mode === 'fixed' && (!Number.isFinite(payload.price) || payload.price < 0)) {
       setError('Informe um preço válido ou selecione “Sob consulta”.'); setBusy(false); return;
     }
@@ -116,6 +126,16 @@ export default function DashboardPage() {
       setBusy(false); return;
     }
     const productId = result.data.id;
+    const printDetails = await supabase.from('product_print_details').upsert({
+      product_id: productId,
+      makerworld_url: makerworldUrl,
+      filament_weight_g: filamentWeight,
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'product_id' });
+    if (printDetails.error) {
+      setError('Produto salvo, mas não foi possível salvar os dados internos de impressão. Confira a migration e as permissões do administrador.');
+      setBusy(false); await loadData(); return;
+    }
     for (const file of files) {
       const safeName = file.name.toLowerCase().replace(/[^a-z0-9.-]+/g, '-');
       const path = productId + '/' + Date.now() + '-' + safeName;
@@ -181,6 +201,13 @@ export default function DashboardPage() {
           <label className="admin-file-field"><span><ImagePlus size={17}/> Fotos do produto</span><input type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple onChange={e => setFiles(Array.from(e.target.files || []))}/><small>{files.length ? files.map(f => f.name).join(', ') : 'JPEG, PNG, WebP ou AVIF. Até 5 MB por imagem.'}</small></label>
         </div>
         <label>Descrição<textarea rows="4" maxLength={3000} value={form.description} onChange={e => setForm({...form, description:e.target.value})} placeholder="Descreva materiais, dimensões e opções de personalização."/></label>
+        <section className="admin-print-details">
+          <div><h3>Dados internos de impressão 3D</h3><p>Visíveis somente para administradores; não aparecem no catálogo público.</p></div>
+          <div className="admin-form-grid">
+            <label>Link do MakerWorld<input type="url" value={form.makerworld_url} onChange={e => setForm({...form, makerworld_url:e.target.value})} placeholder="https://makerworld.com/..." /></label>
+            <label>Peso da peça (gramas)<input type="number" min="0" step="0.01" value={form.filament_weight_g} onChange={e => setForm({...form, filament_weight_g:e.target.value})} placeholder="Ex.: 24.5" /></label>
+          </div>
+        </section>
         <div className="admin-checkboxes"><label><input type="checkbox" checked={form.customization_enabled} onChange={e => setForm({...form, customization_enabled:e.target.checked})}/> Permite personalização</label><label><input type="checkbox" checked={form.featured} onChange={e => setForm({...form, featured:e.target.checked})}/> Destacar na vitrine</label><label><input type="checkbox" checked={form.published} onChange={e => setForm({...form, published:e.target.checked})}/> Publicar na vitrine</label></div>
         <div className="admin-form-actions"><button className="button button-dark" disabled={busy}><Save size={16}/>{busy ? 'Salvando...' : editingId ? 'Salvar alterações' : 'Cadastrar produto'}</button><button type="button" className="button button-outline" onClick={resetForm} disabled={busy}>Limpar formulário</button></div>
       </form>
