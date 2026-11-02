@@ -134,3 +134,10 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 .admin-print-details h3{margin:0 0 6px;color:var(--forest);font-family:var(--serif);font-size:21px;font-weight:500}
 .admin-print-details p{margin:0 0 16px;color:var(--muted);font-size:11px;line-height:1.6}
 .admin-print-details .admin-form-grid{margin-top:14px}
+
+
+/* Private print details shown only in the admin product list */
+.admin-product-print-summary{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:8px;font-size:11px;line-height:1.5;color:var(--muted)}
+.admin-product-print-summary a{color:var(--forest);font-weight:700;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.admin-product-print-summary span{display:inline-flex;align-items:center;gap:4px;padding:3px 7px;background:#eef2e8;border:1px solid #dce5d4;color:#425a39}
+.admin-product-print-summary strong{color:var(--forest)}
