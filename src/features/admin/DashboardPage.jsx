@@ -108,7 +108,7 @@ export default function DashboardPage() {
       customization_enabled: form.customization_enabled, featured: form.featured, published: form.published
     };
     const makerworldUrl = form.makerworld_url.trim();
-    if (makerworldUrl && !/^https?:\\/\\//i.test(makerworldUrl)) {
+    if (makerworldUrl && !makerworldUrl.startsWith('https://') && !makerworldUrl.startsWith('http://')) {
       setError('O link do MakerWorld deve começar com https:// ou http://.'); setBusy(false); return;
     }
     const filamentWeight = form.filament_weight_g === '' ? null : Number(form.filament_weight_g);
