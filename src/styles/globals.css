@@ -141,3 +141,6 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 .admin-product-print-summary a{color:var(--forest);font-weight:700;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
 .admin-product-print-summary span{display:inline-flex;align-items:center;gap:4px;padding:3px 7px;background:#eef2e8;border:1px solid #dce5d4;color:#425a39}
 .admin-product-print-summary strong{color:var(--forest)}
+
+.admin-print-time-grid{margin-top:12px}
+.admin-product-print-summary span{white-space:normal}
