@@ -127,3 +127,10 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 .back-to-top:hover{background:var(--forest-deep);transform:translateY(-3px)}
 .back-to-top svg{width:21px;height:21px}
 @media(max-width:600px){.back-to-top{right:14px;bottom:16px;width:44px;height:44px}}
+
+
+/* Admin-only production details */
+.admin-print-details{padding:20px;background:#f2f4ed;border:1px solid #dfe6d8}
+.admin-print-details h3{margin:0 0 6px;color:var(--forest);font-family:var(--serif);font-size:21px;font-weight:500}
+.admin-print-details p{margin:0 0 16px;color:var(--muted);font-size:11px;line-height:1.6}
+.admin-print-details .admin-form-grid{margin-top:14px}
