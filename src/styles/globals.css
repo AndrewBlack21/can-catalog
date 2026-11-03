@@ -190,3 +190,9 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
   .product-detail-stage{aspect-ratio:1/1;max-height:none}
   .product-gallery-thumbnails button{flex-basis:58px;width:58px;height:54px}
 }
+
+
+/* Hero: neutralize the green frame and image backdrop */
+.hero-art{background:#f7f6f0}
+.hero-art-inner{background:#f7f6f0}
+.hero-art-inner img{background:#f7f6f0}
