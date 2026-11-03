@@ -29,6 +29,7 @@ export default function DashboardPage() {
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState(blankProduct);
   const [files, setFiles] = useState([]);
+  const [existingMedia, setExistingMedia] = useState([]);
   const [categoryName, setCategoryName] = useState('');
   const navigate = useNavigate();
 
@@ -82,7 +83,7 @@ export default function DashboardPage() {
   if (!session || !authorized) return <Navigate to="/adm" replace />;
 
   async function logout() { await supabase.auth.signOut(); navigate('/adm'); }
-  function resetForm() { setEditingId(null); setForm(blankProduct); setFiles([]); setError(''); setNotice(''); }
+  function resetForm() { setEditingId(null); setForm(blankProduct); setFiles([]); setExistingMedia([]); setError(''); setNotice(''); }
   function editProduct(product) {
     const printDetails = getProductPrintDetails(product);
     setEditingId(product.id);
@@ -99,9 +100,35 @@ export default function DashboardPage() {
       print_time_minutes: printDetails?.print_time_minutes ?? ''
     });
     setFiles([]);
+    setExistingMedia([...(product.product_images || [])].sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)));
     setError('');
     setNotice('');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  async function removeProductMedia(media) {
+    const label = media.media_type === 'video' ? 'vídeo' : 'imagem';
+    if (!window.confirm(`Deseja realmente remover esta ${label} do produto?`)) return;
+    setBusy(true); setError(''); setNotice('');
+    const { error: deleteRowError } = await supabase
+      .from('product_images')
+      .delete()
+      .eq('id', media.id);
+    if (deleteRowError) {
+      setError(`Não foi possível remover a mídia: ${deleteRowError.message}`);
+      setBusy(false);
+      return;
+    }
+    const { error: storageError } = await supabase.storage
+      .from('product-images')
+      .remove([media.storage_path]);
+    setExistingMedia(items => items.filter(item => item.id !== media.id));
+    if (storageError) {
+      setError(`A mídia saiu do produto, mas o arquivo não foi removido do armazenamento: ${storageError.message}`);
+    } else {
+      setNotice(`${label === 'vídeo' ? 'Vídeo' : 'Imagem'} removida com sucesso.`);
+    }
+    await loadData();
+    setBusy(false);
   }
   async function saveProduct(event) {
     event.preventDefault(); setBusy(true); setError(''); setNotice('');
@@ -242,6 +269,7 @@ export default function DashboardPage() {
           <label>Disponibilidade<select value={form.availability} onChange={e => setForm({...form, availability:e.target.value})}><option value="available">Disponível</option><option value="made_to_order">Sob encomenda</option><option value="unavailable">Indisponível</option></select></label>
           <label>Quantidade em estoque (opcional)<input type="number" min="0" step="1" value={form.stock_quantity} onChange={e => setForm({...form, stock_quantity:e.target.value})} placeholder="Deixe vazio se não controlar"/></label>
           <label className="admin-file-field"><span><ImagePlus size={17}/> Fotos e vídeo do produto</span><input type="file" accept="image/jpeg,image/png,image/webp,image/avif,video/mp4,video/webm" multiple onChange={e => setFiles(Array.from(e.target.files || []))}/><small>{files.length ? files.map(f => f.name).join(', ') : 'Selecione várias imagens (até 5 MB cada) e/ou vídeos MP4/WebM (até 50 MB cada). Novos arquivos serão adicionados à galeria.'}</small></label>
+          {editingId && existingMedia.length > 0 && <div className="admin-existing-media"><strong>Mídias cadastradas</strong><div className="admin-existing-media-grid">{existingMedia.map(media => <div className="admin-existing-media-item" key={media.id}>{media.media_type === 'video' ? <video src={storageImageUrl(media.storage_path)} muted playsInline /> : <img src={storageImageUrl(media.storage_path)} alt={media.alt_text || form.name} /> }<span>{media.media_type === 'video' ? 'Vídeo' : 'Imagem'}</span><button type="button" className="admin-media-remove" onClick={() => removeProductMedia(media)} disabled={busy} aria-label="Remover mídia"><Trash2 size={14}/> Remover</button></div>)}</div></div>}
         </div>
         <label>Descrição<textarea rows="4" maxLength={3000} value={form.description} onChange={e => setForm({...form, description:e.target.value})} placeholder="Descreva materiais, dimensões e opções de personalização."/></label>
         <label>Cores disponíveis<input value={form.available_colors} onChange={e => setForm({...form, available_colors:e.target.value})} placeholder="Ex.: Preto, Branco, Verde oliva, Rosa"/><small>Separe as cores por vírgula. Elas serão exibidas no anúncio.</small></label>
