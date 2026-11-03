@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ArrowUpRight, MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/formatCurrency.js";
@@ -8,6 +8,7 @@ import { storageImageUrl } from "../utils/storageImageUrl.js";
 export default function ProductCard({ product }) {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
   const [mediaIndex, setMediaIndex] = useState(0);
+  const touchStartX = useRef(null);
   const description = product.description || "Uma criação CAN Group feita para você.";
   const media = [...(product.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const currentMedia = media[mediaIndex];
@@ -18,9 +19,16 @@ export default function ProductCard({ product }) {
     unavailable: "Indisponível",
   }[product.availability];
   const moveMedia = (direction) => setMediaIndex(index => (index + direction + media.length) % media.length);
+  const handleTouchStart = (event) => { touchStartX.current = event.touches[0]?.clientX ?? null; };
+  const handleTouchEnd = (event) => {
+    if (touchStartX.current === null || media.length < 2) return;
+    const delta = event.changedTouches[0]?.clientX - touchStartX.current;
+    if (Math.abs(delta) > 35) moveMedia(delta < 0 ? 1 : -1);
+    touchStartX.current = null;
+  };
   return (
     <article className="product-card">
-      <div className="product-image">
+      <div className="product-image" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         <Link to={`/produto/${product.slug}`} className="product-image-link" aria-label={`Ver ${product.name}`}>
           {mediaUrl ? (
             currentMedia?.media_type === "video" ? (
@@ -37,6 +45,7 @@ export default function ProductCard({ product }) {
             <button type="button" className="product-gallery-arrow previous" aria-label="Mídia anterior" onClick={() => moveMedia(-1)}><ChevronLeft size={17}/></button>
             <button type="button" className="product-gallery-arrow next" aria-label="Próxima mídia" onClick={() => moveMedia(1)}><ChevronRight size={17}/></button>
             <span className="product-gallery-count">{mediaIndex + 1}/{media.length}</span>
+            <div className="product-gallery-dots" aria-label="Selecionar mídia">{media.map((item, index) => <button key={item.id || item.storage_path || index} type="button" className={index === mediaIndex ? "active" : ""} aria-label={`Mostrar mídia ${index + 1}`} aria-pressed={index === mediaIndex} onClick={() => setMediaIndex(index)} />)}</div>
           </>
         )}
         <span className={`availability availability-${product.availability}`}>{availability}</span>
