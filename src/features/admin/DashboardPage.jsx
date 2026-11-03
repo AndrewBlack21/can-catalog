@@ -162,14 +162,30 @@ export default function DashboardPage() {
       setError(`Produto salvo, mas os dados internos de impressão falharam: ${printDetails.error.message}`);
       setBusy(false); await loadData(); return;
     }
+    const { data: lastMedia } = await supabase
+      .from('product_images')
+      .select('sort_order')
+      .eq('product_id', productId)
+      .order('sort_order', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    let nextSortOrder = Number.isInteger(lastMedia?.sort_order) ? lastMedia.sort_order + 1 : 0;
+
     for (const file of files) {
       const safeName = file.name.toLowerCase().replace(/[^a-z0-9.-]+/g, '-');
-      const path = productId + '/' + Date.now() + '-' + safeName;
+      const path = productId + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '-' + safeName;
       const mediaType = file.type.startsWith('video/') ? 'video' : 'image';
       const upload = await supabase.storage.from('product-images').upload(path, file, { contentType: file.type, upsert: false });
       if (upload.error) { setError(`Produto salvo, mas um arquivo não foi enviado: ${upload.error.message}`); setBusy(false); await loadData(); return; }
-      const imageRow = await supabase.from('product_images').insert({ product_id: productId, storage_path: path, alt_text: payload.name, media_type: mediaType, sort_order: Date.now() });
-      if (imageRow.error) { setError(`Produto salvo, mas não foi possível registrar uma mídia: ${imageRow.error.message}`); setBusy(false); await loadData(); return; }
+      const imageRow = await supabase.from('product_images').insert({ product_id: productId, storage_path: path, alt_text: payload.name, media_type: mediaType, sort_order: nextSortOrder });
+      if (imageRow.error) {
+        await supabase.storage.from('product-images').remove([path]);
+        setError(`Produto salvo, mas não foi possível registrar uma mídia: ${imageRow.error.message}`);
+        setBusy(false);
+        await loadData();
+        return;
+      }
+      nextSortOrder += 1;
     }
     await loadData();
     setBusy(false);
