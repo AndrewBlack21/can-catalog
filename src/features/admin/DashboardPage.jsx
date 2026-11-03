@@ -9,7 +9,7 @@ import { storageImageUrl } from '../../utils/storageImageUrl.js';
 const blankProduct = {
   name: '', slug: '', category_id: '', description: '', price_mode: 'fixed', price: '',
   availability: 'available', stock_quantity: '', customization_enabled: false,
-  featured: false, published: false, makerworld_url: '', filament_weight_g: '', print_time_hours: '', print_time_minutes: ''
+  featured: false, published: false, available_colors: '', makerworld_url: '', filament_weight_g: '', print_time_hours: '', print_time_minutes: ''
 };
 const slugify = (value) => value.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const getProductPrintDetails = (product) => {
@@ -92,6 +92,7 @@ export default function DashboardPage() {
       price: product.price ?? '', availability: product.availability || 'available',
       stock_quantity: product.stock_quantity ?? '', customization_enabled: !!product.customization_enabled,
       featured: !!product.featured, published: !!product.published,
+      available_colors: Array.isArray(product.available_colors) ? product.available_colors.join(', ') : '',
       makerworld_url: printDetails?.makerworld_url || '',
       filament_weight_g: printDetails?.filament_weight_g ?? '',
       print_time_hours: printDetails?.print_time_hours ?? '',
@@ -112,7 +113,8 @@ export default function DashboardPage() {
       price: form.price_mode === 'quote' ? null : Number(form.price),
       availability: form.availability,
       stock_quantity: form.stock_quantity === '' ? null : Number(form.stock_quantity),
-      customization_enabled: form.customization_enabled, featured: form.featured, published: form.published
+      customization_enabled: form.customization_enabled, featured: form.featured, published: form.published,
+      available_colors: form.available_colors.split(',').map(color => color.trim()).filter(Boolean)
     };
     const makerworldUrl = form.makerworld_url.trim();
     if (makerworldUrl && !makerworldUrl.startsWith('https://') && !makerworldUrl.startsWith('http://')) {
@@ -138,6 +140,15 @@ export default function DashboardPage() {
       setError(result.error?.code === '23505' ? 'Já existe um produto com esse endereço (slug). Altere o slug.' : 'Não foi possível salvar. Verifique os campos e as permissões do administrador.');
       setBusy(false); return;
     }
+    const invalidFile = files.find(file => {
+      const isImage = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'].includes(file.type);
+      const isVideo = ['video/mp4', 'video/webm'].includes(file.type);
+      return (!isImage && !isVideo) || file.size > (isVideo ? 50 : 5) * 1024 * 1024;
+    });
+    if (invalidFile) {
+      setError('Arquivo inválido. Use imagens de até 5 MB ou vídeos MP4/WebM de até 50 MB.');
+      setBusy(false); return;
+    }
     const productId = result.data.id;
     const printDetails = await supabase.from('product_print_details').upsert({
       product_id: productId,
@@ -154,10 +165,11 @@ export default function DashboardPage() {
     for (const file of files) {
       const safeName = file.name.toLowerCase().replace(/[^a-z0-9.-]+/g, '-');
       const path = productId + '/' + Date.now() + '-' + safeName;
+      const mediaType = file.type.startsWith('video/') ? 'video' : 'image';
       const upload = await supabase.storage.from('product-images').upload(path, file, { contentType: file.type, upsert: false });
-      if (upload.error) { setError('Produto salvo, mas uma foto não foi enviada. Confira o formato e o limite de 5 MB.'); setBusy(false); await loadData(); return; }
-      const imageRow = await supabase.from('product_images').insert({ product_id: productId, storage_path: path, alt_text: payload.name, sort_order: 0 });
-      if (imageRow.error) { setError('Produto salvo, mas não foi possível registrar uma foto no catálogo.'); setBusy(false); await loadData(); return; }
+      if (upload.error) { setError(`Produto salvo, mas um arquivo não foi enviado: ${upload.error.message}`); setBusy(false); await loadData(); return; }
+      const imageRow = await supabase.from('product_images').insert({ product_id: productId, storage_path: path, alt_text: payload.name, media_type: mediaType, sort_order: Date.now() });
+      if (imageRow.error) { setError(`Produto salvo, mas não foi possível registrar uma mídia: ${imageRow.error.message}`); setBusy(false); await loadData(); return; }
     }
     await loadData();
     setBusy(false);
@@ -213,9 +225,10 @@ export default function DashboardPage() {
           {form.price_mode === 'fixed' && <label>Preço (R$)<input type="number" min="0" step="0.01" required value={form.price} onChange={e => setForm({...form, price:e.target.value})} placeholder="8,00"/></label>}
           <label>Disponibilidade<select value={form.availability} onChange={e => setForm({...form, availability:e.target.value})}><option value="available">Disponível</option><option value="made_to_order">Sob encomenda</option><option value="unavailable">Indisponível</option></select></label>
           <label>Quantidade em estoque (opcional)<input type="number" min="0" step="1" value={form.stock_quantity} onChange={e => setForm({...form, stock_quantity:e.target.value})} placeholder="Deixe vazio se não controlar"/></label>
-          <label className="admin-file-field"><span><ImagePlus size={17}/> Fotos do produto</span><input type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple onChange={e => setFiles(Array.from(e.target.files || []))}/><small>{files.length ? files.map(f => f.name).join(', ') : 'JPEG, PNG, WebP ou AVIF. Até 5 MB por imagem.'}</small></label>
+          <label className="admin-file-field"><span><ImagePlus size={17}/> Fotos e vídeo do produto</span><input type="file" accept="image/jpeg,image/png,image/webp,image/avif,video/mp4,video/webm" multiple onChange={e => setFiles(Array.from(e.target.files || []))}/><small>{files.length ? files.map(f => f.name).join(', ') : 'Selecione várias imagens (até 5 MB cada) e/ou vídeos MP4/WebM (até 50 MB cada). Novos arquivos serão adicionados à galeria.'}</small></label>
         </div>
         <label>Descrição<textarea rows="4" maxLength={3000} value={form.description} onChange={e => setForm({...form, description:e.target.value})} placeholder="Descreva materiais, dimensões e opções de personalização."/></label>
+        <label>Cores disponíveis<input value={form.available_colors} onChange={e => setForm({...form, available_colors:e.target.value})} placeholder="Ex.: Preto, Branco, Verde oliva, Rosa"/><small>Separe as cores por vírgula. Elas serão exibidas no anúncio.</small></label>
         <section className="admin-print-details">
           <div><h3>Dados internos de impressão 3D</h3><p>Visíveis somente para administradores; não aparecem no catálogo público.</p></div>
           <div className="admin-form-grid">
