@@ -144,3 +144,25 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 
 .admin-print-time-grid{margin-top:12px}
 .admin-product-print-summary span{white-space:normal}
+
+/* Product gallery, videos and available color labels */
+.product-image{position:relative;overflow:hidden}
+.product-image-link{display:block;width:100%;height:100%}
+.product-image-link img,.product-image-link video{display:block;width:100%;height:100%;object-fit:cover}
+.product-gallery-arrow{position:absolute;z-index:3;top:50%;transform:translateY(-50%);width:34px;height:34px;border:1px solid rgba(255,255,255,.65);border-radius:50%;background:rgba(20,28,19,.72);color:#fff;display:grid;place-items:center;cursor:pointer}
+.product-gallery-arrow.previous{left:10px}
+.product-gallery-arrow.next{right:10px}
+.product-gallery-count{position:absolute;z-index:3;right:12px;bottom:12px;padding:4px 8px;border-radius:20px;background:rgba(20,28,19,.72);color:#fff;font-size:11px}
+.product-colors{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px}
+.product-colors small{color:var(--muted);font-size:11px;margin-right:2px}
+.product-colors span,.detail-colors span{padding:4px 9px;border:1px solid var(--line);border-radius:30px;background:var(--paper);font-size:11px;color:var(--ink)}
+.detail-colors{display:grid;gap:9px;margin:18px 0}
+.detail-colors>div{display:flex;flex-wrap:wrap;gap:7px}
+.product-detail-gallery{position:relative;overflow:hidden}
+.product-detail-gallery>img,.product-detail-gallery>video{display:block;width:100%;height:100%;max-height:620px;object-fit:contain}
+.product-gallery-thumbnails{display:flex;gap:8px;overflow-x:auto;padding:10px;background:var(--paper)}
+.product-gallery-thumbnails button{flex:0 0 62px;width:62px;height:58px;border:1px solid var(--line);border-radius:7px;overflow:hidden;background:var(--surface);padding:0;cursor:pointer}
+.product-gallery-thumbnails button.active{outline:2px solid var(--forest);outline-offset:1px}
+.product-gallery-thumbnails img{width:100%;height:100%;object-fit:cover}
+.product-gallery-thumbnails span{display:grid;place-items:center;height:100%;font-size:10px;font-weight:700;color:var(--forest)}
+@media(max-width:640px){.product-gallery-arrow{width:30px;height:30px}.product-gallery-thumbnails button{flex-basis:54px;width:54px;height:50px}}
