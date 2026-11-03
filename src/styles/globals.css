@@ -175,3 +175,18 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 .admin-existing-media-item>span{font-size:11px;color:var(--muted)}
 .admin-media-remove{display:flex;align-items:center;justify-content:center;gap:5px;width:100%;padding:7px 5px;border:1px solid #e4bcbc;border-radius:6px;background:#fff5f4;color:#a33232;font-size:11px;font-weight:700;cursor:pointer}
 .admin-media-remove:disabled{opacity:.55;cursor:not-allowed}
+
+
+/* Product detail gallery: keep media, counter and thumbnails in separate areas */
+.product-detail-gallery{display:flex;flex-direction:column;gap:10px;min-width:0;aspect-ratio:auto;background:transparent;overflow:visible}
+.product-detail-stage{position:relative;width:100%;aspect-ratio:1/1;max-height:620px;min-height:0;display:grid;place-items:center;overflow:hidden;background:#f7f6f0}
+.product-detail-stage>img,.product-detail-stage>video{display:block;width:100%;height:100%;max-height:620px;object-fit:contain;object-position:center}
+.product-detail-stage>.image-placeholder{width:100%;height:100%;min-height:0}
+.product-detail-stage .product-gallery-count{right:12px;bottom:12px}
+.product-gallery-thumbnails{display:flex;align-items:center;gap:8px;min-height:0;padding:0;background:transparent;overflow-x:auto}
+.product-gallery-thumbnails button{flex:0 0 64px;width:64px;height:60px}
+@media(max-width:600px){
+  .product-detail-gallery{gap:9px}
+  .product-detail-stage{aspect-ratio:1/1;max-height:none}
+  .product-gallery-thumbnails button{flex-basis:58px;width:58px;height:54px}
+}
