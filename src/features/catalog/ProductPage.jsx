@@ -32,15 +32,17 @@ export default function ProductPage() {
           <div className="empty-state"><h2>Produto não encontrado</h2><p>Este produto pode não estar publicado no momento.</p></div>
         ) : (
           <div className="detail-layout">
-            <div className="detail-image product-detail-gallery">
-              {mediaUrl ? (currentMedia?.media_type === "video" ? <video src={mediaUrl} controls playsInline /> : <img src={mediaUrl} alt={currentMedia?.alt_text || product.name} />) : (
-                <div className="image-placeholder"><span>CAN</span><small>FOTO DO PRODUTO</small></div>
-              )}
-              {media.length > 1 && <>
-                <button type="button" className="product-gallery-arrow previous" aria-label="Mídia anterior" onClick={() => moveMedia(-1)}><ChevronLeft size={20}/></button>
-                <button type="button" className="product-gallery-arrow next" aria-label="Próxima mídia" onClick={() => moveMedia(1)}><ChevronRight size={20}/></button>
-                <span className="product-gallery-count">{mediaIndex + 1}/{media.length}</span>
-              </>}
+            <div className="product-detail-gallery">
+              <div className="product-detail-stage">
+                {mediaUrl ? (currentMedia?.media_type === "video" ? <video src={mediaUrl} controls playsInline /> : <img src={mediaUrl} alt={currentMedia?.alt_text || product.name} />) : (
+                  <div className="image-placeholder"><span>CAN</span><small>FOTO DO PRODUTO</small></div>
+                )}
+                {media.length > 1 && <>
+                  <button type="button" className="product-gallery-arrow previous" aria-label="Mídia anterior" onClick={() => moveMedia(-1)}><ChevronLeft size={20}/></button>
+                  <button type="button" className="product-gallery-arrow next" aria-label="Próxima mídia" onClick={() => moveMedia(1)}><ChevronRight size={20}/></button>
+                  <span className="product-gallery-count">{mediaIndex + 1}/{media.length}</span>
+                </>}
+              </div>
               {media.length > 1 && <div className="product-gallery-thumbnails">{media.map((item,index) => {
                 const url=storageImageUrl(item.storage_path);
                 return <button type="button" key={item.id || item.storage_path} className={index===mediaIndex ? "active" : ""} onClick={()=>setMediaIndex(index)} aria-label={`Ver mídia ${index+1}`}>{item.media_type==="video" ? <span>VÍDEO</span> : <img src={url} alt=""/>}</button>;
