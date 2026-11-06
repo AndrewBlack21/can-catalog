@@ -3,7 +3,6 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { ArrowLeft, CalendarDays, CircleDollarSign, ClipboardList, LogOut, Plus, RefreshCw, Save, Trash2 } from 'lucide-react';
 import Header from '../../components/Header.jsx';
 import { isSupabaseConfigured, supabase } from '../../lib/supabase.js';
-import { formatCurrency } from '../../utils/formatCurrency.js';
 
 const money = value => Number(value || 0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const localDateTime = () => { const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,16); };
