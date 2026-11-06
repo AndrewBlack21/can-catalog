@@ -35,6 +35,7 @@ export default function CatalogPage() {
           .select("*, product_images(*)")
           .eq("published", true)
           .order("featured", { ascending: false })
+          .order("featured_order", { ascending: true, nullsFirst: false })
           .order("name"),
         supabase
           .from("categories")
