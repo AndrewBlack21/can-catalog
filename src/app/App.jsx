@@ -5,6 +5,7 @@ import ProductPage from '../features/catalog/ProductPage.jsx';
 import LoginPage from '../features/admin/LoginPage.jsx';
 import DashboardPage from '../features/admin/DashboardPage.jsx';
 import PrintCostPage from '../features/admin/PrintCostPage.jsx';
+import SalesPage from '../features/admin/SalesPage.jsx';
 
 function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -42,6 +43,7 @@ export default function App() {
         <Route path="/adm" element={<LoginPage />} />
         <Route path="/adm/painel" element={<DashboardPage />} />
         <Route path="/adm/orcamento-3d" element={<PrintCostPage />} />
+        <Route path="/adm/vendas" element={<SalesPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <BackToTop />
