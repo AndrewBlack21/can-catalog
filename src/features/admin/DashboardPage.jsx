@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Calculator, ChartNoAxesCombined, ImagePlus, LogOut, PackagePlus, Pencil, RefreshCw, Save, ShieldCheck, Star, Trash2, X } from 'lucide-react';
+import { ArrowDown, ArrowUp, Calculator, ChartNoAxesCombined, ImagePlus, LogOut, PackagePlus, Pencil, RefreshCw, Save, ShieldCheck, Star, Trash2, X } from 'lucide-react';
 import Header from '../../components/Header.jsx';
 import { isSupabaseConfigured, supabase } from '../../lib/supabase.js';
 import { formatCurrency } from '../../utils/formatCurrency.js';
@@ -221,9 +221,29 @@ export default function DashboardPage() {
   }
   async function setFeatured(product, featured) {
     setBusy(true); setError(""); setNotice("");
-    const { error: err } = await supabase.from("products").update({ featured }).eq("id", product.id);
+    let featuredOrder = null;
+    if (featured) {
+      const current = products.filter(item => item.featured);
+      featuredOrder = current.reduce((max,item) => Math.max(max,Number(item.featured_order)||0),0)+1;
+    }
+    const { error: err } = await supabase.from("products").update({ featured, featured_order: featuredOrder }).eq("id", product.id);
     if (err) setError("Não foi possível atualizar o destaque.");
-    else { await loadData(); setNotice(featured ? "Produto adicionado aos destaques." : "Produto removido dos destaques."); }
+    else { await loadData(); setNotice(featured ? "Produto adicionado ao final dos destaques." : "Produto removido dos destaques."); }
+    setBusy(false);
+  }
+  async function moveFeatured(product, direction) {
+    const ordered = products.filter(item => item.featured).sort((a,b) => (Number(a.featured_order)||999999)-(Number(b.featured_order)||999999));
+    const index = ordered.findIndex(item => item.id === product.id);
+    const target = index + direction;
+    if (index < 0 || target < 0 || target >= ordered.length) return;
+    setBusy(true); setError(""); setNotice("");
+    const first = ordered[index], second = ordered[target];
+    const firstOrder = Number(first.featured_order)||index+1;
+    const secondOrder = Number(second.featured_order)||target+1;
+    const a = await supabase.from("products").update({featured_order:secondOrder}).eq("id",first.id);
+    const b = await supabase.from("products").update({featured_order:firstOrder}).eq("id",second.id);
+    if(a.error||b.error) setError("Não foi possível alterar a ordem dos destaques.");
+    else { await loadData(); setNotice("Ordem dos destaques atualizada."); }
     setBusy(false);
   }
   async function setPublished(product, published) {
@@ -290,7 +310,7 @@ export default function DashboardPage() {
     </section>
     <section className="admin-categories"><div><h2>Categorias</h2><p>Crie categorias para organizar a vitrine.</p></div><form onSubmit={addCategory}><input value={categoryName} onChange={e => setCategoryName(e.target.value)} required maxLength={80} placeholder="Nova categoria"/><button className="button button-dark" disabled={busy}><PackagePlus size={16}/> Adicionar</button></form><div className="admin-category-list">{categories.map(c => <span key={c.id}>{c.name}{!c.active && ' (inativa)'}</span>)}</div></section>
     <section className="admin-products"><div className="admin-section-heading"><div><h2>Produtos cadastrados</h2><p>Edite os dados, gerencie as fotos e publique ou oculte os itens.</p></div><button className="button button-outline" onClick={loadData} disabled={busy}><RefreshCw size={15}/> Atualizar</button></div>
-      <div className="admin-product-list">{products.map(p => <article className="admin-product-row" key={p.id}><div className="admin-product-thumb">{p.product_images?.[0]?.storage_path ? <img src={storageImageUrl(p.product_images[0].storage_path)} alt=""/> : <ImagePlus size={22}/>}</div><div className="admin-product-copy"><strong>{p.name}</strong><small>{p.categories?.name || 'Sem categoria'} · {p.price_mode === 'quote' ? 'Sob consulta' : formatCurrency(p.price)}</small><span className={p.published ? 'admin-status published' : 'admin-status'}>{p.published ? 'Publicado' : 'Oculto'}</span>{(getProductPrintDetails(p)?.makerworld_url || getProductPrintDetails(p)?.filament_weight_g != null || getProductPrintDetails(p)?.print_time_hours != null || getProductPrintDetails(p)?.print_time_minutes != null) && <div className="admin-product-print-summary">{getProductPrintDetails(p)?.makerworld_url && <a href={getProductPrintDetails(p).makerworld_url} target="_blank" rel="noreferrer">Abrir MakerWorld</a>}{getProductPrintDetails(p)?.filament_weight_g != null && <span><strong>{Number(getProductPrintDetails(p).filament_weight_g).toLocaleString('pt-BR', { maximumFractionDigits: 2 })} g</strong> de filamento</span>}{(getProductPrintDetails(p)?.print_time_hours != null || getProductPrintDetails(p)?.print_time_minutes != null) && <span><strong>{Number(getProductPrintDetails(p)?.print_time_hours || 0)}h {String(Number(getProductPrintDetails(p)?.print_time_minutes || 0)).padStart(2, '0')}min</strong> de impressão</span>}</div>}</div><div className="admin-product-actions"><button className="button button-outline" onClick={() => editProduct(p)} disabled={busy}><Pencil size={15}/> Editar</button><button className="button button-outline" onClick={() => setPublished(p, !p.published)} disabled={busy}>{p.published ? 'Ocultar' : 'Publicar'}</button><button className={p.featured ? "button button-featured is-featured" : "button button-featured"} onClick={() => setFeatured(p, !p.featured)} disabled={busy} aria-pressed={!!p.featured}><Star size={14} fill={p.featured ? "currentColor" : "none"}/>{p.featured ? "Em destaque" : "Destacar"}</button><button className="admin-delete-button" aria-label={'Excluir ' + p.name} onClick={() => deleteProduct(p)} disabled={busy}><Trash2 size={16}/></button></div></article>)}</div>
+      <div className="admin-product-list">{[...products].sort((a,b) => a.featured !== b.featured ? (a.featured ? -1 : 1) : (Number(a.featured_order)||999999)-(Number(b.featured_order)||999999)).map(p => <article className="admin-product-row" key={p.id}><div className="admin-product-thumb">{p.product_images?.[0]?.storage_path ? <img src={storageImageUrl(p.product_images[0].storage_path)} alt=""/> : <ImagePlus size={22}/>}</div><div className="admin-product-copy"><strong>{p.name}</strong><small>{p.categories?.name || 'Sem categoria'} · {p.price_mode === 'quote' ? 'Sob consulta' : formatCurrency(p.price)}</small><span className={p.published ? 'admin-status published' : 'admin-status'}>{p.published ? 'Publicado' : 'Oculto'}</span>{(getProductPrintDetails(p)?.makerworld_url || getProductPrintDetails(p)?.filament_weight_g != null || getProductPrintDetails(p)?.print_time_hours != null || getProductPrintDetails(p)?.print_time_minutes != null) && <div className="admin-product-print-summary">{getProductPrintDetails(p)?.makerworld_url && <a href={getProductPrintDetails(p).makerworld_url} target="_blank" rel="noreferrer">Abrir MakerWorld</a>}{getProductPrintDetails(p)?.filament_weight_g != null && <span><strong>{Number(getProductPrintDetails(p).filament_weight_g).toLocaleString('pt-BR', { maximumFractionDigits: 2 })} g</strong> de filamento</span>}{(getProductPrintDetails(p)?.print_time_hours != null || getProductPrintDetails(p)?.print_time_minutes != null) && <span><strong>{Number(getProductPrintDetails(p)?.print_time_hours || 0)}h {String(Number(getProductPrintDetails(p)?.print_time_minutes || 0)).padStart(2, '0')}min</strong> de impressão</span>}</div>}</div><div className="admin-product-actions"><button className="button button-outline" onClick={() => editProduct(p)} disabled={busy}><Pencil size={15}/> Editar</button><button className="button button-outline" onClick={() => setPublished(p, !p.published)} disabled={busy}>{p.published ? 'Ocultar' : 'Publicar'}</button>{p.featured && <><button className="button button-outline featured-order-button" title="Mover para cima" aria-label="Mover destaque para cima" onClick={() => moveFeatured(p,-1)} disabled={busy || products.filter(item=>item.featured).sort((a,b)=>(Number(a.featured_order)||999999)-(Number(b.featured_order)||999999))[0]?.id===p.id}><ArrowUp size={14}/></button><button className="button button-outline featured-order-button" title="Mover para baixo" aria-label="Mover destaque para baixo" onClick={() => moveFeatured(p,1)} disabled={busy || products.filter(item=>item.featured).sort((a,b)=>(Number(a.featured_order)||999999)-(Number(b.featured_order)||999999)).at(-1)?.id===p.id}><ArrowDown size={14}/></button></>}<button className={p.featured ? "button button-featured is-featured" : "button button-featured"} onClick={() => setFeatured(p, !p.featured)} disabled={busy} aria-pressed={!!p.featured}><Star size={14} fill={p.featured ? "currentColor" : "none"}/>{p.featured ? "Em destaque" : "Destacar"}</button><button className="admin-delete-button" aria-label={'Excluir ' + p.name} onClick={() => deleteProduct(p)} disabled={busy}><Trash2 size={16}/></button></div></article>)}</div>
       {!products.length && <div className="empty-state"><PackagePlus size={24}/><h3>Nenhum produto cadastrado</h3><p>Use o formulário acima para adicionar os primeiros produtos reais.</p></div>}
     </section>
   </main></>;
