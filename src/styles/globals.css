@@ -264,3 +264,12 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 .featured-order-button{min-width:34px;padding:8px!important;display:inline-flex;align-items:center;justify-content:center}
 .featured-order-button:disabled{opacity:.35;cursor:not-allowed}
 @media(max-width:760px){.featured-order-button{min-width:30px;padding:7px!important}}
+
+
+/* Drag-and-drop ordering for featured products in admin */
+.featured-draggable-row{cursor:grab;transition:border-color .18s,background .18s,transform .18s}
+.featured-draggable-row:active{cursor:grabbing}
+.featured-draggable-row.is-drag-over{border:2px dashed #718568;background:#f0f3eb;transform:scale(1.005)}
+.featured-drag-grip{position:absolute;z-index:2;left:5px;top:5px;display:grid;place-items:center;width:25px;height:28px;border-radius:4px;background:rgba(255,255,255,.94);color:#53664b;font-size:21px;line-height:1;cursor:grab;box-shadow:0 1px 5px #0002}
+.admin-product-thumb{position:relative}
+@media(max-width:760px){.featured-drag-grip{width:29px;height:32px;font-size:23px}}
