@@ -13,6 +13,7 @@ export default function ProductCard({ product }) {
   const media = [...(product.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const currentMedia = media[mediaIndex];
   const mediaUrl = storageImageUrl(currentMedia?.storage_path);
+  const currentIsVideo = currentMedia?.media_type === "video" || /\\.(mp4|webm)(\\?|$)/i.test(currentMedia?.storage_path || "");
   const availability = {
     available: "Disponível",
     made_to_order: "Sob encomenda",
@@ -31,7 +32,7 @@ export default function ProductCard({ product }) {
       <div className="product-image" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         <Link to={`/produto/${product.slug}`} className="product-image-link" aria-label={`Ver ${product.name}`}>
           {mediaUrl ? (
-            currentMedia?.media_type === "video" ? (
+            currentIsVideo ? (
               <video src={mediaUrl} muted loop autoPlay playsInline aria-label={product.name} />
             ) : (
               <img src={mediaUrl} alt={currentMedia?.alt_text || product.name} />
