@@ -170,8 +170,9 @@ export default function DashboardPage() {
       setBusy(false); return;
     }
     const invalidFile = files.find(file => {
-      const isImage = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'].includes(file.type);
-      const isVideo = ['video/mp4', 'video/webm'].includes(file.type);
+      const extension = file.name.split('.').pop()?.toLowerCase();
+      const isImage = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'].includes(file.type) || ['jpg','jpeg','png','webp','avif'].includes(extension);
+      const isVideo = ['video/mp4', 'video/webm'].includes(file.type) || ['mp4','webm'].includes(extension);
       return (!isImage && !isVideo) || file.size > (isVideo ? 200 : 5) * 1024 * 1024;
     });
     if (invalidFile) {
@@ -203,9 +204,11 @@ export default function DashboardPage() {
     for (const file of files) {
       const safeName = file.name.toLowerCase().replace(/[^a-z0-9.-]+/g, '-');
       const path = productId + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '-' + safeName;
-      const mediaType = file.type.startsWith('video/') ? 'video' : 'image';
-      const upload = await supabase.storage.from('product-images').upload(path, file, { contentType: file.type, upsert: false });
-      if (upload.error) { setError(`Produto salvo, mas um arquivo não foi enviado: ${upload.error.message}`); setBusy(false); await loadData(); return; }
+      const extension = file.name.split('.').pop()?.toLowerCase();
+      const mediaType = file.type.startsWith('video/') || ['mp4','webm'].includes(extension) ? 'video' : 'image';
+      const contentType = file.type || (extension === 'mp4' ? 'video/mp4' : extension === 'webm' ? 'video/webm' : 'application/octet-stream');
+      const upload = await supabase.storage.from('product-images').upload(path, file, { contentType, upsert: false });
+      if (upload.error) { setError(`Produto salvo, mas o envio de ${file.name} falhou: ${upload.error.message}`); setBusy(false); await loadData(); return; }
       const imageRow = await supabase.from('product_images').insert({ product_id: productId, storage_path: path, alt_text: payload.name, media_type: mediaType, sort_order: nextSortOrder });
       if (imageRow.error) {
         await supabase.storage.from('product-images').remove([path]);
