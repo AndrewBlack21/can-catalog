@@ -273,3 +273,31 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 .featured-drag-grip{position:absolute;z-index:2;left:5px;top:5px;display:grid;place-items:center;width:25px;height:28px;border-radius:4px;background:rgba(255,255,255,.94);color:#53664b;font-size:21px;line-height:1;cursor:grab;box-shadow:0 1px 5px #0002}
 .admin-product-thumb{position:relative}
 @media(max-width:760px){.featured-drag-grip{width:29px;height:32px;font-size:23px}}
+
+
+/* Featured drag handle belongs in the row gutter, not over the product photo */
+.featured-drag-grip{
+  position:static;
+  z-index:auto;
+  flex:0 0 34px;
+  width:34px;
+  height:44px;
+  align-self:center;
+  border:1px solid #d9e1d2;
+  border-radius:7px;
+  background:#f1f4ed;
+  color:#53664b;
+  font-size:24px;
+  box-shadow:none;
+  cursor:grab;
+  touch-action:none;
+}
+.featured-drag-grip:active{cursor:grabbing;background:#e5ecdf}
+.admin-product-row .featured-drag-grip{order:-1}
+.sales-history-actions{display:flex;align-items:center;gap:12px}
+.sales-history-actions>b{font-size:18px;color:var(--forest);white-space:nowrap}
+.sales-history-actions .button{min-height:34px;padding:8px 11px;font-size:11px}
+@media(max-width:760px){
+ .featured-drag-grip{flex-basis:32px;width:32px;height:42px}
+ .sales-history-actions{flex-direction:column;align-items:flex-end;gap:7px}
+}
