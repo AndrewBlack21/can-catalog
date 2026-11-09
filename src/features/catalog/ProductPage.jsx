@@ -22,7 +22,7 @@ export default function ProductPage() {
   const media = [...(product?.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const currentMedia = media[mediaIndex];
   const mediaUrl = storageImageUrl(currentMedia?.storage_path);
-  const currentIsVideo = currentMedia?.media_type === "video" || /\\.(mp4|webm)(\\?|$)/i.test(currentMedia?.storage_path || "");
+  const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
   const moveMedia = (direction) => setMediaIndex(index => (index + direction + media.length) % media.length);
   return (
     <>
