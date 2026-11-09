@@ -13,7 +13,7 @@ export default function ProductCard({ product }) {
   const media = [...(product.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const currentMedia = media[mediaIndex];
   const mediaUrl = storageImageUrl(currentMedia?.storage_path);
-  const currentIsVideo = currentMedia?.media_type === "video" || /\\.(mp4|webm)(\\?|$)/i.test(currentMedia?.storage_path || "");
+  const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
   const availability = {
     available: "Disponível",
     made_to_order: "Sob encomenda",
