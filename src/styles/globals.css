@@ -293,7 +293,7 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
   touch-action:none;
 }
 .featured-drag-grip:active{cursor:grabbing;background:#e5ecdf}
-.admin-product-row .featured-drag-grip{order:-1}
+.admin-product-row .featured-drag-grip{order:0}
 .sales-history-actions{display:flex;align-items:center;gap:12px}
 .sales-history-actions>b{font-size:18px;color:var(--forest);white-space:nowrap}
 .sales-history-actions .button{min-height:34px;padding:8px 11px;font-size:11px}
