@@ -163,9 +163,9 @@ export default function PrintCostPage() {
           <label className="print-product-select"><span><Package size={15}/> Produto cadastrado (opcional)</span><select value={selectedProductId} onChange={e => applyProduct(e.target.value)}><option value="">Preencher manualmente</option>{products.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}</select><small>Ao selecionar, o sistema preenche peso e tempo salvos no cadastro. Você pode ajustar os valores depois.</small></label>
           <label>Filamento utilizado<select value={selectedId} onChange={e => setSelectedId(e.target.value)}><option value="">Selecione um filamento</option>{filaments.filter(item => item.active).map(item => <option key={item.id} value={item.id}>{item.name} · {item.material}{item.color ? ' · ' + item.color : ''}</option>)}</select>{selected && <small>Custo calculado: {money(unitCostPerGram)}/g · {money(unitCostPerGram * 1000)}/kg</small>}</label>
           <div className="print-field-group"><div className="print-group-heading"><strong>1. Material e produção</strong><span>Dados do fatiador</span></div><div className="admin-form-grid">
-            <label>Filamento consumido (g)<input type="number" min="0" step="0.01" value={quote.grams} onChange={e => updateQuote('grams', e.target.value)}/></label>
-            <label>Horas de impressão<input type="number" min="0" step="1" value={quote.hours} onChange={e => updateQuote('hours', e.target.value)}/></label>
-            <label>Minutos adicionais<input type="number" min="0" max="59" step="1" value={quote.minutes} onChange={e => updateQuote('minutes', e.target.value)}/></label>
+            <label>Filamento consumido por peça (g)<input type="number" min="0" step="0.01" value={quote.grams} onChange={e => updateQuote('grams', e.target.value)}/></label>
+            <label>Horas de impressão por peça<input type="number" min="0" step="1" value={quote.hours} onChange={e => updateQuote('hours', e.target.value)}/></label>
+            <label>Minutos adicionais por peça<input type="number" min="0" max="59" step="1" value={quote.minutes} onChange={e => updateQuote('minutes', e.target.value)}/></label>
             <label>Quantidade de peças<input type="number" min="1" step="1" value={quote.quantity} onChange={e => updateQuote('quantity', e.target.value)}/></label>
             <label>Margem para falhas e desperdício (%)<input type="number" min="0" max="200" step="1" value={quote.waste} onChange={e => updateQuote('waste', e.target.value)}/><small>Acrescentada ao peso do filamento.</small></label>
           </div></div>
@@ -173,16 +173,16 @@ export default function PrintCostPage() {
             <label>Potência média (W)<input type="number" min="0" step="1" value={quote.power} onChange={e => updateQuote('power', e.target.value)}/><small>Use a média real da sua impressora.</small></label>
             <label>Tarifa de energia (R$/kWh)<input type="number" min="0" step="0.01" value={quote.kwhPrice} onChange={e => updateQuote('kwhPrice', e.target.value)}/></label>
             <label>Custo da máquina por hora (R$/h)<input type="number" min="0" step="0.01" value={quote.machineHour} onChange={e => updateQuote('machineHour', e.target.value)}/><small>Reserva para manutenção e desgaste.</small></label>
-            <label>Tempo de trabalho manual (min)<input type="number" min="0" step="1" value={quote.laborMinutes} onChange={e => updateQuote('laborMinutes', e.target.value)}/></label>
+            <label>Trabalho manual por peça (min)<input type="number" min="0" step="1" value={quote.laborMinutes} onChange={e => updateQuote('laborMinutes', e.target.value)}/></label>
             <label>Valor da mão de obra (R$/h)<input type="number" min="0" step="0.01" value={quote.laborHour} onChange={e => updateQuote('laborHour', e.target.value)}/></label>
-            <label>Outros custos por peça (R$)<input type="number" min="0" step="0.01" value={quote.extraCost} onChange={e => updateQuote('extraCost', e.target.value)}/><small>Embalagem, cola, ímã, acabamento etc.</small></label>
+            <label>Embalagem e extras por peça (R$)<input type="number" min="0" step="0.01" value={quote.extraCost} onChange={e => updateQuote('extraCost', e.target.value)}/><small>Embalagem, cola, ímã, acabamento etc.</small></label>
             <label>Custos indiretos (%)<input type="number" min="0" step="1" value={quote.overhead} onChange={e => updateQuote('overhead', e.target.value)}/><small>Rateio de despesas gerais.</small></label>
           </div></div>
           <div className="print-field-group"><div className="print-group-heading"><strong>3. Formação do preço</strong><span>Quanto cobrar</span></div><div className="admin-form-grid">
             <label>Taxa de pagamento (%)<input type="number" min="0" max="30" step="0.1" value={quote.paymentFee} onChange={e => updateQuote('paymentFee', e.target.value)}/><small>Maquininha ou plataforma, se houver.</small></label>
             <label>Margem de lucro desejada (%)<input type="number" min="0" max="80" step="1" value={quote.margin} onChange={e => updateQuote('margin', e.target.value)}/><small>Lucro como percentual do preço de venda.</small></label>
           </div></div>
-          <div className="print-formula-help"><Info size={17}/><p><strong>Como o preço é calculado?</strong><br/>O sistema soma material, energia, máquina, mão de obra, extras e custos indiretos. Depois considera a taxa de pagamento e calcula o preço para que a margem de lucro escolhida seja preservada.</p></div>
+          <div className="print-formula-help"><Info size={17}/><p><strong>Como o preço é calculado?</strong><br/>Os dados de gramas, tempo e custos informados são considerados por unidade. O sistema soma material, energia, máquina, mão de obra, extras e custos indiretos. Depois considera a taxa de pagamento e calcula o preço para que a margem de lucro escolhida seja preservada.</p></div>
         </div>
         <aside className="print-result">
           <span className="eyebrow"><CircleDollarSign size={14}/> RESUMO DO ORÇAMENTO</span>
