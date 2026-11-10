@@ -301,3 +301,36 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
  .featured-drag-grip{flex-basis:32px;width:32px;height:42px}
  .sales-history-actions{flex-direction:column;align-items:flex-end;gap:7px}
 }
+
+
+/* Clearer 3D quote calculator */
+.print-product-select>span{display:flex;align-items:center;gap:7px;color:var(--forest);font-weight:700}
+.print-product-select>small,.print-fields label small{display:block;color:var(--muted);font-size:10px;font-weight:400;line-height:1.55}
+.print-field-group{margin:22px 0;padding:18px;border:1px solid var(--line);background:#fbfcf8}
+.print-group-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.print-group-heading strong{font-family:var(--serif);font-size:19px;color:var(--forest);font-weight:500}
+.print-group-heading span{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.print-field-group .admin-form-grid{margin-top:0}
+.print-field-group label{display:flex;flex-direction:column;gap:7px;min-width:0;font-size:11px;font-weight:700;color:#475342}
+.print-field-group input{width:100%;min-width:0;border:1px solid var(--line);background:#fff;padding:12px;outline-color:var(--sage);font-size:13px}
+.print-formula-help{display:flex;gap:12px;align-items:flex-start;padding:16px;background:#edf2e8;border:1px solid #dbe5d3;color:#40583a}
+.print-formula-help svg{flex:0 0 auto;margin-top:2px}
+.print-formula-help p{margin:0;font-size:11px;line-height:1.7}
+.print-formula-help strong{color:var(--forest)}
+.print-batch-summary{display:grid;gap:9px;margin-top:20px;padding:15px;background:#ffffff12;border:1px solid #ffffff2b}
+.print-batch-summary>div{display:flex;justify-content:space-between;gap:12px;font-size:11px}
+.print-batch-summary span{color:#d3dacd}
+.print-batch-summary strong{white-space:nowrap}
+.print-batch-summary>div:nth-child(3){padding-top:10px;border-top:1px solid #ffffff40;font-size:13px}
+.print-batch-summary>div:nth-child(3) strong{font-size:17px;color:#fff}
+.print-warning{padding:10px;background:#fff3d8;color:#714c13!important;border-radius:5px}
+.filament-live-cost{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px;padding:13px 15px;background:#edf2e8;border:1px solid #dbe5d3}
+.filament-live-cost span{font-size:11px;color:#475342}
+.filament-live-cost strong{font-size:16px;color:var(--forest)}
+.filament-live-cost small{font-size:10px;color:var(--muted)}
+@media(max-width:600px){
+ .print-field-group{padding:13px;margin:16px 0}
+ .print-group-heading{align-items:flex-start;flex-direction:column;gap:3px}
+ .print-batch-summary{padding:12px}
+ .print-result{padding:18px}
+}
