@@ -40,7 +40,7 @@ export default function CatalogPage() {
       const [productResult, categoryResult] = await Promise.all([
         supabase
           .from("products")
-          .select("*, categories(name), product_images(*)")
+          .select("id,name,slug,description,price,price_mode,availability,featured,featured_order,customization_enabled,created_at,category_id,sales_count,categories(name),product_images(id,storage_path,media_type,sort_order,alt_text)")
           .eq("published", true)
           .order("featured", { ascending: false })
           .order("featured_order", { ascending: true, nullsFirst: false })
@@ -181,28 +181,15 @@ export default function CatalogPage() {
               </span>
             </div>
           )}
-          {!loading && !error && newProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">CHEGARAM AGORA</span><h2>Novidades.</h2></div><span>Adicionados recentemente</span></div><div className="catalog-collection-grid">{newProducts.map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
-          {!loading && !error && bestSellingProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">PREFERIDOS</span><h2>Mais <em>procurados.</em></h2></div><span>Com base nas vendas registradas</span></div><div className="catalog-collection-grid">{bestSellingProducts.map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
-          {!loading && !error && customizedProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">DO SEU JEITO</span><h2>Personalizados.</h2></div><span>Peças que podem ganhar sua identidade</span></div><div className="catalog-collection-grid">{customizedProducts.map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
           {!loading && !error && featuredProducts.length > 0 && (
-            <section className="featured-section" aria-label="Produtos em destaque">
-              <div className="featured-heading">
-                <div>
-                  <span className="eyebrow"><Star size={14} fill="currentColor" /> ESCOLHAS CAN GROUP</span>
-                  <h2>Em <em>destaque.</em></h2>
-                  <p>Peças que merecem aparecer primeiro.</p>
-                </div>
-                <div className="featured-controls">
-                  <button type="button" aria-label="Ver destaques anteriores" onClick={() => scrollFeatured(-1)}><ChevronLeft size={19}/></button>
-                  <button type="button" aria-label="Ver próximos destaques" onClick={() => scrollFeatured(1)}><ChevronRight size={19}/></button>
-                </div>
-              </div>
-              <div className="featured-track" ref={featuredTrackRef}>
-                {featuredProducts.map((p) => <div className="featured-slide" key={p.id}><ProductCard product={p} /></div>)}
-              </div>
-              <div className="featured-hint">Deslize para explorar <span>← →</span></div>
+            <section className="catalog-collection catalog-featured-collection" aria-label="Produtos em destaque">
+              <div className="catalog-collection-heading"><div><span className="eyebrow"><Star size={13} fill="currentColor"/> ESCOLHAS CAN GROUP</span><h2>Em <em>destaque.</em></h2></div><span>Peças selecionadas pela CAN</span></div>
+              <div className="catalog-collection-grid">{featuredProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p} priority={false}/>)}</div>
             </section>
           )}
+          {!loading && !error && newProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">CHEGARAM AGORA</span><h2>Novidades.</h2></div><span>Adicionados recentemente</span></div><div className="catalog-collection-grid">{newProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
+          {!loading && !error && bestSellingProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">PREFERIDOS</span><h2>Mais <em>procurados.</em></h2></div><span>Com base nas vendas registradas</span></div><div className="catalog-collection-grid">{bestSellingProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
+          {!loading && !error && customizedProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">DO SEU JEITO</span><h2>Personalizados.</h2></div><span>Peças que podem ganhar sua identidade</span></div><div className="catalog-collection-grid">{customizedProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
           {isSupabaseConfigured && (
             <div className="catalog-tools catalog-tools-sticky">
               <label className="search-field">
