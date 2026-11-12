@@ -16,17 +16,23 @@ const methods = [
   { value: 'credit', label: 'Crédito' }, { value: 'debit', label: 'Débito' },
   { value: 'pix', label: 'Pix' }, { value: 'cash', label: 'Dinheiro' }, { value: 'transfer', label: 'Transferência' }
 ];
-const blank = () => ({ title: '', category: 'filament', supplier: '', purchase_date: today(), total_amount: '', payment_method: 'credit', installments_count: '1', installments_paid: '0', first_due_date: today(), description: '' });
+const blank = () => ({ title: '', category: 'filament', filament_type_id: '', supplier: '', purchase_date: today(), total_amount: '', payment_method: 'credit', installments_count: '1', installments_paid: '0', first_due_date: today(), description: '' });
 const paidAmount = item => item.payment_method === 'credit' ? Number((Number(item.total_amount) * Number(item.installments_paid) / Number(item.installments_count)).toFixed(2)) : Number(item.total_amount);
 const labelFor = (list, value) => list.find(item => item.value === value)?.label || value;
 const dateLabel = value => value ? new Date(value + 'T12:00:00').toLocaleDateString('pt-BR') : '—';
 
 export default function ExpensesPage() {
   const [session, setSession] = useState(undefined), [authorized, setAuthorized] = useState(false), [checking, setChecking] = useState(true);
-  const [expenses, setExpenses] = useState([]), [form, setForm] = useState(blank), [editingId, setEditingId] = useState(null);
+  const [expenses, setExpenses] = useState([]), [filamentTypes, setFilamentTypes] = useState([]), [form, setForm] = useState(blank), [editingId, setEditingId] = useState(null);
   const [search, setSearch] = useState(''), [categoryFilter, setCategoryFilter] = useState('all'), [paymentFilter, setPaymentFilter] = useState('all'), [statusFilter, setStatusFilter] = useState('all');
   const [busy, setBusy] = useState(false), [error, setError] = useState(''), [notice, setNotice] = useState('');
   const navigate = useNavigate();
+
+  async function loadFilamentTypes() {
+    const { data, error: loadError } = await supabase.from('filament_types').select('id,name,material,color,spool_weight_g,spool_price,active').order('name');
+    if (loadError) setError('Não foi possível carregar os filamentos cadastrados no Orçamento 3D: ' + loadError.message);
+    else setFilamentTypes(data || []);
+  }
 
   async function loadExpenses() {
     const { data, error: loadError } = await supabase.from('can_expenses').select('*').order('purchase_date', { ascending: false }).order('created_at', { ascending: false });
@@ -43,7 +49,7 @@ export default function ExpensesPage() {
       const { data: admin, error: adminError } = await supabase.from('catalog_admins').select('user_id').eq('user_id', current.user.id).maybeSingle();
       if (!alive) return;
       const ok = !adminError && Boolean(admin); setAuthorized(ok);
-      if (ok) await loadExpenses();
+      if (ok) await Promise.all([loadExpenses(), loadFilamentTypes()]);
       if (alive) setChecking(false);
     }).catch(() => { if (alive) { setSession(null); setChecking(false); } });
     return () => { alive = false; };
@@ -68,6 +74,10 @@ export default function ExpensesPage() {
   }, { purchased: 0, paid: 0, pending: 0 }), [expenses]);
 
   function resetForm() { setForm(blank()); setEditingId(null); setError(''); setNotice(''); }
+  function selectFilament(id) {
+    const filament = filamentTypes.find(item => item.id === id);
+    setForm(current => ({ ...current, filament_type_id: id, title: filament ? `${filament.name} · ${filament.material}${filament.color ? ' · ' + filament.color : ''}` : current.title, total_amount: filament ? String(filament.spool_price) : current.total_amount }));
+  }
   function updateForm(key, value) {
     setForm(current => {
       const next = { ...current, [key]: value };
@@ -85,7 +95,7 @@ export default function ExpensesPage() {
     if (form.payment_method !== 'credit' && (count !== 1 || paid !== 1)) { setError('Compras no débito, Pix, dinheiro ou transferência são registradas como quitadas.'); return; }
     setBusy(true);
     const payload = {
-      title: form.title.trim(), category: form.category, supplier: form.supplier.trim() || null,
+      title: form.title.trim(), category: form.category, filament_type_id: form.category === 'filament' ? (form.filament_type_id || null) : null, supplier: form.supplier.trim() || null,
       purchase_date: form.purchase_date, total_amount: amount, payment_method: form.payment_method,
       installments_count: count, installments_paid: paid, first_due_date: form.payment_method === 'credit' ? (form.first_due_date || null) : null,
       description: form.description.trim() || null, ...(editingId ? {} : { created_by: session.user.id })
@@ -96,7 +106,7 @@ export default function ExpensesPage() {
   }
   function editExpense(item) {
     setEditingId(item.id);
-    setForm({ title: item.title, category: item.category, supplier: item.supplier || '', purchase_date: item.purchase_date, total_amount: String(item.total_amount), payment_method: item.payment_method, installments_count: String(item.installments_count), installments_paid: String(item.installments_paid), first_due_date: item.first_due_date || today(), description: item.description || '' });
+    setForm({ title: item.title, category: item.category, filament_type_id: item.filament_type_id || '', supplier: item.supplier || '', purchase_date: item.purchase_date, total_amount: String(item.total_amount), payment_method: item.payment_method, installments_count: String(item.installments_count), installments_paid: String(item.installments_paid), first_due_date: item.first_due_date || today(), description: item.description || '' });
     setError(''); setNotice(''); window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   async function deleteExpense(item) {
@@ -134,13 +144,14 @@ export default function ExpensesPage() {
         <form className="product-form" onSubmit={saveExpense}>
           <div className="admin-form-grid">
             <label>Descrição da compra<input required maxLength={160} value={form.title} onChange={e => updateForm('title', e.target.value)} placeholder="Ex.: Filamento PLA verde oliva 1 kg"/></label>
-            <label>Categoria<select value={form.category} onChange={e => updateForm('category', e.target.value)}>{categories.map(item => <option key={item.value} value={item.value}>{item.label}</option>)}</select></label>
+            <label>Categoria<select value={form.category} onChange={e => { updateForm('category', e.target.value); if (e.target.value !== 'filament') updateForm('filament_type_id', ''); }}>{categories.map(item => <option key={item.value} value={item.value}>{item.label}</option>)}</select></label>
+            {form.category === 'filament' && <label>Filamento cadastrado no Orçamento 3D<select value={form.filament_type_id} onChange={e => selectFilament(e.target.value)}><option value=''>Compra avulsa / não vincular</option>{filamentTypes.map(item => <option key={item.id} value={item.id}>{item.name} · {item.material}{item.color ? ' · ' + item.color : ''}{item.active ? '' : ' (inativo)'}</option>)}</select><small>Selecione um rolo já cadastrado para preencher descrição e valor com os dados registrados no Orçamento 3D.</small></label>}
             <label>Valor total da compra (R$)<input required type="number" min="0.01" step="0.01" value={form.total_amount} onChange={e => updateForm('total_amount', e.target.value)} placeholder="Ex.: 129,90"/></label>
             <label>Data da compra<input required type="date" value={form.purchase_date} onChange={e => updateForm('purchase_date', e.target.value)}/></label>
             <label>Loja / fornecedor<input maxLength={140} value={form.supplier} onChange={e => updateForm('supplier', e.target.value)} placeholder="Ex.: Loja de impressão 3D"/></label>
             <label>Forma de pagamento<select value={form.payment_method} onChange={e => updateForm('payment_method', e.target.value)}>{methods.map(item => <option key={item.value} value={item.value}>{item.label}</option>)}</select></label>
             {form.payment_method === 'credit' && <>
-              <label>Quantidade de parcelas<select value={form.installments_count} onChange={e => updateForm('installments_count', e.target.value)}>{Array.from({length:48},(_,i)=>i+1).map(n=><option key={n} value={n}>{n}x {n===1?'(à vista no crédito)':'(parcelado)'}</option>)}</select></label>
+              <label>Pagamento no cartão<select value={form.installments_count} onChange={e => updateForm('installments_count', e.target.value)}>{Array.from({length:48},(_,i)=>i+1).map(n=><option key={n} value={n}>{n}x {n===1?'(à vista)':'(parcelado)'}</option>)}</select></label>
               <label>Parcelas já pagas<input type="number" min="0" max={form.installments_count} step="1" value={form.installments_paid} onChange={e => updateForm('installments_paid', e.target.value)}/></label>
               <label>Vencimento da primeira parcela<input type="date" value={form.first_due_date} onChange={e => updateForm('first_due_date', e.target.value)}/></label>
             </>}
@@ -163,7 +174,7 @@ export default function ExpensesPage() {
             const paid = paidAmount(item), pending = Math.max(0, Number(item.total_amount) - paid), settled = pending < 0.01;
             return <article className="expense-row" key={item.id}>
               <div className="expense-date"><CalendarDays size={15}/><span>{dateLabel(item.purchase_date)}</span></div>
-              <div className="expense-main"><strong>{item.title}</strong><small>{labelFor(categories,item.category)}{item.supplier ? ' · ' + item.supplier : ''}</small><div className="expense-tags"><span>{labelFor(methods,item.payment_method)}</span><span className={settled ? 'expense-paid' : 'expense-pending'}>{settled ? 'Quitado' : item.installments_paid + '/' + item.installments_count + ' parcelas pagas'}</span></div>{item.description && <p>{item.description}</p>}</div>
+              <div className="expense-main"><strong>{item.title}</strong><small>{labelFor(categories,item.category)}{item.filament_type_id && filamentTypes.find(f => f.id === item.filament_type_id) ? ' · Vinculado: ' + (() => { const f = filamentTypes.find(row => row.id === item.filament_type_id); return `${f.name} ${f.material}${f.color ? ' · ' + f.color : ''}`; })() : ''}{item.supplier ? ' · ' + item.supplier : ''}</small><div className="expense-tags"><span>{labelFor(methods,item.payment_method)}</span><span className={settled ? 'expense-paid' : 'expense-pending'}>{settled ? 'Quitado' : item.installments_paid + '/' + item.installments_count + ' parcelas pagas'}</span></div>{item.description && <p>{item.description}</p>}</div>
               <div className="expense-values"><strong>{money(item.total_amount)}</strong><small>Pago: {money(paid)}</small>{pending > 0 && <small className="expense-due">Pendente: {money(pending)}</small>}</div>
               <div className="expense-actions"><button type="button" className="button button-outline" onClick={() => editExpense(item)} disabled={busy}><Pencil size={14}/> Editar</button><button type="button" className="admin-delete-button" aria-label={'Excluir ' + item.title} onClick={() => deleteExpense(item)} disabled={busy}><Trash2 size={15}/></button></div>
             </article>;
