@@ -50,7 +50,7 @@ export default function DashboardPage() {
   const [productSearch, setProductSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [publicationFilter, setPublicationFilter] = useState('all');
-  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState([]);\n  const [bulkCategory, setBulkCategory] = useState("");
   const navigate = useNavigate();
 
   async function loadData() {
@@ -328,6 +328,18 @@ export default function DashboardPage() {
     return matchesTab && matchesSearch && matchesCategory && matchesPublication;
   }).sort((a,b) => a.featured !== b.featured ? (a.featured ? -1 : 1) : (Number(a.featured_order)||999999)-(Number(b.featured_order)||999999));
   const selectedVisible = filteredProducts.filter(product => selectedProducts.includes(product.id));
+  const categoryCounts = categories.map(category => ({...category, count: products.filter(product => product.category_id === category.id).length}));
+  const emptyCategories = categoryCounts.filter(category => category.count === 0);
+  const uncategorizedCount = products.filter(product => !product.category_id).length;
+  async function bulkChangeCategory() {
+    if (!selectedVisible.length) return;
+    setBusy(true); setError(''); setNotice('');
+    for (const product of selectedVisible) {
+      const {error: updateError} = await supabase.from('products').update({category_id: bulkCategory || null}).eq('id', product.id);
+      if (updateError) { setError('Não foi possível alterar a categoria de todos os produtos: '+updateError.message); setBusy(false); await loadData(); return; }
+    }
+    await loadData(); setSelectedProducts([]); setNotice('Categoria atualizada para '+selectedVisible.length+' produto(s).'); setBusy(false);
+  }
   const allVisibleSelected = filteredProducts.length > 0 && filteredProducts.every(product => selectedProducts.includes(product.id));
   function toggleProductSelection(id) { setSelectedProducts(current => current.includes(id) ? current.filter(item => item !== id) : [...current, id]); }
   function toggleVisibleSelection() {
@@ -380,7 +392,8 @@ export default function DashboardPage() {
         <div className="admin-form-actions"><button className="button button-dark" disabled={busy}><Save size={16}/>{busy ? 'Salvando...' : editingId ? 'Salvar alterações' : 'Cadastrar produto'}</button><button type="button" className="button button-outline" onClick={resetForm} disabled={busy}>Limpar formulário</button></div>
       </form>
     </section>
-    <section className="admin-categories"><div><h2>Categorias</h2><p>Crie categorias para organizar a vitrine.</p></div><form onSubmit={addCategory}><input value={categoryName} onChange={e => setCategoryName(e.target.value)} required maxLength={80} placeholder="Nova categoria"/><button className="button button-dark" disabled={busy}><PackagePlus size={16}/> Adicionar</button></form><div className="admin-category-list">{categories.map(c => <span key={c.id}>{c.name}{!c.active && ' (inativa)'}</span>)}</div></section>
+    <section className="admin-categories"><div><h2>Categorias</h2><p>Crie categorias para organizar a vitrine.</p></div><form onSubmit={addCategory}><input value={categoryName} onChange={e => setCategoryName(e.target.value)} required maxLength={80} placeholder="Nova categoria"/><button className="button button-dark" disabled={busy}><PackagePlus size={16}/> Adicionar</button></form><div className="admin-category-list">{categoryCounts.map(c => <span key={c.id}><strong>{c.name}</strong><small>{c.count} produto(s)</small>{!c.active && ' (inativa)'}</span>)}<span className={uncategorizedCount ? 'category-count-warning' : ''}><strong>Sem categoria</strong><small>{uncategorizedCount} produto(s)</small></span></div>
+      {emptyCategories.length > 0 && <p className="category-admin-note">{emptyCategories.length} categoria(s) ainda sem produtos: {emptyCategories.map(item=>item.name).join(', ')}.</p>}</section>
     <section className="admin-products"><div className="admin-section-heading"><div><h2>Gerenciamento de publicações</h2><p>Encontre, edite, destaque e controle a visibilidade dos produtos em um só lugar.</p></div><button className="button button-outline" onClick={loadData} disabled={busy}><RefreshCw size={15}/> Atualizar</button></div>
       <div className="publication-overview">
 <button type="button" className={publicationTab === 'featured' ? 'publication-stat active' : 'publication-stat'} onClick={() => setPublicationTab('featured')}><span>Destacados</span><strong>{products.filter(p => p.featured).length}</strong></button>
@@ -398,7 +411,7 @@ export default function DashboardPage() {
 <button type="button" className="button button-outline" onClick={() => bulkUpdate('featured', false)} disabled={busy || !selectedVisible.some(p => p.featured)}>Remover destaque</button>
 <button type="button" className="button button-outline" onClick={() => bulkUpdate('published', true)} disabled={busy || !selectedVisible.length}>Publicar</button>
 <button type="button" className="button button-outline" onClick={() => bulkUpdate('published', false)} disabled={busy || !selectedVisible.length}>Ocultar</button>
-</div></div><DndContext sensors={sensors} collisionDetection={closestCenter}
+</div><div className="publication-bulk-category"><label>Alterar categoria dos selecionados<select value={bulkCategory} onChange={event=>setBulkCategory(event.target.value)}><option value="">Sem categoria</option>{categories.map(item=><option key={item.id} value={item.id}>{item.name}</option>)}</select></label><button type="button" className="button button-outline" onClick={bulkChangeCategory} disabled={busy || !selectedVisible.length}>Aplicar categoria</button></div></div><DndContext sensors={sensors} collisionDetection={closestCenter}
         onDragEnd={({ active, over }) => { if (over && active.id !== over.id) reorderFeatured(active.id, over.id); }}>
         <SortableContext
           items={filteredProducts.filter(item => item.featured).map(item => item.id)}
