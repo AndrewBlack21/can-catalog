@@ -218,7 +218,7 @@ export default function CatalogPage() {
               <div className="catalog-control-row">
                 <span>{visibleProducts.length} {visibleProducts.length === 1 ? "produto encontrado" : "produtos encontrados"}</span>
                 <div>
-                  <label className="catalog-sort"><ArrowDownWideNarrow size={15}/><select value={sortBy} onChange={e=>setSortBy(e.target.value)} aria-label="Ordenar produtos"><option value="featured">Relevância</option><option value="newest">Mais recentes</option><option value="best_selling">Mais vendidos</option><option value="price_asc">Menor preço</option><option value="price_desc">Maior preço</option><option value="name">Ordem alfabética</option></select></label>
+                  <label className="catalog-sort"><ArrowDownWideNarrow size={15}/><select value={sortBy} onChange={e=>setSortBy(e.target.value)} aria-label="Ordenar produtos"><option value="featured">Relevância</option><option value="newest">Mais recentes</option>{Object.keys(salesRank).length > 0 && <option value="best_selling">Mais vendidos</option>}<option value="price_asc">Menor preço</option><option value="price_desc">Maior preço</option><option value="name">Ordem alfabética</option></select></label>
                   <button type="button" className="catalog-filter-trigger" onClick={()=>setFilterOpen(true)}><SlidersHorizontal size={15}/> Filtros {activeFilters>0 && <b>{activeFilters}</b>}</button>
                 </div>
               </div>
