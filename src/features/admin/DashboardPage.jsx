@@ -336,8 +336,9 @@ export default function DashboardPage() {
   async function bulkUpdate(field, value) {
     if (!selectedVisible.length) return;
     setBusy(true); setError(''); setNotice('');
+    let nextFeaturedOrder = products.filter(item => item.featured).reduce((max, item) => Math.max(max, Number(item.featured_order) || 0), 0) + 1;
     for (const product of selectedVisible) {
-      const payload = field === 'featured' ? { featured: value, featured_order: value ? (Number(product.featured_order) || products.filter(item => item.featured).length + 1) : null } : { [field]: value };
+      const payload = field === 'featured' ? { featured: value, featured_order: value ? (Number(product.featured_order) || nextFeaturedOrder++) : null } : { [field]: value };
       const { error: updateError } = await supabase.from('products').update(payload).eq('id', product.id);
       if (updateError) { setError('Não foi possível atualizar todos os produtos selecionados: ' + updateError.message); setBusy(false); await loadData(); return; }
     }
