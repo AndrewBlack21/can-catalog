@@ -68,3 +68,5 @@ function ProductCard({ product, priority = false }) {
     </article>
   );
 }
+
+export default memo(ProductCard);
