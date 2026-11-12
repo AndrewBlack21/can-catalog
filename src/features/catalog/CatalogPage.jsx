@@ -5,6 +5,10 @@ import {
   Search,
   Sparkles,
   MessageCircle,
+  Star,
+  SlidersHorizontal,
+  X,
+  ArrowDownWideNarrow,
 } from "lucide-react";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
@@ -17,6 +21,11 @@ export default function CatalogPage() {
   const [categories, setCategories] = useState([]);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
+  const [sortBy, setSortBy] = useState("featured");
+  const [availabilityFilter, setAvailabilityFilter] = useState("all");
+  const [customOnly, setCustomOnly] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [salesRank, setSalesRank] = useState({});
   const [loading, setLoading] = useState(isSupabaseConfigured);
   const [error, setError] = useState("");
 
@@ -28,9 +37,10 @@ export default function CatalogPage() {
       const [productResult, categoryResult] = await Promise.all([
         supabase
           .from("products")
-          .select("*, product_images(*)")
+          .select("id,name,slug,description,price,price_mode,availability,featured,featured_order,customization_enabled,created_at,category_id,sales_count,categories(name),product_images(id,storage_path,media_type,sort_order,alt_text)")
           .eq("published", true)
           .order("featured", { ascending: false })
+          .order("featured_order", { ascending: true, nullsFirst: false })
           .order("name"),
         supabase
           .from("categories")
@@ -45,6 +55,11 @@ export default function CatalogPage() {
         );
       else setProducts(productResult.data || []);
       if (!categoryResult.error) setCategories(categoryResult.data || []);
+      if (active && !productResult.error) {
+        const totals = {};
+        (productResult.data || []).forEach(item => { totals[item.id] = Number(item.sales_count || 0); });
+        setSalesRank(totals);
+      }
       setLoading(false);
     }
     load();
@@ -53,20 +68,40 @@ export default function CatalogPage() {
     };
   }, []);
 
-  const visibleProducts = useMemo(
-    () =>
-      products.filter((p) => {
-        const matchesQuery = `${p.name} ${p.description}`
-          .toLowerCase()
-          .includes(query.toLowerCase());
-        return (
-          matchesQuery &&
-          (category === "all" || p.category_id === category) &&
-          p.availability !== "unavailable"
-        );
-      }),
-    [products, query, category],
+  const featuredProducts = useMemo(
+    () => products.filter((p) => p.featured && p.availability !== "unavailable"),
+    [products],
   );
+
+  const visibleProducts = useMemo(() => {
+    const filtered = products.filter((p) => {
+      const text = `${p.name || ""} ${p.description || ""} ${p.categories?.name || ""}`.toLocaleLowerCase("pt-BR");
+      return text.includes(query.trim().toLocaleLowerCase("pt-BR")) &&
+        (category === "all" || p.category_id === category) &&
+        (availabilityFilter === "all" || p.availability === availabilityFilter) &&
+        (!customOnly || p.customization_enabled) &&
+        p.availability !== "unavailable";
+    });
+    return filtered.sort((a,b) => {
+      if (sortBy === "price_asc") return Number(a.price || 0) - Number(b.price || 0);
+      if (sortBy === "price_desc") return Number(b.price || 0) - Number(a.price || 0);
+      if (sortBy === "name") return a.name.localeCompare(b.name, "pt-BR");
+      if (sortBy === "newest") return new Date(b.created_at || 0) - new Date(a.created_at || 0);
+      if (sortBy === "best_selling") return (salesRank[b.id] || 0) - (salesRank[a.id] || 0);
+      return Number(b.featured) - Number(a.featured) || (Number(a.featured_order) || 999999) - (Number(b.featured_order) || 999999);
+    });
+  }, [products, query, category, availabilityFilter, customOnly, sortBy, salesRank]);
+
+  const newProducts = useMemo(() => {
+    const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
+    return products.filter(p => p.availability !== "unavailable" && p.created_at && new Date(p.created_at).getTime() >= cutoff)
+      .sort((a,b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 8);
+  }, [products]);
+  const customizedProducts = useMemo(() => products.filter(p => p.customization_enabled && p.availability !== "unavailable").slice(0, 8), [products]);
+  const bestSellingProducts = useMemo(() => products.filter(p => (salesRank[p.id] || 0) > 0 && p.availability !== "unavailable")
+    .sort((a,b) => (salesRank[b.id] || 0) - (salesRank[a.id] || 0)).slice(0, 8), [products, salesRank]);
+  const activeFilters = Number(availabilityFilter !== "all") + Number(customOnly);
+
 
   return (
     <>
@@ -138,49 +173,49 @@ export default function CatalogPage() {
               </span>
             </div>
           )}
+          {!loading && !error && featuredProducts.length > 0 && (
+            <section className="catalog-collection catalog-featured-collection" aria-label="Produtos em destaque">
+              <div className="catalog-collection-heading"><div><span className="eyebrow"><Star size={13} fill="currentColor"/> ESCOLHAS CAN GROUP</span><h2>Em <em>destaque.</em></h2></div><span>Peças selecionadas pela CAN</span></div>
+              <div className="catalog-collection-grid">{featuredProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p} priority={false}/>)}</div>
+            </section>
+          )}
+          {!loading && !error && newProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">CHEGARAM AGORA</span><h2>Novidades.</h2></div><span>Adicionados recentemente</span></div><div className="catalog-collection-grid">{newProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
+          {!loading && !error && bestSellingProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">PREFERIDOS</span><h2>Mais <em>procurados.</em></h2></div><span>Com base nas vendas registradas</span></div><div className="catalog-collection-grid">{bestSellingProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
+          {!loading && !error && customizedProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">DO SEU JEITO</span><h2>Personalizados.</h2></div><span>Peças que podem ganhar sua identidade</span></div><div className="catalog-collection-grid">{customizedProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
           {isSupabaseConfigured && (
-            <div className="catalog-tools">
+            <div className="catalog-tools catalog-tools-sticky">
               <label className="search-field">
                 <Search size={18} />
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Buscar produtos..."
-                />
+                <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Buscar por produto ou categoria..." />
+                {query && <button type="button" onClick={() => setQuery("")} aria-label="Limpar busca"><X size={16}/></button>}
               </label>
-              <div className="category-list">
-                <button
-                  className={
-                    category === "all"
-                      ? "category-chip active"
-                      : "category-chip"
-                  }
-                  onClick={() => setCategory("all")}
-                >
-                  Todos
-                </button>
-                {categories.map((c) => (
-                  <button
-                    key={c.id}
-                    className={
-                      category === c.id
-                        ? "category-chip active"
-                        : "category-chip"
-                    }
-                    onClick={() => setCategory(c.id)}
-                  >
-                    {c.name}
-                  </button>
-                ))}
+              <div className="category-list" aria-label="Categorias do catálogo">
+                <button className={category === "all" ? "category-chip active" : "category-chip"} onClick={() => setCategory("all")}>Todos <small>{products.filter(p=>p.availability!=="unavailable").length}</small></button>
+                {categories.map((item) => <button key={item.id} className={category === item.id ? "category-chip active" : "category-chip"} onClick={() => setCategory(item.id)}>{item.name} <small>{products.filter(p=>p.category_id===item.id && p.availability!=="unavailable").length}</small></button>)}
+              </div>
+              <div className="catalog-control-row">
+                <span>{visibleProducts.length} {visibleProducts.length === 1 ? "produto encontrado" : "produtos encontrados"}</span>
+                <div>
+                  <label className="catalog-sort"><ArrowDownWideNarrow size={15}/><select value={sortBy} onChange={e=>setSortBy(e.target.value)} aria-label="Ordenar produtos"><option value="featured">Relevância</option><option value="newest">Mais recentes</option>{Object.keys(salesRank).length > 0 && <option value="best_selling">Mais vendidos</option>}<option value="price_asc">Menor preço</option><option value="price_desc">Maior preço</option><option value="name">Ordem alfabética</option></select></label>
+                  <button type="button" className="catalog-filter-trigger" onClick={()=>setFilterOpen(true)}><SlidersHorizontal size={15}/> Filtros {activeFilters>0 && <b>{activeFilters}</b>}</button>
+                </div>
               </div>
             </div>
           )}
+          {filterOpen && <div className="catalog-filter-backdrop" role="presentation" onClick={()=>setFilterOpen(false)}>
+            <section className="catalog-filter-sheet" role="dialog" aria-modal="true" aria-labelledby="catalog-filter-title" onClick={e=>e.stopPropagation()}>
+              <div className="catalog-filter-heading"><h3 id="catalog-filter-title">Filtrar produtos</h3><button type="button" onClick={()=>setFilterOpen(false)} aria-label="Fechar filtros"><X size={19}/></button></div>
+              <label>Disponibilidade<select value={availabilityFilter} onChange={e=>setAvailabilityFilter(e.target.value)}><option value="all">Todas</option><option value="available">Disponível</option><option value="made_to_order">Sob encomenda</option></select></label>
+              <label className="catalog-filter-check"><input type="checkbox" checked={customOnly} onChange={e=>setCustomOnly(e.target.checked)}/> Somente produtos personalizados</label>
+              <div className="catalog-filter-actions"><button type="button" className="button button-outline" onClick={()=>{setAvailabilityFilter("all");setCustomOnly(false);setCategory("all");setQuery("");setSortBy("featured");}}>Limpar filtros</button><button type="button" className="button button-dark" onClick={()=>setFilterOpen(false)}>Ver {visibleProducts.length} produtos</button></div>
+            </section>
+          </div>}
           {loading ? (
             <div className="empty-state">Carregando catálogo...</div>
           ) : error ? (
             <div className="empty-state">{error}</div>
           ) : visibleProducts.length ? (
-            <div className="product-grid">
+            <div className="product-grid" id="resultados">
               {visibleProducts.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}

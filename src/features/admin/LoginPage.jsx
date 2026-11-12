@@ -52,7 +52,7 @@ export default function LoginPage() {
       setBusy(false);
       return;
     }
-    navigate("/admin");
+    navigate("/adm/painel");
   }
   return (
     <>
