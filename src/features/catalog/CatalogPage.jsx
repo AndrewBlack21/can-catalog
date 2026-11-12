@@ -58,10 +58,9 @@ export default function CatalogPage() {
         );
       else setProducts(productResult.data || []);
       if (!categoryResult.error) setCategories(categoryResult.data || []);
-      const { data: salesData } = await supabase.from("sale_items").select("product_id,quantity");
-      if (active && salesData) {
+      if (active && !productResult.error) {
         const totals = {};
-        salesData.forEach(item => { if (item.product_id) totals[item.product_id] = (totals[item.product_id] || 0) + Number(item.quantity || 0); });
+        (productResult.data || []).forEach(item => { totals[item.id] = Number(item.sales_count || 0); });
         setSalesRank(totals);
       }
       setLoading(false);
