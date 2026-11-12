@@ -29,7 +29,8 @@ export default function ProductCard({ product }) {
   };
   return (
     <article className="product-card">
-      <div className="product-image" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>\n        <div className="product-card-badges">{product.featured && <span className="product-badge featured"><Star size={11} fill="currentColor"/> Destaque</span>}{isNew && <span className="product-badge new"><Sparkles size={11}/> Novidade</span>}</div>
+      <div className="product-image" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+        <div className="product-card-badges">{product.featured && <span className="product-badge featured"><Star size={11} fill="currentColor"/> Destaque</span>}{isNew && <span className="product-badge new"><Sparkles size={11}/> Novidade</span>}</div>
         <Link to={`/produto/${product.slug}`} className="product-image-link" aria-label={`Ver ${product.name}`}>
           {mediaUrl ? (
             currentIsVideo ? (
@@ -53,7 +54,7 @@ export default function ProductCard({ product }) {
       </div>
       <div className="product-info">
         <div className="product-heading">
-          <h3>{product.name}</h3>
+          <div>{product.categories?.name && <span className="product-category-label">{product.categories.name}</span>}<h3>{product.name}</h3></div>
           <Link to={`/produto/${product.slug}`} aria-label={`Detalhes de ${product.name}`}><ArrowUpRight size={18} /></Link>
         </div>
         <p className={descriptionExpanded ? "product-description expanded" : "product-description"}>{description}</p>
