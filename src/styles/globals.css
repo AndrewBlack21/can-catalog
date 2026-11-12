@@ -351,3 +351,39 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 .publication-bulk-actions{display:flex;gap:7px;flex-wrap:wrap}.publication-bulk-actions .button{padding:9px 11px;font-size:10px}
 .publication-row-check{flex:0 0 22px;justify-content:center}.admin-product-row .publication-row-check{order:-1}
 @media(max-width:760px){.publication-overview{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:16px 0}.publication-stat{padding:12px}.publication-stat strong{font-size:21px}.publication-toolbar{grid-template-columns:1fr}.publication-bulkbar{align-items:stretch}.publication-bulk-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.publication-bulk-actions .button{width:100%;padding:10px 7px}.publication-row-check{flex-basis:24px}}
+
+
+/* CAN expenses management */
+.expenses-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}
+.expense-summary-card{display:flex;flex-direction:column;gap:8px;padding:20px;border:1px solid var(--line);background:#fbfcf8}
+.expense-summary-card>span{font-size:11px;color:var(--muted)}
+.expense-summary-card>strong{font-family:var(--serif);font-size:clamp(23px,3vw,32px);font-weight:500;color:var(--forest)}
+.expense-summary-card>small{font-size:10px;color:var(--muted);line-height:1.5}
+.expense-summary-card.pending{background:#f7f2e8;border-color:#e8dcc4}
+.expense-summary-card.pending>strong{color:#8b6530}
+.expense-installment-preview{display:flex;align-items:center;gap:13px;margin:16px 0;padding:14px 16px;background:#edf2e8;border:1px solid #dbe5d3;color:#40583a}
+.expense-installment-preview>svg{flex:0 0 auto}
+.expense-installment-preview>div{display:grid;gap:4px}
+.expense-installment-preview strong{font-size:13px;color:var(--forest)}
+.expense-installment-preview small{font-size:10px;color:#596653;line-height:1.5}
+.expenses-filters{display:grid;grid-template-columns:minmax(220px,1fr) repeat(3,minmax(145px,.45fr));gap:9px;margin:18px 0}
+.expenses-filters input,.expenses-filters select{min-width:0;width:100%;min-height:43px;padding:10px 12px;border:1px solid var(--line);background:#fffefa;color:var(--ink);font:inherit;font-size:11px}
+.expenses-list{display:grid;gap:9px}
+.expense-row{display:grid;grid-template-columns:105px minmax(0,1fr) auto auto;align-items:center;gap:16px;padding:15px;border:1px solid var(--line);background:#fffefa}
+.expense-date{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:10px;white-space:nowrap}
+.expense-main{display:grid;gap:5px;min-width:0}
+.expense-main>strong{font-size:13px;color:var(--ink);overflow-wrap:anywhere}
+.expense-main>small{font-size:10px;color:var(--muted)}
+.expense-main>p{margin:2px 0 0;color:var(--muted);font-size:10px;line-height:1.5}
+.expense-tags{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.expense-tags>span{padding:4px 7px;background:#f1f2ed;color:#66705f;font-size:9px}
+.expense-tags>.expense-paid{background:#e8efe3;color:#45613d}
+.expense-tags>.expense-pending{background:#f7eddd;color:#8b6530}
+.expense-values{display:grid;gap:4px;text-align:right;white-space:nowrap}
+.expense-values>strong{font-size:15px;color:var(--forest)}
+.expense-values>small{font-size:9px;color:var(--muted)}
+.expense-values>.expense-due{color:#8b6530}
+.expense-actions{display:flex;align-items:center;gap:6px}
+.expense-actions .button{min-height:34px;padding:8px 10px;font-size:10px}
+@media(max-width:900px){.expenses-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.expense-row{grid-template-columns:1fr auto;gap:10px}.expense-date{grid-column:1/-1}.expense-main{grid-column:1}.expense-values{grid-column:2;grid-row:2}.expense-actions{grid-column:1/-1;justify-content:flex-end;border-top:1px solid var(--line);padding-top:9px}}
+@media(max-width:600px){.expenses-summary{grid-template-columns:1fr;gap:8px;margin:16px 0}.expense-summary-card{padding:14px;gap:4px}.expense-summary-card>strong{font-size:24px}.expenses-filters{grid-template-columns:1fr}.expense-row{padding:12px;grid-template-columns:minmax(0,1fr) auto}.expense-values>strong{font-size:13px}.expense-actions{justify-content:stretch}.expense-actions .button{flex:1;justify-content:center}}
