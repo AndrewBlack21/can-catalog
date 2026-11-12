@@ -50,7 +50,8 @@ export default function DashboardPage() {
   const [productSearch, setProductSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [publicationFilter, setPublicationFilter] = useState('all');
-  const [selectedProducts, setSelectedProducts] = useState([]);\n  const [bulkCategory, setBulkCategory] = useState("");
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [bulkCategory, setBulkCategory] = useState("");
   const navigate = useNavigate();
 
   async function loadData() {
