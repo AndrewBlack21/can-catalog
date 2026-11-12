@@ -1,15 +1,15 @@
-import { useRef, useState } from "react";
+import { memo, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/formatCurrency.js";
 import { storageImageUrl } from "../utils/storageImageUrl.js";
 
-export default function ProductCard({ product }) {
+function ProductCard({ product, priority = false }) {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
   const [mediaIndex, setMediaIndex] = useState(0);
   const touchStartX = useRef(null);
   const description = product.description || "Uma criação CAN Group feita para você.";
-  const media = [...(product.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  const media = useMemo(() => [...(product.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)), [product.product_images]);
   const currentMedia = media[mediaIndex];
   const mediaUrl = storageImageUrl(currentMedia?.storage_path);
   const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
@@ -34,9 +34,9 @@ export default function ProductCard({ product }) {
         <Link to={`/produto/${product.slug}`} className="product-image-link" aria-label={`Ver ${product.name}`}>
           {mediaUrl ? (
             currentIsVideo ? (
-              <video src={mediaUrl} muted loop autoPlay playsInline aria-label={product.name} />
+              <video src={mediaUrl} muted playsInline preload="none" aria-label={product.name} />
             ) : (
-              <img src={mediaUrl} alt={currentMedia?.alt_text || product.name} />
+              <img src={mediaUrl} alt={currentMedia?.alt_text || product.name} loading={priority ? "eager" : "lazy"} decoding="async" fetchPriority={priority ? "high" : "auto"} width="640" height="640" />
             )
           ) : (
             <div className="image-placeholder"><span>CAN</span><small>FOTO DO PRODUTO</small></div>
