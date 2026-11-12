@@ -1,12 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
   Search,
   Sparkles,
   MessageCircle,
-  ChevronLeft,
-  ChevronRight,
   Star,
   SlidersHorizontal,
   X,
@@ -30,7 +28,6 @@ export default function CatalogPage() {
   const [salesRank, setSalesRank] = useState({});
   const [loading, setLoading] = useState(isSupabaseConfigured);
   const [error, setError] = useState("");
-  const featuredTrackRef = useRef(null);
 
   useEffect(() => {
     if (!isSupabaseConfigured) return;
@@ -75,11 +72,6 @@ export default function CatalogPage() {
     () => products.filter((p) => p.featured && p.availability !== "unavailable"),
     [products],
   );
-
-  const scrollFeatured = (direction) => {
-    if (!featuredTrackRef.current) return;
-    featuredTrackRef.current.scrollBy({ left: direction * featuredTrackRef.current.clientWidth * 0.82, behavior: "smooth" });
-  };
 
   const visibleProducts = useMemo(() => {
     const filtered = products.filter((p) => {
