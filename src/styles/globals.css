@@ -334,3 +334,20 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
  .print-batch-summary{padding:12px}
  .print-result{padding:18px}
 }
+
+
+/* Publication management */
+.publication-overview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:22px 0}
+.publication-stat{display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;padding:15px 17px;border:1px solid var(--line);background:#fbfcf8;color:var(--ink);cursor:pointer}
+.publication-stat span{font-size:11px;color:var(--muted)}.publication-stat strong{font-size:24px;color:var(--forest)}
+.publication-stat.active{border-color:var(--forest);background:#edf2e8;box-shadow:inset 0 0 0 1px var(--forest)}
+.publication-toolbar{display:grid;grid-template-columns:minmax(220px,1fr) minmax(150px,.35fr) minmax(150px,.3fr);gap:10px;margin:18px 0}
+.publication-search,.publication-filter{display:flex;align-items:center;gap:9px;min-width:0;min-height:44px;padding:0 12px;border:1px solid var(--line);background:#fffefa;color:var(--muted)}
+.publication-search input,.publication-filter select{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:11px}
+.publication-filter span{font-size:10px;white-space:nowrap}
+.publication-bulkbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 14px;margin-bottom:12px;background:#f4f5ef;border:1px solid var(--line)}
+.publication-select-all,.publication-row-check{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted)}
+.publication-select-all input,.publication-row-check input{accent-color:var(--forest);width:16px;height:16px}
+.publication-bulk-actions{display:flex;gap:7px;flex-wrap:wrap}.publication-bulk-actions .button{padding:9px 11px;font-size:10px}
+.publication-row-check{flex:0 0 22px;justify-content:center}.admin-product-row .publication-row-check{order:-1}
+@media(max-width:760px){.publication-overview{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:16px 0}.publication-stat{padding:12px}.publication-stat strong{font-size:21px}.publication-toolbar{grid-template-columns:1fr}.publication-bulkbar{align-items:stretch}.publication-bulk-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.publication-bulk-actions .button{width:100%;padding:10px 7px}.publication-row-check{flex-basis:24px}}
