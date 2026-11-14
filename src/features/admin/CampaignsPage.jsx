@@ -13,10 +13,28 @@ const THEMES = [
   { value: "dia-das-maes", label: "Dia das Mães" },
   { value: "dia-dos-pais", label: "Dia dos Pais" }
 ];
+const THEME_PALETTES = {
+  "black-friday": { brand: "#171717", accent: "#d6a900", background: "#f5f4ef", text: "#171717", button_text: "#ffffff" },
+  natal: { brand: "#8b1e2d", accent: "#286344", background: "#fff8f3", text: "#2c2020", button_text: "#ffffff" },
+  "dia-das-maes": { brand: "#963d65", accent: "#bd6f94", background: "#fff7fa", text: "#30212a", button_text: "#ffffff" },
+  "dia-dos-pais": { brand: "#1e4777", accent: "#6c9bc8", background: "#f5f8fc", text: "#1c2938", button_text: "#ffffff" }
+};
 const emptyForm = {
   name: "", slug: "black-friday", headline: "", subtitle: "",
   starts_at: "", ends_at: "", is_active: false, priority: 0,
-  banner_path: "", theme_colors: { brand: "#171717", accent: "#d6a900", background: "#f5f4ef", text: "#171717", button_text: "#ffffff" }
+  banner_path: "", theme_colors: THEME_PALETTES["black-friday"]
+};
+const hexToRgb = hex => {
+  const value = String(hex || "").replace("#", "");
+  if (!/^[0-9a-f]{6}$/i.test(value)) return null;
+  return [0, 2, 4].map(index => parseInt(value.slice(index, index + 2), 16) / 255).map(channel => channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4);
+};
+const contrastRatio = (first, second) => {
+  const a = hexToRgb(first), b = hexToRgb(second);
+  if (!a || !b) return 0;
+  const luminance = rgb => .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2];
+  const values = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (values[0] + .05) / (values[1] + .05);
 };
 const toLocalInput = value => {
   if (!value) return "";
@@ -124,6 +142,8 @@ export default function CampaignsPage() {
     if (!Number.isInteger(Number(form.priority))) { setError("A prioridade deve ser um número inteiro."); return; }
     if (form.is_active && !selected.some(item => products.some(product => product.id === item.product_id && product.published))) { setError("Adicione pelo menos um produto publicado antes de ativar a campanha."); return; }
     if (selected.some(item => item.promo_price !== null && (!Number.isFinite(Number(item.promo_price)) || Number(item.promo_price) < 0))) { setError("Confira os preços promocionais informados."); return; }
+    if (contrastRatio(form.theme_colors.text, form.theme_colors.background) < 4.5) { setError("A combinação entre texto e fundo precisa ter contraste mínimo de 4,5:1 (WCAG AA)."); return; }
+    if (contrastRatio(form.theme_colors.button_text, form.theme_colors.brand) < 4.5) { setError("A combinação entre texto e botão precisa ter contraste mínimo de 4,5:1 (WCAG AA)."); return; }
     setBusy(true);
     let bannerPath = removeBanner ? null : form.banner_path || null;
     if (bannerFile) {
@@ -191,7 +211,7 @@ export default function CampaignsPage() {
           <form className="campaign-form" onSubmit={saveCampaign}>
             <div className="campaign-form-grid">
               <label>Nome da campanha<input value={form.name} onChange={e => setForm({...form, name:e.target.value})} required placeholder="Ex.: Black Friday CAN"/></label>
-              <label>Tema visual<select value={form.slug} onChange={e => setForm({...form, slug:e.target.value})}>{THEMES.map(theme => <option key={theme.value} value={theme.value}>{theme.label}</option>)}</select></label>
+              <label>Tema visual<select value={form.slug} onChange={e => setForm({...form, slug:e.target.value, theme_colors:THEME_PALETTES[e.target.value]})}>{THEMES.map(theme => <option key={theme.value} value={theme.value}>{theme.label}</option>)}</select></label>
               <label className="campaign-form-wide">Título principal<input value={form.headline} onChange={e => setForm({...form, headline:e.target.value})} required maxLength={160} placeholder="Ex.: Ofertas especiais por tempo limitado"/></label>
               <label className="campaign-form-wide">Subtítulo<textarea value={form.subtitle} onChange={e => setForm({...form, subtitle:e.target.value})} rows={2} placeholder="Conte um pouco sobre esta campanha"/></label>
               <div className="campaign-visual-editor campaign-form-wide">
