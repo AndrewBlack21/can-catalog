@@ -69,6 +69,16 @@ export default function CatalogPage({ campaign, campaignLoading, campaignError }
     };
   }, []);
 
+  const campaignPromoPrices = useMemo(() => {
+    const prices = new Map();
+    (campaign?.products || []).forEach(item => {
+      if (item?.id && item.promo_price !== null && item.promo_price !== undefined) {
+        prices.set(item.id, Number(item.promo_price));
+      }
+    });
+    return prices;
+  }, [campaign]);
+
   const featuredProducts = useMemo(
     () => products.filter((p) => p.featured && p.availability !== "unavailable"),
     [products],
@@ -178,12 +188,12 @@ export default function CatalogPage({ campaign, campaignLoading, campaignError }
           {!loading && !error && featuredProducts.length > 0 && (
             <section className="catalog-collection catalog-featured-collection" aria-label="Produtos em destaque">
               <div className="catalog-collection-heading"><div><span className="eyebrow"><Star size={13} fill="currentColor"/> ESCOLHAS CAN GROUP</span><h2>Em <em>destaque.</em></h2></div><span>Peças selecionadas pela CAN</span></div>
-              <div className="catalog-collection-grid">{featuredProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p} priority={false}/>)}</div>
+              <div className="catalog-collection-grid">{featuredProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p} priority={false} promoPrice={campaignPromoPrices.get(p.id) ?? null}/>)}</div>
             </section>
           )}
-          {!loading && !error && newProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">CHEGARAM AGORA</span><h2>Novidades.</h2></div><span>Adicionados recentemente</span></div><div className="catalog-collection-grid">{newProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
-          {!loading && !error && bestSellingProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">PREFERIDOS</span><h2>Mais <em>procurados.</em></h2></div><span>Com base nas vendas registradas</span></div><div className="catalog-collection-grid">{bestSellingProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
-          {!loading && !error && customizedProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">DO SEU JEITO</span><h2>Personalizados.</h2></div><span>Peças que podem ganhar sua identidade</span></div><div className="catalog-collection-grid">{customizedProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
+          {!loading && !error && newProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">CHEGARAM AGORA</span><h2>Novidades.</h2></div><span>Adicionados recentemente</span></div><div className="catalog-collection-grid">{newProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p} promoPrice={campaignPromoPrices.get(p.id) ?? null}/>)}</div></section>}
+          {!loading && !error && bestSellingProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">PREFERIDOS</span><h2>Mais <em>procurados.</em></h2></div><span>Com base nas vendas registradas</span></div><div className="catalog-collection-grid">{bestSellingProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p} promoPrice={campaignPromoPrices.get(p.id) ?? null}/>)}</div></section>}
+          {!loading && !error && customizedProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">DO SEU JEITO</span><h2>Personalizados.</h2></div><span>Peças que podem ganhar sua identidade</span></div><div className="catalog-collection-grid">{customizedProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p} promoPrice={campaignPromoPrices.get(p.id) ?? null}/>)}</div></section>}
           {isSupabaseConfigured && (
             <div className="catalog-tools catalog-tools-sticky">
               <label className="search-field">
@@ -219,7 +229,7 @@ export default function CatalogPage({ campaign, campaignLoading, campaignError }
           ) : visibleProducts.length ? (
             <div className="product-grid" id="resultados">
               {visibleProducts.map((p) => (
-                <ProductCard key={p.id} product={p} />
+                <ProductCard key={p.id} product={p} promoPrice={campaignPromoPrices.get(p.id) ?? null} />
               ))}
             </div>
           ) : (
