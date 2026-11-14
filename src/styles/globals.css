@@ -786,3 +786,39 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 
 .campaign-section .campaign-banner-copy .campaign-kicker { color: #fff; }
 .campaign-preview.has-banner > span, .campaign-preview.has-banner h2, .campaign-preview.has-banner p { color: #fff; }
+
+/* Countdown sobre o banner: sem caixa branca e com números legíveis */
+.campaign-banner-copy .campaign-countdown {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-items: start;
+  gap: 10px 16px;
+  width: fit-content;
+  padding: 0;
+  margin-top: 22px;
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none;
+  color: #fff !important;
+}
+.campaign-banner-copy .campaign-countdown span,
+.campaign-banner-copy .campaign-countdown strong {
+  color: #fff !important;
+}
+.campaign-banner-copy .campaign-countdown span {
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+.campaign-banner-copy .campaign-countdown strong {
+  font-size: clamp(15px, 2vw, 21px);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 3px rgba(0,0,0,.35);
+}
+@media (max-width: 640px) {
+  .campaign-banner-copy .campaign-countdown {
+    gap: 8px 12px;
+    width: 100%;
+  }
+}
