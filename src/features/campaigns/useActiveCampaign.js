@@ -3,6 +3,22 @@ import { isSupabaseConfigured, supabase } from "../../lib/supabase.js";
 
 const THEME_KEYS = ["black-friday", "natal", "dia-das-maes", "dia-dos-pais"];
 const CACHE_KEY = "can-active-campaign-theme";
+const clearCampaignTheme = () => {
+  document.documentElement.removeAttribute("data-theme");
+  ["--brand","--accent","--bg","--text","--campaign-button-text","--forest","--sage","--paper","--ink"].forEach(key => document.documentElement.style.removeProperty(key));
+};
+const applyCampaignTheme = (slug, colors = {}) => {
+  const root = document.documentElement;
+  root.dataset.theme = slug;
+  const variables = {
+    "--brand": colors.brand, "--forest": colors.brand,
+    "--accent": colors.accent, "--sage": colors.accent,
+    "--bg": colors.background, "--paper": colors.background,
+    "--text": colors.text, "--ink": colors.text,
+    "--campaign-button-text": colors.button_text
+  };
+  Object.entries(variables).forEach(([key, value]) => value ? root.style.setProperty(key, value) : root.style.removeProperty(key));
+};
 
 export function useActiveCampaign(enabled = true) {
   const [campaign, setCampaign] = useState(null);
@@ -11,15 +27,19 @@ export function useActiveCampaign(enabled = true) {
 
   useEffect(() => {
     if (!enabled) {
-      document.documentElement.removeAttribute("data-theme");
+      clearCampaignTheme();
       setCampaign(null);
       setLoading(false);
       return;
     }
     if (!isSupabaseConfigured) {
-      document.documentElement.removeAttribute("data-theme");
+      clearCampaignTheme();
       return;
     }
+    try {
+      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || "null");
+      if (cached && THEME_KEYS.includes(cached.slug) && new Date(cached.endsAt).getTime() > Date.now()) applyCampaignTheme(cached.slug, cached.theme_colors || {});
+    } catch {}
     let alive = true;
     async function loadCampaign() {
       setLoading(true);
@@ -35,7 +55,7 @@ export function useActiveCampaign(enabled = true) {
       if (queryError) {
         setError("Não foi possível carregar a campanha ativa.");
         setCampaign(null);
-        document.documentElement.removeAttribute("data-theme");
+        clearCampaignTheme();
         try { localStorage.removeItem(CACHE_KEY); } catch {}
       } else {
         const selected = (data || [])
@@ -47,20 +67,16 @@ export function useActiveCampaign(enabled = true) {
               .map(link => ({ ...link.products, promo_price: link.promo_price, campaign_id: item.id }))
           }))
           .sort((a, b) => Number(b.priority || 0) - Number(a.priority || 0))[0] || null;
-        setCampaign(selected);
         if (selected && THEME_KEYS.includes(selected.slug)) {
-          document.documentElement.dataset.theme = selected.slug;
           const colors = selected.theme_colors || {};
-          const root = document.documentElement;
-          const cssVariables = { "--brand": colors.brand, "--accent": colors.accent, "--bg": colors.background, "--text": colors.text, "--campaign-button-text": colors.button_text };
-          Object.entries(cssVariables).forEach(([key, value]) => value ? root.style.setProperty(key, value) : root.style.removeProperty(key));
+          applyCampaignTheme(selected.slug, colors);
           selected.banner_url = selected.banner_path ? supabase.storage.from("product-images").getPublicUrl(selected.banner_path).data.publicUrl : null;
           try { localStorage.setItem(CACHE_KEY, JSON.stringify({ slug: selected.slug, endsAt: selected.ends_at, theme_colors: colors })); } catch {}
         } else {
-          document.documentElement.removeAttribute("data-theme");
-          ["--brand","--accent","--bg","--text","--campaign-button-text"].forEach(key => document.documentElement.style.removeProperty(key));
+          clearCampaignTheme();
           try { localStorage.removeItem(CACHE_KEY); } catch {}
         }
+        setCampaign(selected);
       }
       setLoading(false);
     }
