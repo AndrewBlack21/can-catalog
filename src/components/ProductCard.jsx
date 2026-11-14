@@ -1,5 +1,5 @@
 import { memo, useMemo, useRef, useState } from "react";
-import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, Star } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, Star, Tag } from "lucide-react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/formatCurrency.js";
 import { storageImageUrl } from "../utils/storageImageUrl.js";
@@ -14,6 +14,7 @@ function ProductCard({ product, priority = false, promoPrice = null }) {
   const mediaUrl = storageImageUrl(currentMedia?.storage_path);
   const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
   const isNew = product.created_at && Date.now() - new Date(product.created_at).getTime() <= 30 * 24 * 60 * 60 * 1000;
+  const hasPromo = promoPrice !== null && promoPrice !== undefined;
   const availability = {
     available: "Disponível",
     made_to_order: "Sob encomenda",
@@ -30,7 +31,7 @@ function ProductCard({ product, priority = false, promoPrice = null }) {
   return (
     <article className="product-card">
       <div className="product-image" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-        <div className="product-card-badges">{product.featured && <span className="product-badge featured"><Star size={11} fill="currentColor"/> Destaque</span>}{isNew && <span className="product-badge new"><Sparkles size={11}/> Novidade</span>}</div>
+        <div className="product-card-badges">{product.featured && <span className="product-badge featured"><Star size={11} fill="currentColor"/> Destaque</span>}{isNew && <span className="product-badge new"><Sparkles size={11}/> Novidade</span>}{hasPromo && <span className="product-badge offer"><Tag size={11}/> Oferta</span>}</div>
         <Link to={`/produto/${product.slug}`} className="product-image-link" aria-label={`Ver ${product.name}`}>
           {mediaUrl ? (
             currentIsVideo ? (
@@ -61,7 +62,7 @@ function ProductCard({ product, priority = false, promoPrice = null }) {
         {description.length > 105 && <button type="button" className="product-more" aria-expanded={descriptionExpanded} onClick={() => setDescriptionExpanded(expanded => !expanded)}>{descriptionExpanded ? "Menos" : "Mais"}</button>}
         {product.available_colors?.length > 0 && <div className="product-colors"><small>Cores:</small>{product.available_colors.map(color => <span key={color}>{color}</span>)}</div>}
         <div className="product-bottom">
-          <div className="product-price-stack">{promoPrice !== null && promoPrice !== undefined ? <><strong className="product-promo-price">{formatCurrency(promoPrice)}</strong><del>{product.price_mode === "quote" ? "Preço sob consulta" : formatCurrency(product.price)}</del></> : <strong>{product.price_mode === "quote" ? "Sob consulta" : formatCurrency(product.price)}</strong>}</div>
+          <div className="product-price-stack">{hasPromo ? <><strong className="product-promo-price">{formatCurrency(promoPrice)}</strong><del>{product.price_mode === "quote" ? "Preço sob consulta" : formatCurrency(product.price)}</del></> : <strong>{product.price_mode === "quote" ? "Sob consulta" : formatCurrency(product.price)}</strong>}</div>
           <Link className="product-details-link" to={`/produto/${product.slug}`}>Ver detalhes <ArrowUpRight size={15}/></Link>
         </div>
       </div>
