@@ -38,7 +38,7 @@ export function useActiveCampaign(enabled = true) {
     }
     try {
       const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || "null");
-      if (cached && THEME_KEYS.includes(cached.slug) && new Date(cached.endsAt).getTime() > Date.now()) applyCampaignTheme(cached.slug, cached.theme_colors || {});
+      if (cached && THEME_KEYS.includes(cached.slug) && new Date(cached.startsAt).getTime() <= Date.now() && new Date(cached.endsAt).getTime() > Date.now()) applyCampaignTheme(cached.slug, cached.theme_colors || {});
     } catch {}
     let alive = true;
     async function loadCampaign() {
@@ -66,12 +66,13 @@ export function useActiveCampaign(enabled = true) {
               .sort((a, b) => a.position - b.position)
               .map(link => ({ ...link.products, promo_price: link.promo_price, campaign_id: item.id }))
           }))
+          .filter(item => item.products.length > 0)
           .sort((a, b) => Number(b.priority || 0) - Number(a.priority || 0))[0] || null;
         if (selected && THEME_KEYS.includes(selected.slug)) {
           const colors = selected.theme_colors || {};
           applyCampaignTheme(selected.slug, colors);
           selected.banner_url = selected.banner_path ? supabase.storage.from("product-images").getPublicUrl(selected.banner_path).data.publicUrl : null;
-          try { localStorage.setItem(CACHE_KEY, JSON.stringify({ slug: selected.slug, endsAt: selected.ends_at, theme_colors: colors })); } catch {}
+          try { localStorage.setItem(CACHE_KEY, JSON.stringify({ slug: selected.slug, startsAt: selected.starts_at, endsAt: selected.ends_at, theme_colors: colors })); } catch {}
         } else {
           clearCampaignTheme();
           try { localStorage.removeItem(CACHE_KEY); } catch {}
