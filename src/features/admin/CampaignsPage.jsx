@@ -56,6 +56,8 @@ export default function CampaignsPage() {
   const [preview, setPreview] = useState(false);
   const [bannerFile, setBannerFile] = useState(null);
   const [removeBanner, setRemoveBanner] = useState(false);
+  const bannerPreviewUrl = useMemo(() => bannerFile ? URL.createObjectURL(bannerFile) : "", [bannerFile]);
+  useEffect(() => () => { if (bannerPreviewUrl) URL.revokeObjectURL(bannerPreviewUrl); }, [bannerPreviewUrl]);
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }), useSensor(TouchSensor, { activationConstraint: { delay: 120, tolerance: 5 } }), useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }));
 
   async function loadData() {
@@ -206,7 +208,7 @@ export default function CampaignsPage() {
                   <small>Imagem JPG, PNG, WebP ou AVIF. Recomendado: 1920 × 700 px, até 5 MB.</small>
                 </label>
                 {(bannerFile || form.banner_path) && !removeBanner && <div className="campaign-banner-preview">
-                  <img src={bannerFile ? URL.createObjectURL(bannerFile) : supabase.storage.from("product-images").getPublicUrl(form.banner_path).data.publicUrl} alt="Prévia do banner da campanha"/>
+                  <img src={bannerFile ? bannerPreviewUrl : supabase.storage.from("product-images").getPublicUrl(form.banner_path).data.publicUrl} alt="Prévia do banner da campanha"/>
                   <button type="button" className="button button-outline" onClick={() => {setBannerFile(null);setForm({...form,banner_path:""});setRemoveBanner(true);}}>Remover banner</button>
                 </div>}
               </div>
@@ -231,7 +233,7 @@ export default function CampaignsPage() {
             </div>
             <div className="campaign-form-actions"><button className="button button-outline" type="button" onClick={() => setPreview(value => !value)}><Eye size={16}/>{preview ? "Fechar prévia" : "Pré-visualizar tema"}</button><button className="button button-dark" type="submit" disabled={busy}><Save size={16}/>{busy ? "Salvando..." : "Salvar campanha"}</button></div>
           </form>
-          {preview && <div className="campaign-preview" data-theme={form.slug} style={{"--campaign-brand":form.theme_colors.brand,"--campaign-accent":form.theme_colors.accent,"--campaign-bg":form.theme_colors.background,"--campaign-text":form.theme_colors.text,"--campaign-button-text":form.theme_colors.button_text, ...(bannerFile ? {backgroundImage:`linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.12)), url(${URL.createObjectURL(bannerFile)})`} : form.banner_path && !removeBanner ? {backgroundImage:`linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.12)), url(${supabase.storage.from("product-images").getPublicUrl(form.banner_path).data.publicUrl})`} : {})}}><span>PRÉVIA DO TEMA · {THEMES.find(theme => theme.value === form.slug)?.label}</span><h2>{form.headline || "Título da campanha"}</h2><p>{form.subtitle || "O subtítulo da campanha aparecerá aqui."}</p><button type="button">Exemplo de botão</button></div>}
+          {preview && <div className="campaign-preview" data-theme={form.slug} style={{"--campaign-brand":form.theme_colors.brand,"--campaign-accent":form.theme_colors.accent,"--campaign-bg":form.theme_colors.background,"--campaign-text":form.theme_colors.text,"--campaign-button-text":form.theme_colors.button_text, ...(bannerFile ? {backgroundImage:`linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.12)), url(${bannerPreviewUrl})`} : form.banner_path && !removeBanner ? {backgroundImage:`linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.12)), url(${supabase.storage.from("product-images").getPublicUrl(form.banner_path).data.publicUrl})`} : {})}}><span>PRÉVIA DO TEMA · {THEMES.find(theme => theme.value === form.slug)?.label}</span><h2>{form.headline || "Título da campanha"}</h2><p>{form.subtitle || "O subtítulo da campanha aparecerá aqui."}</p><button type="button">Exemplo de botão</button></div>}
         </section>
         <section className="admin-editor">
           <div className="admin-section-heading"><div><h2>Campanhas cadastradas</h2><p>Campanhas fora do período não são exibidas no catálogo, mesmo que estejam ativas.</p></div></div>
