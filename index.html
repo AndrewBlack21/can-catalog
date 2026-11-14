@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#233A22" />
+    <script>
+      try {
+        const cached = JSON.parse(localStorage.getItem("can-active-campaign-theme") || "null");
+        const themes = ["black-friday", "natal", "dia-das-maes", "dia-dos-pais"];
+        if (!location.pathname.startsWith("/adm") && cached && themes.includes(cached.slug) && Date.parse(cached.endsAt) > Date.now()) document.documentElement.dataset.theme = cached.slug;
+      } catch {}
+    </script>
     <meta name="description" content="Produtos criativos e personalizados da CAN Group." />
     <title>CAN Group — Catálogo</title>
   </head>

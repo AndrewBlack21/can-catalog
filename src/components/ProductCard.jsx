@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/formatCurrency.js";
 import { storageImageUrl } from "../utils/storageImageUrl.js";
 
-function ProductCard({ product, priority = false }) {
+function ProductCard({ product, priority = false, promoPrice = null }) {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
   const [mediaIndex, setMediaIndex] = useState(0);
   const touchStartX = useRef(null);
@@ -61,7 +61,7 @@ function ProductCard({ product, priority = false }) {
         {description.length > 105 && <button type="button" className="product-more" aria-expanded={descriptionExpanded} onClick={() => setDescriptionExpanded(expanded => !expanded)}>{descriptionExpanded ? "Menos" : "Mais"}</button>}
         {product.available_colors?.length > 0 && <div className="product-colors"><small>Cores:</small>{product.available_colors.map(color => <span key={color}>{color}</span>)}</div>}
         <div className="product-bottom">
-          <strong>{product.price_mode === "quote" ? "Sob consulta" : formatCurrency(product.price)}</strong>
+          <div className="product-price-stack">{promoPrice !== null && promoPrice !== undefined ? <><strong className="product-promo-price">{formatCurrency(promoPrice)}</strong><del>{product.price_mode === "quote" ? "Preço sob consulta" : formatCurrency(product.price)}</del></> : <strong>{product.price_mode === "quote" ? "Sob consulta" : formatCurrency(product.price)}</strong>}</div>
           <Link className="product-details-link" to={`/produto/${product.slug}`}>Ver detalhes <ArrowUpRight size={15}/></Link>
         </div>
       </div>

@@ -12,9 +12,10 @@ export default function Header({ admin = false }) {
       </Link>
       <nav>
         {admin && (
-          <Link className="text-link" to="/">
-            Ver catálogo ↗
-          </Link>
+          <>
+            <Link className="text-link" to="/adm/campanhas">Campanhas</Link>
+            <Link className="text-link" to="/">Ver catálogo ↗</Link>
+          </>
         )}
       </nav>
     </header>

@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap");
 :root {
   font-family: "DM Sans", sans-serif;
-  color: #20251e;
-  background: #f7f6f0;
+  color: var(--text);
+  background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -16,6 +16,11 @@
   --muted: #72766d;
   --line: #dedfd5;
   --serif: "Playfair Display", Georgia, serif;
+  --brand: var(--forest);
+  --accent: var(--sage);
+  --bg: var(--paper);
+  --text: var(--ink);
+  --card: #fffefa;
 }
 * {
   box-sizing: border-box;
@@ -42,4 +47,31 @@ a {
 }
 button {
   cursor: pointer;
+}
+
+
+/* Seasonal theme palettes. Default values above preserve the current CAN identity. */
+:root[data-theme="black-friday"],
+.campaign-preview[data-theme="black-friday"] {
+  --brand: #171717; --accent: #765d00; --bg: #f5f4ef; --text: #171717; --card: #ffffff;
+  --forest: #171717; --forest-deep: #000000; --sage: #d6a900; --sage-light: #fff0b3;
+  --cream: #fff0b3; --paper: #f5f4ef; --ink: #171717; --muted: #55524a; --line: #d8d4c8;
+}
+:root[data-theme="natal"],
+.campaign-preview[data-theme="natal"] {
+  --brand: #8b1e2d; --accent: #286344; --bg: #fff8f3; --text: #2c2020; --card: #ffffff;
+  --forest: #8b1e2d; --forest-deep: #641522; --sage: #286344; --sage-light: #dcebe0;
+  --cream: #f5e5dc; --paper: #fff8f3; --ink: #2c2020; --muted: #5e4a48; --line: #e8d8d2;
+}
+:root[data-theme="dia-das-maes"],
+.campaign-preview[data-theme="dia-das-maes"] {
+  --brand: #963d65; --accent: #87385a; --bg: #fff7fa; --text: #30212a; --card: #ffffff;
+  --forest: #963d65; --forest-deep: #71304c; --sage: #bd6f94; --sage-light: #f4dce7;
+  --cream: #f9e8ef; --paper: #fff7fa; --ink: #30212a; --muted: #624653; --line: #ead5df;
+}
+:root[data-theme="dia-dos-pais"],
+.campaign-preview[data-theme="dia-dos-pais"] {
+  --brand: #1e4777; --accent: #285a88; --bg: #f5f8fc; --text: #1c2938; --card: #ffffff;
+  --forest: #1e4777; --forest-deep: #153354; --sage: #6c9bc8; --sage-light: #dce9f5;
+  --cream: #e7f0f8; --paper: #f5f8fc; --ink: #1c2938; --muted: #46586b; --line: #d5e0eb;
 }

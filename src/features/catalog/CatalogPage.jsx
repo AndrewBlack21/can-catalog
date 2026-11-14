@@ -15,8 +15,9 @@ import Footer from "../../components/Footer.jsx";
 import ProductCard from "../../components/ProductCard.jsx";
 import { isSupabaseConfigured, supabase } from "../../lib/supabase.js";
 import imagemHero from "../../assets/Logo-Hero.png";
+import CampaignSection from "../campaigns/CampaignSection.jsx";
 
-export default function CatalogPage() {
+export default function CatalogPage({ campaign, campaignLoading, campaignError }) {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [query, setQuery] = useState("");
@@ -148,6 +149,7 @@ export default function CatalogPage() {
             </div>
           </div>
         </section>
+        <CampaignSection campaign={campaign} loading={campaignLoading} error={campaignError} />
         <section className="catalog-section" id="catalogo">
           <div className="section-intro">
             <div>

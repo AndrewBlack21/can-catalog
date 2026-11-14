@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import CatalogPage from '../features/catalog/CatalogPage.jsx';
 import ProductPage from '../features/catalog/ProductPage.jsx';
 import LoginPage from '../features/admin/LoginPage.jsx';
@@ -7,6 +7,8 @@ import DashboardPage from '../features/admin/DashboardPage.jsx';
 import PrintCostPage from '../features/admin/PrintCostPage.jsx';
 import SalesPage from '../features/admin/SalesPage.jsx';
 import ExpensesPage from '../features/admin/ExpensesPage.jsx';
+import CampaignsPage from '../features/admin/CampaignsPage.jsx';
+import { useActiveCampaign } from '../features/campaigns/useActiveCampaign.js';
 
 function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -36,16 +38,20 @@ function BackToTop() {
 }
 
 export default function App() {
+  const location = useLocation();
+  const isPublicRoute = !location.pathname.startsWith('/adm');
+  const { campaign, loading: campaignLoading, error: campaignError } = useActiveCampaign(isPublicRoute);
   return (
     <>
       <Routes>
-        <Route path="/" element={<CatalogPage />} />
+        <Route path="/" element={<CatalogPage campaign={campaign} campaignLoading={campaignLoading} campaignError={campaignError} />} />
         <Route path="/produto/:slug" element={<ProductPage />} />
         <Route path="/adm" element={<LoginPage />} />
         <Route path="/adm/painel" element={<DashboardPage />} />
         <Route path="/adm/orcamento-3d" element={<PrintCostPage />} />
         <Route path="/adm/vendas" element={<SalesPage />} />
         <Route path="/adm/gastos" element={<ExpensesPage />} />
+        <Route path="/adm/campanhas" element={<CampaignsPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <BackToTop />
