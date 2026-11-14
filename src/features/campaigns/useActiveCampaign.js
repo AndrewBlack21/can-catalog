@@ -25,7 +25,7 @@ export function useActiveCampaign(enabled = true) {
       setLoading(true);
       const { data, error: queryError } = await supabase
         .from("campaigns")
-        .select("id,name,slug,headline,subtitle,starts_at,ends_at,priority,campaign_products(product_id,promo_price,position,products(id,name,slug,description,price,price_mode,availability,featured,customization_enabled,created_at,category_id,categories(name),product_images(id,storage_path,media_type,sort_order,alt_text)))")
+        .select("id,name,slug,headline,subtitle,starts_at,ends_at,priority,banner_path,theme_colors,campaign_products(product_id,promo_price,position,products(id,name,slug,description,price,price_mode,availability,featured,customization_enabled,created_at,category_id,categories(name),product_images(id,storage_path,media_type,sort_order,alt_text)))")
         .eq("is_active", true)
         .lte("starts_at", new Date().toISOString())
         .gte("ends_at", new Date().toISOString())
@@ -50,9 +50,15 @@ export function useActiveCampaign(enabled = true) {
         setCampaign(selected);
         if (selected && THEME_KEYS.includes(selected.slug)) {
           document.documentElement.dataset.theme = selected.slug;
-          try { localStorage.setItem(CACHE_KEY, JSON.stringify({ slug: selected.slug, endsAt: selected.ends_at })); } catch {}
+          const colors = selected.theme_colors || {};
+          const root = document.documentElement;
+          const cssVariables = { "--brand": colors.brand, "--accent": colors.accent, "--bg": colors.background, "--text": colors.text, "--campaign-button-text": colors.button_text };
+          Object.entries(cssVariables).forEach(([key, value]) => value ? root.style.setProperty(key, value) : root.style.removeProperty(key));
+          selected.banner_url = selected.banner_path ? supabase.storage.from("product-images").getPublicUrl(selected.banner_path).data.publicUrl : null;
+          try { localStorage.setItem(CACHE_KEY, JSON.stringify({ slug: selected.slug, endsAt: selected.ends_at, theme_colors: colors })); } catch {}
         } else {
           document.documentElement.removeAttribute("data-theme");
+          ["--brand","--accent","--bg","--text","--campaign-button-text"].forEach(key => document.documentElement.style.removeProperty(key));
           try { localStorage.removeItem(CACHE_KEY); } catch {}
         }
       }
