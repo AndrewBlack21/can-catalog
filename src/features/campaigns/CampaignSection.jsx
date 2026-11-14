@@ -48,15 +48,23 @@ export default function CampaignSection({ campaign, loading = false, error = "" 
   if (!campaign && loading) return <section className="campaign-section campaign-feedback" aria-live="polite">Verificando campanhas especiais...</section>;
   if (!campaign || !products.length) return null;
   return (
-    <section className="campaign-section" aria-labelledby="campaign-headline">
+    <section className="campaign-section" aria-labelledby="campaign-headline" style={{"--campaign-brand":campaign.theme_colors?.brand || "var(--brand)","--campaign-accent":campaign.theme_colors?.accent || "var(--accent)","--campaign-bg":campaign.theme_colors?.background || "var(--bg)","--campaign-text":campaign.theme_colors?.text || "var(--text)","--campaign-button-text":campaign.theme_colors?.button_text || "#ffffff"}}>
       <div className="campaign-section-inner">
-        <div className="campaign-section-top">
+        {campaign.banner_url && <div className="campaign-hero-banner" style={{backgroundImage:`linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.12)), url("${campaign.banner_url}")`}}>
+          <div className="campaign-banner-copy">
+            {!campaign.banner_url && <><span className="campaign-kicker"><Tag size={14}/> CAMPANHA ESPECIAL · {campaign.name}</span>
+            <h2 id="campaign-headline">{campaign.headline}</h2>
+            {campaign.subtitle && <p>{campaign.subtitle}</p></>}
+            <CampaignCountdown endsAt={campaign.ends_at}/>
+          </div>
+        </div>}
+        <div className={campaign.banner_url ? "campaign-section-top campaign-section-top-compact" : "campaign-section-top"}>
           <div>
             <span className="campaign-kicker"><Tag size={14}/> CAMPANHA ESPECIAL · {campaign.name}</span>
             <h2 id="campaign-headline">{campaign.headline}</h2>
             {campaign.subtitle && <p>{campaign.subtitle}</p>}
           </div>
-          <CampaignCountdown endsAt={campaign.ends_at}/>
+          {!campaign.banner_url && <CampaignCountdown endsAt={campaign.ends_at}/>}
         </div>
         <div className="campaign-product-grid">
           {products.map(product => (
