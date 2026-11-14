@@ -822,3 +822,24 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
     width: 100%;
   }
 }
+
+/* Selo de oferta para produtos participantes de campanhas */
+.product-badge.offer {
+  background: var(--brand);
+  color: #fff;
+  border: 1px solid var(--accent);
+}
+.product-price-stack .product-promo-price {
+  display: block;
+  color: var(--brand);
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+.product-price-stack del {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
