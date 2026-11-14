@@ -783,3 +783,6 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
   .campaign-hero-banner { min-height: 300px; padding: 24px 18px; background-position: center; }
   .campaign-banner-copy h2 { font-size: clamp(1.9rem, 9vw, 2.8rem); }
 }
+
+.campaign-section .campaign-banner-copy .campaign-kicker { color: #fff; }
+.campaign-preview.has-banner > span, .campaign-preview.has-banner h2, .campaign-preview.has-banner p { color: #fff; }
