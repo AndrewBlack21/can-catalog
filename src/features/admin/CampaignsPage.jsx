@@ -15,7 +15,8 @@ const THEMES = [
 ];
 const emptyForm = {
   name: "", slug: "black-friday", headline: "", subtitle: "",
-  starts_at: "", ends_at: "", is_active: false, priority: 0
+  starts_at: "", ends_at: "", is_active: false, priority: 0,
+  banner_path: "", theme_colors: { brand: "#171717", accent: "#d6a900", background: "#f5f4ef", text: "#171717", button_text: "#ffffff" }
 };
 const toLocalInput = value => {
   if (!value) return "";
@@ -53,6 +54,8 @@ export default function CampaignsPage() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [preview, setPreview] = useState(false);
+  const [bannerFile, setBannerFile] = useState(null);
+  const [removeBanner, setRemoveBanner] = useState(false);
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }), useSensor(TouchSensor, { activationConstraint: { delay: 120, tolerance: 5 } }), useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }));
 
   async function loadData() {
@@ -94,10 +97,11 @@ export default function CampaignsPage() {
     return campaigns.filter(c => c.id !== editingId && start < new Date(c.ends_at).getTime() && end > new Date(c.starts_at).getTime());
   }, [campaigns, form.starts_at, form.ends_at, editingId]);
 
-  function resetForm() { setEditingId(null); setForm(emptyForm); setSelected([]); setError(""); setNotice(""); setPreview(false); }
+  function resetForm() { setEditingId(null); setForm(emptyForm); setSelected([]); setBannerFile(null); setRemoveBanner(false); setError(""); setNotice(""); setPreview(false); }
   function editCampaign(campaign) {
     setEditingId(campaign.id);
-    setForm({ name: campaign.name, slug: campaign.slug, headline: campaign.headline, subtitle: campaign.subtitle || "", starts_at: toLocalInput(campaign.starts_at), ends_at: toLocalInput(campaign.ends_at), is_active: campaign.is_active, priority: campaign.priority ?? 0 });
+    setForm({ name: campaign.name, slug: campaign.slug, headline: campaign.headline, subtitle: campaign.subtitle || "", starts_at: toLocalInput(campaign.starts_at), ends_at: toLocalInput(campaign.ends_at), is_active: campaign.is_active, priority: campaign.priority ?? 0, banner_path: campaign.banner_path || "", theme_colors: { ...emptyForm.theme_colors, ...(campaign.theme_colors || {}) } });
+    setBannerFile(null); setRemoveBanner(false);
     setSelected([...(campaign.campaign_products || [])].sort((a,b) => a.position - b.position).map(item => ({ product_id: item.product_id, promo_price: item.promo_price })));
     setError(""); setNotice(""); setPreview(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -119,7 +123,15 @@ export default function CampaignsPage() {
     if (form.is_active && !selected.some(item => products.some(product => product.id === item.product_id && product.published))) { setError("Adicione pelo menos um produto publicado antes de ativar a campanha."); return; }
     if (selected.some(item => item.promo_price !== null && (!Number.isFinite(Number(item.promo_price)) || Number(item.promo_price) < 0))) { setError("Confira os preços promocionais informados."); return; }
     setBusy(true);
-    const payload = { name: form.name.trim(), slug: form.slug, headline: form.headline.trim(), subtitle: form.subtitle.trim(), starts_at: toIso(form.starts_at), ends_at: toIso(form.ends_at), is_active: form.is_active, priority: Number(form.priority) || 0 };
+    let bannerPath = removeBanner ? null : form.banner_path || null;
+    if (bannerFile) {
+      const extension = bannerFile.name.split(".").pop()?.toLowerCase() || "jpg";
+      const filePath = `campaigns/${editingId || crypto.randomUUID()}/banner-${Date.now()}.${extension}`;
+      const { error: uploadError } = await supabase.storage.from("product-images").upload(filePath, bannerFile, { upsert: true, contentType: bannerFile.type });
+      if (uploadError) { setError(`Não foi possível enviar o banner: ${uploadError.message}`); setBusy(false); return; }
+      bannerPath = filePath;
+    }
+    const payload = { name: form.name.trim(), slug: form.slug, headline: form.headline.trim(), subtitle: form.subtitle.trim(), starts_at: toIso(form.starts_at), ends_at: toIso(form.ends_at), is_active: form.is_active, priority: Number(form.priority) || 0, banner_path: bannerPath, theme_colors: form.theme_colors };
     const result = editingId
       ? await supabase.from("campaigns").update(payload).eq("id", editingId).select("id").single()
       : await supabase.from("campaigns").insert(payload).select("id").single();
@@ -180,6 +192,24 @@ export default function CampaignsPage() {
               <label>Tema visual<select value={form.slug} onChange={e => setForm({...form, slug:e.target.value})}>{THEMES.map(theme => <option key={theme.value} value={theme.value}>{theme.label}</option>)}</select></label>
               <label className="campaign-form-wide">Título principal<input value={form.headline} onChange={e => setForm({...form, headline:e.target.value})} required maxLength={160} placeholder="Ex.: Ofertas especiais por tempo limitado"/></label>
               <label className="campaign-form-wide">Subtítulo<textarea value={form.subtitle} onChange={e => setForm({...form, subtitle:e.target.value})} rows={2} placeholder="Conte um pouco sobre esta campanha"/></label>
+              <div className="campaign-visual-editor campaign-form-wide">
+                <div className="campaign-visual-editor-heading"><div><h3>Identidade visual da campanha</h3><p>Personalize as cores e adicione um banner para destacar a campanha na vitrine.</p></div></div>
+                <div className="campaign-color-fields">
+                  <label>Cor principal<input type="color" value={form.theme_colors.brand} onChange={e => setForm({...form, theme_colors:{...form.theme_colors,brand:e.target.value}})}/></label>
+                  <label>Cor de destaque<input type="color" value={form.theme_colors.accent} onChange={e => setForm({...form, theme_colors:{...form.theme_colors,accent:e.target.value}})}/></label>
+                  <label>Fundo<input type="color" value={form.theme_colors.background} onChange={e => setForm({...form, theme_colors:{...form.theme_colors,background:e.target.value}})}/></label>
+                  <label>Texto<input type="color" value={form.theme_colors.text} onChange={e => setForm({...form, theme_colors:{...form.theme_colors,text:e.target.value}})}/></label>
+                  <label>Texto dos botões<input type="color" value={form.theme_colors.button_text} onChange={e => setForm({...form, theme_colors:{...form.theme_colors,button_text:e.target.value}})}/></label>
+                </div>
+                <label className="campaign-banner-upload">Banner da campanha
+                  <input type="file" accept="image/jpeg,image/png,image/webp,image/avif" onChange={e => {setBannerFile(e.target.files?.[0] || null);setRemoveBanner(false);}}/>
+                  <small>Imagem JPG, PNG, WebP ou AVIF. Recomendado: 1920 × 700 px, até 5 MB.</small>
+                </label>
+                {(bannerFile || form.banner_path) && !removeBanner && <div className="campaign-banner-preview">
+                  <img src={bannerFile ? URL.createObjectURL(bannerFile) : supabase.storage.from("product-images").getPublicUrl(form.banner_path).data.publicUrl} alt="Prévia do banner da campanha"/>
+                  <button type="button" className="button button-outline" onClick={() => {setBannerFile(null);setForm({...form,banner_path:""});setRemoveBanner(true);}}>Remover banner</button>
+                </div>}
+              </div>
               <label>Início<input type="datetime-local" value={form.starts_at} onChange={e => setForm({...form, starts_at:e.target.value})} required/></label>
               <label>Término<input type="datetime-local" value={form.ends_at} onChange={e => setForm({...form, ends_at:e.target.value})} required/></label>
               <label>Prioridade<input type="number" step="1" value={form.priority} onChange={e => setForm({...form, priority:e.target.value})}/></label>
@@ -201,7 +231,7 @@ export default function CampaignsPage() {
             </div>
             <div className="campaign-form-actions"><button className="button button-outline" type="button" onClick={() => setPreview(value => !value)}><Eye size={16}/>{preview ? "Fechar prévia" : "Pré-visualizar tema"}</button><button className="button button-dark" type="submit" disabled={busy}><Save size={16}/>{busy ? "Salvando..." : "Salvar campanha"}</button></div>
           </form>
-          {preview && <div className="campaign-preview" data-theme={form.slug}><span>PRÉVIA DO TEMA · {THEMES.find(theme => theme.value === form.slug)?.label}</span><h2>{form.headline || "Título da campanha"}</h2><p>{form.subtitle || "O subtítulo da campanha aparecerá aqui."}</p><button type="button">Exemplo de botão</button></div>}
+          {preview && <div className="campaign-preview" data-theme={form.slug} style={{"--campaign-brand":form.theme_colors.brand,"--campaign-accent":form.theme_colors.accent,"--campaign-bg":form.theme_colors.background,"--campaign-text":form.theme_colors.text,"--campaign-button-text":form.theme_colors.button_text, ...(bannerFile ? {backgroundImage:`linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.12)), url(${URL.createObjectURL(bannerFile)})`} : form.banner_path && !removeBanner ? {backgroundImage:`linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.12)), url(${supabase.storage.from("product-images").getPublicUrl(form.banner_path).data.publicUrl})`} : {})}}><span>PRÉVIA DO TEMA · {THEMES.find(theme => theme.value === form.slug)?.label}</span><h2>{form.headline || "Título da campanha"}</h2><p>{form.subtitle || "O subtítulo da campanha aparecerá aqui."}</p><button type="button">Exemplo de botão</button></div>}
         </section>
         <section className="admin-editor">
           <div className="admin-section-heading"><div><h2>Campanhas cadastradas</h2><p>Campanhas fora do período não são exibidas no catálogo, mesmo que estejam ativas.</p></div></div>
