@@ -17,10 +17,14 @@ const mixHex = (first, second, amount) => {
   if (!/^[0-9a-f]{6}$/i.test(a) || !/^[0-9a-f]{6}$/i.test(b)) return first;
   return "#" + [0,2,4].map(index => Math.round(parseInt(a.slice(index,index+2),16) * (1-amount) + parseInt(b.slice(index,index+2),16) * amount).toString(16).padStart(2,"0")).join("");
 };
+const contrastRatio = (first, second) => {
+  const values = [luminance(first), luminance(second)].sort((a, b) => b - a);
+  return (values[0] + .05) / (values[1] + .05);
+};
 const normalizePalette = (colors = {}) => {
   const background = colors.background || "#f5f4ef";
   const dark = luminance(background) < .42;
-  const text = dark ? "#ffffff" : "#191919";
+  const text = contrastRatio("#ffffff", background) >= contrastRatio("#191919", background) ? "#ffffff" : "#191919";
   return {
     background,
     brand: background,
