@@ -77,6 +77,7 @@ export function useActiveCampaign(enabled = true) {
       if (cached && THEME_KEYS.includes(cached.slug) && new Date(cached.startsAt).getTime() <= Date.now() && new Date(cached.endsAt).getTime() > Date.now()) applyCampaignTheme(cached.slug, cached.theme_colors || {});
     } catch {}
     let alive = true;
+    let expiryTimer = null;
     async function loadCampaign() {
       setLoading(true);
       const { data, error: queryError } = await supabase
@@ -114,11 +115,16 @@ export function useActiveCampaign(enabled = true) {
           try { localStorage.removeItem(CACHE_KEY); } catch {}
         }
         setCampaign(selected);
+        if (expiryTimer) window.clearTimeout(expiryTimer);
+        if (selected?.ends_at) {
+          const remaining = new Date(selected.ends_at).getTime() - Date.now();
+          if (remaining > 0) expiryTimer = window.setTimeout(() => { if (alive) loadCampaign(); }, Math.min(remaining + 1000, 2147483647));
+        }
       }
       setLoading(false);
     }
     loadCampaign();
-    return () => { alive = false; };
+    return () => { alive = false; if (expiryTimer) window.clearTimeout(expiryTimer); };
   }, [enabled]);
 
   return { campaign, loading, error };
