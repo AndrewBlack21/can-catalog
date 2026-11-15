@@ -28,7 +28,11 @@ const luminance = hex => {
   const rgb = hexToRgb(hex);
   return rgb ? .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2] : .95;
 };
-const contrastText = background => luminance(background) < .42 ? "#ffffff" : "#191919";
+const contrastText = background => {
+  const light = contrastRatio("#ffffff", background);
+  const dark = contrastRatio("#191919", background);
+  return light >= dark ? "#ffffff" : "#191919";
+};
 const mixHex = (first, second, amount) => {
   const a = String(first).replace("#", ""), b = String(second).replace("#", "");
   if (!/^[0-9a-f]{6}$/i.test(a) || !/^[0-9a-f]{6}$/i.test(b)) return first;
