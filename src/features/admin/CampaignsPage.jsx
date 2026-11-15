@@ -14,26 +14,39 @@ const THEMES = [
   { value: "dia-dos-pais", label: "Dia dos Pais" }
 ];
 const THEME_PALETTES = {
-  "black-friday": { brand: "#171717", accent: "#d6a900", background: "#f5f4ef", text: "#171717", button_text: "#ffffff" },
-  natal: { brand: "#8b1e2d", accent: "#286344", background: "#fff8f3", text: "#2c2020", button_text: "#ffffff" },
-  "dia-das-maes": { brand: "#963d65", accent: "#bd6f94", background: "#fff7fa", text: "#30212a", button_text: "#ffffff" },
-  "dia-dos-pais": { brand: "#1e4777", accent: "#6c9bc8", background: "#f5f8fc", text: "#1c2938", button_text: "#ffffff" }
-};
-const emptyForm = {
-  name: "", slug: "black-friday", headline: "", subtitle: "",
-  starts_at: "", ends_at: "", is_active: false, priority: 0,
-  banner_path: "", theme_colors: THEME_PALETTES["black-friday"]
+  "black-friday": "#f5f4ef",
+  natal: "#fff8f3",
+  "dia-das-maes": "#fff7fa",
+  "dia-dos-pais": "#f5f8fc"
 };
 const hexToRgb = hex => {
   const value = String(hex || "").replace("#", "");
   if (!/^[0-9a-f]{6}$/i.test(value)) return null;
   return [0, 2, 4].map(index => parseInt(value.slice(index, index + 2), 16) / 255).map(channel => channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4);
 };
+const luminance = hex => {
+  const rgb = hexToRgb(hex);
+  return rgb ? .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2] : .95;
+};
+const contrastText = background => luminance(background) < .42 ? "#ffffff" : "#191919";
+const mixHex = (first, second, amount) => {
+  const a = String(first).replace("#", ""), b = String(second).replace("#", "");
+  if (!/^[0-9a-f]{6}$/i.test(a) || !/^[0-9a-f]{6}$/i.test(b)) return first;
+  return "#" + [0,2,4].map(index => Math.round(parseInt(a.slice(index,index+2),16) * (1-amount) + parseInt(b.slice(index,index+2),16) * amount).toString(16).padStart(2,"0")).join("");
+};
+const createCampaignPalette = background => {
+  const dark = luminance(background) < .42;
+  const text = contrastText(background);
+  const card = mixHex(background, dark ? "#ffffff" : "#000000", dark ? .09 : .035);
+  return { background, brand: background, accent: background, card, text, button_text: text };
+};
+const emptyForm = {
+  name: "", slug: "black-friday", headline: "", subtitle: "",
+  starts_at: "", ends_at: "", is_active: false, priority: 0,
+  banner_path: "", theme_colors: createCampaignPalette(THEME_PALETTES["black-friday"])
+};
 const contrastRatio = (first, second) => {
-  const a = hexToRgb(first), b = hexToRgb(second);
-  if (!a || !b) return 0;
-  const luminance = rgb => .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2];
-  const values = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  const values = [luminance(first), luminance(second)].sort((a, b) => b - a);
   return (values[0] + .05) / (values[1] + .05);
 };
 const toLocalInput = value => {
@@ -120,7 +133,7 @@ export default function CampaignsPage() {
   function resetForm() { setEditingId(null); setForm(emptyForm); setSelected([]); setBannerFile(null); setRemoveBanner(false); setError(""); setNotice(""); setPreview(false); }
   function editCampaign(campaign) {
     setEditingId(campaign.id);
-    setForm({ name: campaign.name, slug: campaign.slug, headline: campaign.headline, subtitle: campaign.subtitle || "", starts_at: toLocalInput(campaign.starts_at), ends_at: toLocalInput(campaign.ends_at), is_active: campaign.is_active, priority: campaign.priority ?? 0, banner_path: campaign.banner_path || "", theme_colors: { ...emptyForm.theme_colors, ...(campaign.theme_colors || {}) } });
+    setForm({ name: campaign.name, slug: campaign.slug, headline: campaign.headline, subtitle: campaign.subtitle || "", starts_at: toLocalInput(campaign.starts_at), ends_at: toLocalInput(campaign.ends_at), is_active: campaign.is_active, priority: campaign.priority ?? 0, banner_path: campaign.banner_path || "", theme_colors: createCampaignPalette(campaign.theme_colors?.background || THEME_PALETTES[campaign.slug] || THEME_PALETTES["black-friday"]) });
     setBannerFile(null); setRemoveBanner(false);
     setSelected([...(campaign.campaign_products || [])].sort((a,b) => a.position - b.position).map(item => ({ product_id: item.product_id, promo_price: item.promo_price })));
     setError(""); setNotice(""); setPreview(false);
@@ -211,17 +224,16 @@ export default function CampaignsPage() {
           <form className="campaign-form" onSubmit={saveCampaign}>
             <div className="campaign-form-grid">
               <label>Nome da campanha<input value={form.name} onChange={e => setForm({...form, name:e.target.value})} required placeholder="Ex.: Black Friday CAN"/></label>
-              <label>Tema visual<select value={form.slug} onChange={e => setForm({...form, slug:e.target.value, theme_colors:THEME_PALETTES[e.target.value]})}>{THEMES.map(theme => <option key={theme.value} value={theme.value}>{theme.label}</option>)}</select></label>
+              <label>Tema visual<select value={form.slug} onChange={e => setForm({...form, slug:e.target.value, theme_colors:createCampaignPalette(THEME_PALETTES[e.target.value])})}>{THEMES.map(theme => <option key={theme.value} value={theme.value}>{theme.label}</option>)}</select></label>
               <label className="campaign-form-wide">Título principal<input value={form.headline} onChange={e => setForm({...form, headline:e.target.value})} required maxLength={160} placeholder="Ex.: Ofertas especiais por tempo limitado"/></label>
               <label className="campaign-form-wide">Subtítulo<textarea value={form.subtitle} onChange={e => setForm({...form, subtitle:e.target.value})} rows={2} placeholder="Conte um pouco sobre esta campanha"/></label>
               <div className="campaign-visual-editor campaign-form-wide">
                 <div className="campaign-visual-editor-heading"><div><h3>Identidade visual da campanha</h3><p>Personalize as cores e adicione um banner para destacar a campanha na vitrine.</p></div></div>
-                <div className="campaign-color-fields">
-                  <label>Cor principal<input type="color" value={form.theme_colors.brand} onChange={e => setForm({...form, theme_colors:{...form.theme_colors,brand:e.target.value}})}/></label>
-                  <label>Cor de destaque<input type="color" value={form.theme_colors.accent} onChange={e => setForm({...form, theme_colors:{...form.theme_colors,accent:e.target.value}})}/></label>
-                  <label>Fundo<input type="color" value={form.theme_colors.background} onChange={e => setForm({...form, theme_colors:{...form.theme_colors,background:e.target.value}})}/></label>
-                  <label>Texto<input type="color" value={form.theme_colors.text} onChange={e => setForm({...form, theme_colors:{...form.theme_colors,text:e.target.value}})}/></label>
-                  <label>Texto dos botões<input type="color" value={form.theme_colors.button_text} onChange={e => setForm({...form, theme_colors:{...form.theme_colors,button_text:e.target.value}})}/></label>
+                <div className="campaign-color-fields campaign-color-fields-simple">
+                  <label>Cor de fundo da campanha e dos cards
+                    <input type="color" value={form.theme_colors.background} onChange={e => setForm({...form, theme_colors:createCampaignPalette(e.target.value)})}/>
+                  </label>
+                  <p>Pronto: o texto, os botões, os cards das ofertas e o restante da vitrine ajustam as cores automaticamente para manter a leitura e o contraste.</p>
                 </div>
                 <label className="campaign-banner-upload">Banner da campanha
                   <input type="file" accept="image/jpeg,image/png,image/webp,image/avif" onChange={e => {const file=e.target.files?.[0] || null;if(file && file.size > 5 * 1024 * 1024){setError("O banner deve ter no máximo 5 MB.");e.target.value="";return;}setError("");setBannerFile(file);setRemoveBanner(false);}}/>
@@ -253,7 +265,7 @@ export default function CampaignsPage() {
             </div>
             <div className="campaign-form-actions"><button className="button button-outline" type="button" onClick={() => setPreview(value => !value)}><Eye size={16}/>{preview ? "Fechar prévia" : "Pré-visualizar tema"}</button><button className="button button-dark" type="submit" disabled={busy}><Save size={16}/>{busy ? "Salvando..." : "Salvar campanha"}</button></div>
           </form>
-          {preview && <div className={bannerPreviewUrl || (form.banner_path && !removeBanner) ? "campaign-preview has-banner" : "campaign-preview"} data-theme={form.slug} style={{"--campaign-brand":form.theme_colors.brand,"--campaign-accent":form.theme_colors.accent,"--campaign-bg":form.theme_colors.background,"--campaign-text":form.theme_colors.text,"--campaign-button-text":form.theme_colors.button_text, ...(bannerFile ? {backgroundImage:`linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.12)), url(${bannerPreviewUrl})`} : form.banner_path && !removeBanner ? {backgroundImage:`linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.12)), url(${supabase.storage.from("product-images").getPublicUrl(form.banner_path).data.publicUrl})`} : {})}}><span>PRÉVIA DO TEMA · {THEMES.find(theme => theme.value === form.slug)?.label}</span><h2>{form.headline || "Título da campanha"}</h2><p>{form.subtitle || "O subtítulo da campanha aparecerá aqui."}</p><button type="button">Exemplo de botão</button></div>}
+          {preview && <div className={bannerPreviewUrl || (form.banner_path && !removeBanner) ? "campaign-preview has-banner" : "campaign-preview"} data-theme={form.slug} style={{"--campaign-brand":form.theme_colors.brand,"--campaign-accent":form.theme_colors.accent,"--campaign-bg":form.theme_colors.background,"--campaign-card":form.theme_colors.card,"--campaign-text":form.theme_colors.text,"--campaign-button-text":form.theme_colors.button_text, ...(bannerFile ? {backgroundImage:`linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.12)), url(${bannerPreviewUrl})`} : form.banner_path && !removeBanner ? {backgroundImage:`linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.12)), url(${supabase.storage.from("product-images").getPublicUrl(form.banner_path).data.publicUrl})`} : {})}}><span>PRÉVIA DO TEMA · {THEMES.find(theme => theme.value === form.slug)?.label}</span><h2>{form.headline || "Título da campanha"}</h2><p>{form.subtitle || "O subtítulo da campanha aparecerá aqui."}</p><button type="button">Exemplo de botão</button></div>}
         </section>
         <section className="admin-editor">
           <div className="admin-section-heading"><div><h2>Campanhas cadastradas</h2><p>Campanhas fora do período não são exibidas no catálogo, mesmo que estejam ativas.</p></div></div>
