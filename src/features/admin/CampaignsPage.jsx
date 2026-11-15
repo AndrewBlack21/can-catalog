@@ -28,6 +28,10 @@ const luminance = hex => {
   const rgb = hexToRgb(hex);
   return rgb ? .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2] : .95;
 };
+const contrastRatio = (first, second) => {
+  const values = [luminance(first), luminance(second)].sort((a, b) => b - a);
+  return (values[0] + .05) / (values[1] + .05);
+};
 const contrastText = background => {
   const light = contrastRatio("#ffffff", background);
   const dark = contrastRatio("#191919", background);
@@ -48,10 +52,6 @@ const emptyForm = {
   name: "", slug: "black-friday", headline: "", subtitle: "",
   starts_at: "", ends_at: "", is_active: false, priority: 0,
   banner_path: "", theme_colors: createCampaignPalette(THEME_PALETTES["black-friday"])
-};
-const contrastRatio = (first, second) => {
-  const values = [luminance(first), luminance(second)].sort((a, b) => b - a);
-  return (values[0] + .05) / (values[1] + .05);
 };
 const toLocalInput = value => {
   if (!value) return "";
