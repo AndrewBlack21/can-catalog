@@ -3,19 +3,51 @@ import { isSupabaseConfigured, supabase } from "../../lib/supabase.js";
 
 const THEME_KEYS = ["black-friday", "natal", "dia-das-maes", "dia-dos-pais"];
 const CACHE_KEY = "can-active-campaign-theme";
+const hexToRgb = hex => {
+  const value = String(hex || "").replace("#", "");
+  if (!/^[0-9a-f]{6}$/i.test(value)) return null;
+  return [0, 2, 4].map(index => parseInt(value.slice(index, index + 2), 16) / 255).map(channel => channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4);
+};
+const luminance = hex => {
+  const rgb = hexToRgb(hex);
+  return rgb ? .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2] : .95;
+};
+const mixHex = (first, second, amount) => {
+  const a = String(first || "").replace("#", ""), b = String(second).replace("#", "");
+  if (!/^[0-9a-f]{6}$/i.test(a) || !/^[0-9a-f]{6}$/i.test(b)) return first;
+  return "#" + [0,2,4].map(index => Math.round(parseInt(a.slice(index,index+2),16) * (1-amount) + parseInt(b.slice(index,index+2),16) * amount).toString(16).padStart(2,"0")).join("");
+};
+const normalizePalette = (colors = {}) => {
+  const background = colors.background || "#f5f4ef";
+  const dark = luminance(background) < .42;
+  const text = dark ? "#ffffff" : "#191919";
+  return {
+    background,
+    brand: background,
+    accent: background,
+    card: colors.card || mixHex(background, dark ? "#ffffff" : "#000000", dark ? .09 : .035),
+    text,
+    button_text: text
+  };
+};
 const clearCampaignTheme = () => {
   document.documentElement.removeAttribute("data-theme");
-  ["--brand","--accent","--bg","--text","--campaign-button-text","--forest","--sage","--paper","--ink"].forEach(key => document.documentElement.style.removeProperty(key));
+  ["--brand","--accent","--bg","--card","--text","--campaign-button-text","--forest","--sage","--paper","--ink","--line","--muted"].forEach(key => document.documentElement.style.removeProperty(key));
 };
-const applyCampaignTheme = (slug, colors = {}) => {
+const applyCampaignTheme = (slug, rawColors = {}) => {
   const root = document.documentElement;
+  const colors = normalizePalette(rawColors);
+  const dark = luminance(colors.background) < .42;
   root.dataset.theme = slug;
   const variables = {
     "--brand": colors.brand, "--forest": colors.brand,
     "--accent": colors.accent, "--sage": colors.accent,
     "--bg": colors.background, "--paper": colors.background,
+    "--card": colors.card,
     "--text": colors.text, "--ink": colors.text,
-    "--campaign-button-text": colors.button_text
+    "--campaign-button-text": colors.button_text,
+    "--line": mixHex(colors.background, colors.text, dark ? .28 : .16),
+    "--muted": mixHex(colors.text, colors.background, .38)
   };
   Object.entries(variables).forEach(([key, value]) => value ? root.style.setProperty(key, value) : root.style.removeProperty(key));
 };
