@@ -48,7 +48,7 @@ export default function CampaignSection({ campaign, loading = false, error = "" 
   if (!campaign && loading) return <section className="campaign-section campaign-feedback" aria-live="polite">Verificando campanhas especiais...</section>;
   if (!campaign || !products.length) return null;
   return (
-    <section className="campaign-section" aria-labelledby="campaign-headline" style={{"--campaign-brand":campaign.theme_colors?.brand || "var(--brand)","--campaign-accent":campaign.theme_colors?.accent || "var(--accent)","--campaign-bg":campaign.theme_colors?.background || "var(--bg)","--campaign-text":campaign.theme_colors?.text || "var(--text)","--campaign-button-text":campaign.theme_colors?.button_text || "#ffffff"}}>
+    <section className="campaign-section" aria-labelledby="campaign-headline" style={{"--campaign-brand":campaign.theme_colors?.brand || "var(--brand)","--campaign-accent":campaign.theme_colors?.accent || "var(--accent)","--campaign-bg":campaign.theme_colors?.background || "var(--bg)","--campaign-card":campaign.theme_colors?.card || "var(--card)","--campaign-text":campaign.theme_colors?.text || "var(--text)","--campaign-button-text":campaign.theme_colors?.button_text || "#ffffff"}}>
       <div className="campaign-section-inner">
         {campaign.banner_url && <div className="campaign-hero-banner" style={{backgroundImage:`linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.12)), url("${campaign.banner_url}")`}}>
           <div className="campaign-banner-copy">
