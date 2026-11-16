@@ -8,6 +8,7 @@ import Header from '../../components/Header.jsx';
 import { isSupabaseConfigured, supabase } from '../../lib/supabase.js';
 import { formatCurrency } from '../../utils/formatCurrency.js';
 import { storageImageUrl } from '../../utils/storageImageUrl.js';
+import { optimizeImageFile, originalPathForOptimized } from '../../utils/optimizeImage.js';
 
 const blankProduct = {
   name: '', slug: '', category_id: '', description: '', price_mode: 'fixed', price: '',
@@ -141,7 +142,7 @@ export default function DashboardPage() {
     }
     const { error: storageError } = await supabase.storage
       .from('product-images')
-      .remove([media.storage_path]);
+      .remove([media.storage_path, originalPathForOptimized(media.storage_path)].filter(Boolean));
     setExistingMedia(items => items.filter(item => item.id !== media.id));
     if (storageError) {
       setError(`A mídia saiu do produto, mas o arquivo não foi removido do armazenamento: ${storageError.message}`);
@@ -221,16 +222,25 @@ export default function DashboardPage() {
     let nextSortOrder = Number.isInteger(lastMedia?.sort_order) ? lastMedia.sort_order + 1 : 0;
 
     for (const file of files) {
-      const safeName = file.name.toLowerCase().replace(/[^a-z0-9.-]+/g, '-');
-      const path = productId + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '-' + safeName;
-      const extension = file.name.split('.').pop()?.toLowerCase();
+      const extension = file.name.split('.').pop()?.toLowerCase() || 'bin';
       const mediaType = file.type.startsWith('video/') || ['mp4','webm'].includes(extension) ? 'video' : 'image';
       const contentType = file.type || (extension === 'mp4' ? 'video/mp4' : extension === 'webm' ? 'video/webm' : 'application/octet-stream');
-      const upload = await supabase.storage.from('product-images').upload(path, file, { contentType, upsert: false });
-      if (upload.error) { setError(`Produto salvo, mas o envio de ${file.name} falhou: ${upload.error.message}`); setBusy(false); await loadData(); return; }
+      const uniqueId = (globalThis.crypto?.randomUUID?.() || (Date.now() + '-' + Math.random().toString(36).slice(2, 10))).toLowerCase();
+      const originalPath = `${productId}/${uniqueId}-original.${extension}`;
+      const originalUpload = await supabase.storage.from('product-images').upload(originalPath, file, { contentType, cacheControl: '31536000', upsert: false });
+      if (originalUpload.error) { setError(`Produto salvo, mas o envio de ${file.name} falhou: ${originalUpload.error.message}`); setBusy(false); await loadData(); return; }
+      let path = originalPath;
+      if (mediaType === 'image') {
+        const optimized = await optimizeImageFile(file);
+        if (optimized) {
+          const optimizedPath = `${productId}/${uniqueId}-optimized-${extension}.webp`;
+          const optimizedUpload = await supabase.storage.from('product-images').upload(optimizedPath, optimized.blob, { contentType: optimized.contentType, cacheControl: '31536000', upsert: false });
+          if (!optimizedUpload.error) path = optimizedPath;
+        }
+      }
       const imageRow = await supabase.from('product_images').insert({ product_id: productId, storage_path: path, alt_text: payload.name, media_type: mediaType, sort_order: nextSortOrder });
       if (imageRow.error) {
-        await supabase.storage.from('product-images').remove([path]);
+        await supabase.storage.from('product-images').remove([path, originalPath]);
         setError(`Produto salvo, mas não foi possível registrar uma mídia: ${imageRow.error.message}`);
         setBusy(false);
         await loadData();
@@ -303,7 +313,7 @@ export default function DashboardPage() {
   async function deleteProduct(product) {
     if (!window.confirm('Excluir "' + product.name + '" e as referências às suas fotos?')) return;
     setBusy(true); setError(''); setNotice('');
-    const paths = (product.product_images || []).map(image => image.storage_path).filter(Boolean);
+    const paths = (product.product_images || []).flatMap(image => [image.storage_path, originalPathForOptimized(image.storage_path)]).filter(Boolean);
     if (paths.length) await supabase.storage.from('product-images').remove(paths);
     const { error: deleteError } = await supabase.from('products').delete().eq('id', product.id);
     if (deleteError) setError('Não foi possível excluir o produto.');
