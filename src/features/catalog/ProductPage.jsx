@@ -6,7 +6,7 @@ import Footer from "../../components/Footer.jsx";
 import { loadProductBySlug } from "./catalogData.js";
 import { formatCurrency } from "../../utils/formatCurrency.js";
 import { productWhatsAppUrl } from "../../utils/whatsapp.js";
-import { getProductImage } from "../../utils/catalogMediaUrl.js";
+import { getProductImage, getProductImageSrcSet } from "../../utils/catalogMediaUrl.js";
 
 export default function ProductPage() {
   const { slug } = useParams();
@@ -35,6 +35,7 @@ export default function ProductPage() {
   const media = [...(product?.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const currentMedia = media[mediaIndex];
   const mediaUrl = getProductImage(currentMedia?.storage_path);
+  const mediaSrcSet = getProductImageSrcSet(currentMedia);
   const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
   const moveMedia = (direction) => setMediaIndex(index => (index + direction + media.length) % media.length);
   return (
@@ -48,7 +49,7 @@ export default function ProductPage() {
           <div className="detail-layout">
             <div className="product-detail-gallery">
               <div className="product-detail-stage">
-                {mediaUrl ? (currentIsVideo ? <video src={mediaUrl} controls playsInline /> : <img src={mediaUrl} alt={currentMedia?.alt_text || product.name} />) : (
+                {mediaUrl ? (currentIsVideo ? <video src={mediaUrl} controls playsInline /> : <img src={mediaUrl} srcSet={mediaSrcSet} sizes="(max-width: 900px) 100vw, 55vw" alt={currentMedia?.alt_text || product.name} loading="eager" fetchPriority="high" decoding="async" />) : (
                   <div className="image-placeholder"><span>CAN</span><small>FOTO DO PRODUTO</small></div>
                 )}
                 {media.length > 1 && <>
@@ -59,7 +60,7 @@ export default function ProductPage() {
               </div>
               {media.length > 1 && <div className="product-gallery-thumbnails">{media.map((item,index) => {
                 const url=getProductImage(item.storage_path);
-                return <button type="button" key={item.id || item.storage_path} className={index===mediaIndex ? "active" : ""} onClick={()=>setMediaIndex(index)} aria-label={`Ver mídia ${index+1}`}>{item.media_type==="video" ? <span>VÍDEO</span> : <img src={url} alt=""/>}</button>;
+                return <button type="button" key={item.id || item.storage_path} className={index===mediaIndex ? "active" : ""} onClick={()=>setMediaIndex(index)} aria-label={`Ver mídia ${index+1}`}>{item.media_type==="video" ? <span>VÍDEO</span> : <img src={url} alt="" loading="lazy" decoding="async"/>}</button>;
               })}</div>}
             </div>
             <div className="detail-copy">
