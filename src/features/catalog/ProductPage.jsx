@@ -3,7 +3,7 @@ import { ArrowLeft, MessageCircle, ChevronLeft, ChevronRight } from "lucide-reac
 import { Link, useParams } from "react-router-dom";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
-import { supabase, isSupabaseConfigured } from "../../lib/supabase.js";
+import { loadProductBySlug } from "./catalogData.js";
 import { formatCurrency } from "../../utils/formatCurrency.js";
 import { productWhatsAppUrl } from "../../utils/whatsapp.js";
 import { storageImageUrl } from "../../utils/storageImageUrl.js";
@@ -15,9 +15,22 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(true);
   const [mediaIndex, setMediaIndex] = useState(0);
   useEffect(() => {
-    if (!isSupabaseConfigured) { setLoading(false); return; }
-    supabase.from("products").select("*,product_images(*)").eq("slug", slug).eq("published", true).maybeSingle()
-      .then(({ data }) => { setProduct(data); setMediaIndex(0); setLoading(false); });
+    let active = true;
+    setLoading(true);
+    loadProductBySlug(slug)
+      .then((data) => {
+        if (!active) return;
+        setProduct(data);
+        setMediaIndex(0);
+      })
+      .catch((error) => {
+        console.error("Falha ao carregar detalhes do produto:", error);
+        if (active) setProduct(null);
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => { active = false; };
   }, [slug]);
   const media = [...(product?.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const currentMedia = media[mediaIndex];
