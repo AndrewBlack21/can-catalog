@@ -30,9 +30,9 @@ for (const product of catalog.products) {
     let storagePath = media.storage_path;
     if (!storagePath || typeof storagePath !== "string") continue;
 
-    storagePath = storagePath.trim().replace(/\\\\/g, "/");
+    storagePath = storagePath.trim().replaceAll("\\", "/");
 
-    if (/^https?:\\/\\//i.test(storagePath)) {
+    if (storagePath.startsWith("http://") || storagePath.startsWith("https://")) {
       try {
         const url = new URL(storagePath);
         const marker = "/storage/v1/object/public/product-images/";
@@ -45,7 +45,11 @@ for (const product of catalog.products) {
       }
     }
 
-    storagePath = storagePath.replace(/^\\/+/, "").replace(/^product-images\\//i, "");
+    while (storagePath.startsWith("/")) storagePath = storagePath.slice(1);
+    if (storagePath.toLowerCase().startsWith("product-images/")) {
+      storagePath = storagePath.slice("product-images/".length);
+    }
+
     const segments = storagePath.split("/").filter(Boolean);
     if (!segments.length || segments.some((part) => part === "." || part === "..")) {
       missing.push({ product: product.name, path: storagePath, reason: "caminho inválido" });
