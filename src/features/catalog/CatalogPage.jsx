@@ -13,7 +13,7 @@ import {
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import ProductCard from "../../components/ProductCard.jsx";
-import { isSupabaseConfigured, supabase } from "../../lib/supabase.js";
+import { loadCatalog } from "./catalogData.js";
 import imagemHero from "../../assets/Logo-Hero.png";
 
 export default function CatalogPage() {
@@ -30,42 +30,29 @@ export default function CatalogPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!isSupabaseConfigured) return;
     let active = true;
     async function load() {
       setLoading(true);
-      const [productResult, categoryResult] = await Promise.all([
-        supabase
-          .from("products")
-          .select("id,name,slug,description,price,price_mode,availability,featured,featured_order,customization_enabled,created_at,category_id,sales_count,categories(name),product_images(id,storage_path,media_type,sort_order,alt_text)")
-          .eq("published", true)
-          .order("featured", { ascending: false })
-          .order("featured_order", { ascending: true, nullsFirst: false })
-          .order("name"),
-        supabase
-          .from("categories")
-          .select("id,name,slug")
-          .eq("active", true)
-          .order("sort_order"),
-      ]);
-      if (!active) return;
-      if (productResult.error)
-        setError(
-          "Não foi possível carregar os produtos. Confira a configuração do Supabase.",
-        );
-      else setProducts(productResult.data || []);
-      if (!categoryResult.error) setCategories(categoryResult.data || []);
-      if (active && !productResult.error) {
+      setError("");
+      try {
+        const result = await loadCatalog();
+        if (!active) return;
+        setProducts(result.products || []);
+        setCategories(result.categories || []);
         const totals = {};
-        (productResult.data || []).forEach(item => { totals[item.id] = Number(item.sales_count || 0); });
+        (result.products || []).forEach((item) => {
+          totals[item.id] = Number(item.sales_count || 0);
+        });
         setSalesRank(totals);
+      } catch (err) {
+        console.error("Falha ao carregar catálogo:", err);
+        if (active) setError("Não foi possível carregar a vitrine. Verifique se catalog.json está publicado.");
+      } finally {
+        if (active) setLoading(false);
       }
-      setLoading(false);
     }
     load();
-    return () => {
-      active = false;
-    };
+    return () => { active = false; };
   }, []);
 
   const featuredProducts = useMemo(
@@ -163,16 +150,7 @@ export default function CatalogPage() {
               pedir ou personalizar a sua.
             </p>
           </div>
-          {!isSupabaseConfigured && (
-            <div className="setup-notice">
-              <strong>Catálogo em configuração</strong>
-              <span>
-                Conecte o projeto Supabase para carregar e administrar os
-                produtos reais. As fotos e os preços serão inseridos pelo
-                painel.
-              </span>
-            </div>
-          )}
+
           {!loading && !error && featuredProducts.length > 0 && (
             <section className="catalog-collection catalog-featured-collection" aria-label="Produtos em destaque">
               <div className="catalog-collection-heading"><div><span className="eyebrow"><Star size={13} fill="currentColor"/> ESCOLHAS CAN GROUP</span><h2>Em <em>destaque.</em></h2></div><span>Peças selecionadas pela CAN</span></div>
@@ -182,7 +160,7 @@ export default function CatalogPage() {
           {!loading && !error && newProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">CHEGARAM AGORA</span><h2>Novidades.</h2></div><span>Adicionados recentemente</span></div><div className="catalog-collection-grid">{newProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
           {!loading && !error && bestSellingProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">PREFERIDOS</span><h2>Mais <em>procurados.</em></h2></div><span>Com base nas vendas registradas</span></div><div className="catalog-collection-grid">{bestSellingProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
           {!loading && !error && customizedProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">DO SEU JEITO</span><h2>Personalizados.</h2></div><span>Peças que podem ganhar sua identidade</span></div><div className="catalog-collection-grid">{customizedProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
-          {isSupabaseConfigured && (
+          {(
             <div className="catalog-tools catalog-tools-sticky">
               <label className="search-field">
                 <Search size={18} />
@@ -226,14 +204,10 @@ export default function CatalogPage() {
                 <Search size={22} />
               </span>
               <h3>
-                {isSupabaseConfigured
-                  ? "Estamos preparando a vitrine."
-                  : "Novidades chegando em breve."}
+                {"Nenhum produto encontrado."}
               </h3>
               <p>
-                {isSupabaseConfigured
-                  ? "Assim que os produtos forem cadastrados e publicados, eles aparecerão aqui."
-                  : "Os produtos reais da CAN Group serão exibidos aqui assim que o banco de dados estiver conectado."}
+                {"Tente alterar os filtros ou a busca para encontrar outros produtos."}
               </p>
             </div>
           )}
