@@ -26,7 +26,7 @@ export default function CatalogPage() {
   const [customOnly, setCustomOnly] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
   const [salesRank, setSalesRank] = useState({});
-  const [loading, setLoading] = useState(isSupabaseConfigured);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -160,8 +160,7 @@ export default function CatalogPage() {
           {!loading && !error && newProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">CHEGARAM AGORA</span><h2>Novidades.</h2></div><span>Adicionados recentemente</span></div><div className="catalog-collection-grid">{newProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
           {!loading && !error && bestSellingProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">PREFERIDOS</span><h2>Mais <em>procurados.</em></h2></div><span>Com base nas vendas registradas</span></div><div className="catalog-collection-grid">{bestSellingProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
           {!loading && !error && customizedProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">DO SEU JEITO</span><h2>Personalizados.</h2></div><span>Peças que podem ganhar sua identidade</span></div><div className="catalog-collection-grid">{customizedProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}
-          {(
-            <div className="catalog-tools catalog-tools-sticky">
+          <div className="catalog-tools catalog-tools-sticky">
               <label className="search-field">
                 <Search size={18} />
                 <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Buscar por produto ou categoria..." />
@@ -179,7 +178,6 @@ export default function CatalogPage() {
                 </div>
               </div>
             </div>
-          )}
           {filterOpen && <div className="catalog-filter-backdrop" role="presentation" onClick={()=>setFilterOpen(false)}>
             <section className="catalog-filter-sheet" role="dialog" aria-modal="true" aria-labelledby="catalog-filter-title" onClick={e=>e.stopPropagation()}>
               <div className="catalog-filter-heading"><h3 id="catalog-filter-title">Filtrar produtos</h3><button type="button" onClick={()=>setFilterOpen(false)} aria-label="Fechar filtros"><X size={19}/></button></div>
