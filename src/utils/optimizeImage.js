@@ -9,7 +9,7 @@ export async function optimizeImageFile(file, { maxDimension = 1600, quality = 0
     const canvas = document.createElement("canvas");
     canvas.width = width;
     canvas.height = height;
-    const context = canvas.getContext("2d", { alpha: false });
+    const context = canvas.getContext("2d");
     if (!context) return null;
     context.drawImage(bitmap, 0, 0, width, height);
     const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/webp", quality));
