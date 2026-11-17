@@ -19,7 +19,7 @@ export default function ProductPage() {
     supabase.from("products").select("*,product_images(*)").eq("slug", slug).eq("published", true).maybeSingle()
       .then(({ data }) => { setProduct(data); setMediaIndex(0); setLoading(false); });
   }, [slug]);
-  const media = [...(product?.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  const media = [...(product?.product_images || [])].filter(item => item.cloudinary_url || (typeof item.storage_path === "string" && (item.storage_path.startsWith("https://") || item.storage_path.startsWith("http://")))).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const currentMedia = media[mediaIndex];
   const mediaUrl = productMediaUrl(currentMedia, 1200);
   const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
