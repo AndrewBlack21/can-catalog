@@ -2,7 +2,7 @@ export function productMediaUrl(media, width = 900) {
   if (!media) return null;
 
   const url = media.cloudinary_url ||
-    (typeof media.storage_path === "string" && /^https?:\\/\\//i.test(media.storage_path)
+    (typeof media.storage_path === "string" && (media.storage_path.startsWith("https://") || media.storage_path.startsWith("http://"))
       ? media.storage_path
       : null);
 
