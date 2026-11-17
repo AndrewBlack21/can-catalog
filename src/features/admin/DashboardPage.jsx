@@ -389,6 +389,7 @@ export default function DashboardPage() {
   const categoryCounts = categories.map(category => ({...category, count: products.filter(product => product.category_id === category.id).length}));
   const emptyCategories = categoryCounts.filter(category => category.count === 0);
   const uncategorizedCount = products.filter(product => !product.category_id).length;
+  const pendingMediaCount = products.reduce((total, product) => total + (product.product_images || []).filter(media => !media.cloudinary_url).length, 0);
   async function bulkChangeCategory() {
     if (!selectedVisible.length) return;
     setBusy(true); setError(''); setNotice('');
@@ -417,7 +418,7 @@ export default function DashboardPage() {
 
   return <><Header admin/><main className="admin-main">
     <div className="admin-title-row"><div><span className="eyebrow"><ShieldCheck size={14}/> PAINEL RESTRITO</span><h1>Seu catálogo,<br/><em>sob controle.</em></h1><p>Gerencie os produtos que aparecem na vitrine CAN Group.</p></div><div className="admin-title-actions"><button className="button button-dark" onClick={() => navigate("/adm/vendas")}><ChartNoAxesCombined size={16}/> Controle de vendas</button><button className="button button-outline" onClick={() => navigate("/adm/gastos")}><Wallet size={16}/> Gastos da CAN</button><button className="button button-outline" onClick={() => navigate("/adm/orcamento-3d")}><Calculator size={16}/> Orçamento 3D</button><button className="button button-outline" onClick={logout}><LogOut size={16}/> Sair</button></div></div>
-    <div className="stats-grid"><div className="stat-card"><span>Produtos cadastrados</span><strong>{products.length}</strong></div><div className="stat-card"><span>Publicados</span><strong>{products.filter(p => p.published).length}</strong></div><div className="stat-card"><span>Categorias ativas</span><strong>{categories.filter(c => c.active).length}</strong></div></div>
+    <div className="stats-grid"><div className="stat-card"><span>Produtos cadastrados</span><strong>{products.length}</strong></div><div className="stat-card"><span>Publicados</span><strong>{products.filter(p => p.published).length}</strong></div><div className="stat-card"><span>Categorias ativas</span><strong>{categories.filter(c => c.active).length}</strong></div><div className="stat-card"><span>Mídias pendentes de migração</span><strong>{pendingMediaCount}</strong></div></div>
     {error && <div className="form-error" role="alert">{error}</div>}{notice && <div className="admin-success" role="status">{notice}</div>}
     <section className="admin-editor">
       <div className="admin-section-heading"><div><h2>{editingId ? 'Editar produto' : 'Cadastrar produto'}</h2><p>Use fotos reais dos itens da CAN Group. Imagens de até 5 MB e vídeos de até 200 MB.</p></div>{editingId && <button className="button button-outline" onClick={resetForm}><X size={16}/> Cancelar edição</button>}</div>
