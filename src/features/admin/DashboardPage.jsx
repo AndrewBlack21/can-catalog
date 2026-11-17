@@ -7,7 +7,7 @@ import { ArrowDown, ArrowUp, Calculator, ChartNoAxesCombined, ImagePlus, LogOut,
 import Header from '../../components/Header.jsx';
 import { isSupabaseConfigured, supabase } from '../../lib/supabase.js';
 import { formatCurrency } from '../../utils/formatCurrency.js';
-import { storageImageUrl } from '../../utils/storageImageUrl.js';
+import { productMediaUrl } from '../../utils/productMediaUrl.js';
 
 const blankProduct = {
   name: '', slug: '', category_id: '', description: '', price_mode: 'fixed', price: '',
@@ -126,30 +126,46 @@ export default function DashboardPage() {
     setNotice('');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+  async function cloudinaryRequest(action, payload = {}) {
+    const { data: { session: currentSession } } = await supabase.auth.getSession();
+    if (!currentSession?.access_token) throw new Error('Sua sessão expirou. Entre novamente.');
+    const response = await fetch('/api/cloudinary-media', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${currentSession.access_token}`
+      },
+      body: JSON.stringify({ action, ...payload })
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || 'Falha na operação com o Cloudinary.');
+    return data;
+  }
+
   async function removeProductMedia(media) {
     const label = media.media_type === 'video' ? 'vídeo' : 'imagem';
     if (!window.confirm(`Deseja realmente remover esta ${label} do produto?`)) return;
     setBusy(true); setError(''); setNotice('');
-    const { error: deleteRowError } = await supabase
-      .from('product_images')
-      .delete()
-      .eq('id', media.id);
-    if (deleteRowError) {
-      setError(`Não foi possível remover a mídia: ${deleteRowError.message}`);
-      setBusy(false);
-      return;
-    }
-    const { error: storageError } = await supabase.storage
-      .from('product-images')
-      .remove([media.storage_path]);
-    setExistingMedia(items => items.filter(item => item.id !== media.id));
-    if (storageError) {
-      setError(`A mídia saiu do produto, mas o arquivo não foi removido do armazenamento: ${storageError.message}`);
-    } else {
+    try {
+      if (media.cloudinary_public_id) {
+        await cloudinaryRequest('delete', {
+          publicId: media.cloudinary_public_id,
+          resourceType: media.cloudinary_resource_type || media.media_type || 'image'
+        });
+      }
+      const { error: deleteRowError } = await supabase
+        .from('product_images')
+        .delete()
+        .eq('id', media.id);
+      if (deleteRowError) throw new Error(deleteRowError.message);
+      setExistingMedia(items => items.filter(item => item.id !== media.id));
+      await loadData();
       setNotice(`${label === 'vídeo' ? 'Vídeo' : 'Imagem'} removida com sucesso.`);
+    } catch (removeError) {
+      setError(`Não foi possível remover a mídia: ${removeError.message}`);
+    } finally {
+      setBusy(false);
     }
-    await loadData();
-    setBusy(false);
   }
   async function saveProduct(event) {
     event.preventDefault(); setBusy(true); setError(''); setNotice('');
@@ -181,13 +197,6 @@ export default function DashboardPage() {
     if (payload.price_mode === 'fixed' && (!Number.isFinite(payload.price) || payload.price < 0)) {
       setError('Informe um preço válido ou selecione “Sob consulta”.'); setBusy(false); return;
     }
-    const result = editingId
-      ? await supabase.from('products').update(payload).eq('id', editingId).select('id').single()
-      : await supabase.from('products').insert(payload).select('id').single();
-    if (result.error || !result.data) {
-      setError(result.error?.code === '23505' ? 'Já existe um produto com esse endereço (slug). Altere o slug.' : 'Não foi possível salvar. Verifique os campos e as permissões do administrador.');
-      setBusy(false); return;
-    }
     const invalidFile = files.find(file => {
       const extension = file.name.split('.').pop()?.toLowerCase();
       const isImage = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'].includes(file.type) || ['jpg','jpeg','png','webp','avif'].includes(extension);
@@ -196,6 +205,13 @@ export default function DashboardPage() {
     });
     if (invalidFile) {
       setError('Arquivo inválido. Use imagens de até 5 MB ou vídeos MP4/WebM de até 200 MB.');
+      setBusy(false); return;
+    }
+    const result = editingId
+      ? await supabase.from('products').update(payload).eq('id', editingId).select('id').single()
+      : await supabase.from('products').insert(payload).select('id').single();
+    if (result.error || !result.data) {
+      setError(result.error?.code === '23505' ? 'Já existe um produto com esse endereço (slug). Altere o slug.' : 'Não foi possível salvar. Verifique os campos e as permissões do administrador.');
       setBusy(false); return;
     }
     const productId = result.data.id;
@@ -221,22 +237,50 @@ export default function DashboardPage() {
     let nextSortOrder = Number.isInteger(lastMedia?.sort_order) ? lastMedia.sort_order + 1 : 0;
 
     for (const file of files) {
-      const safeName = file.name.toLowerCase().replace(/[^a-z0-9.-]+/g, '-');
-      const path = productId + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '-' + safeName;
       const extension = file.name.split('.').pop()?.toLowerCase();
       const mediaType = file.type.startsWith('video/') || ['mp4','webm'].includes(extension) ? 'video' : 'image';
-      const contentType = file.type || (extension === 'mp4' ? 'video/mp4' : extension === 'webm' ? 'video/webm' : 'application/octet-stream');
-      const upload = await supabase.storage.from('product-images').upload(path, file, { contentType, upsert: false });
-      if (upload.error) { setError(`Produto salvo, mas o envio de ${file.name} falhou: ${upload.error.message}`); setBusy(false); await loadData(); return; }
-      const imageRow = await supabase.from('product_images').insert({ product_id: productId, storage_path: path, alt_text: payload.name, media_type: mediaType, sort_order: nextSortOrder });
-      if (imageRow.error) {
-        await supabase.storage.from('product-images').remove([path]);
-        setError(`Produto salvo, mas não foi possível registrar uma mídia: ${imageRow.error.message}`);
+      try {
+        const signed = await cloudinaryRequest('sign-upload', { productId });
+        const uploadBody = new FormData();
+        uploadBody.append('file', file);
+        uploadBody.append('api_key', signed.apiKey);
+        uploadBody.append('timestamp', String(signed.timestamp));
+        uploadBody.append('folder', signed.folder);
+        uploadBody.append('signature', signed.signature);
+
+        const uploadResponse = await fetch(`https://api.cloudinary.com/v1_1/${signed.cloudName}/auto/upload`, {
+          method: 'POST',
+          body: uploadBody
+        });
+        const uploaded = await uploadResponse.json().catch(() => ({}));
+        if (!uploadResponse.ok || !uploaded.secure_url || !uploaded.public_id) {
+          throw new Error(uploaded.error?.message || `Falha ao enviar ${file.name} para o Cloudinary.`);
+        }
+
+        const imageRow = await supabase.from('product_images').insert({
+          product_id: productId,
+          storage_path: null,
+          cloudinary_public_id: uploaded.public_id,
+          cloudinary_url: uploaded.secure_url,
+          cloudinary_resource_type: uploaded.resource_type || mediaType,
+          alt_text: payload.name,
+          media_type: mediaType,
+          sort_order: nextSortOrder
+        });
+        if (imageRow.error) {
+          await cloudinaryRequest('delete', {
+            publicId: uploaded.public_id,
+            resourceType: uploaded.resource_type || mediaType
+          }).catch(() => {});
+          throw new Error(`Arquivo enviado, mas não foi possível registrar no banco: ${imageRow.error.message}`);
+        }
+        nextSortOrder += 1;
+      } catch (uploadError) {
+        setError(`Produto salvo, mas o envio de ${file.name} falhou: ${uploadError.message}`);
         setBusy(false);
         await loadData();
         return;
       }
-      nextSortOrder += 1;
     }
     await loadData();
     setBusy(false);
@@ -303,12 +347,25 @@ export default function DashboardPage() {
   async function deleteProduct(product) {
     if (!window.confirm('Excluir "' + product.name + '" e as referências às suas fotos?')) return;
     setBusy(true); setError(''); setNotice('');
-    const paths = (product.product_images || []).map(image => image.storage_path).filter(Boolean);
-    if (paths.length) await supabase.storage.from('product-images').remove(paths);
-    const { error: deleteError } = await supabase.from('products').delete().eq('id', product.id);
-    if (deleteError) setError('Não foi possível excluir o produto.');
-    else { if (editingId === product.id) resetForm(); await loadData(); setNotice('Produto excluído.'); }
-    setBusy(false);
+    try {
+      for (const media of product.product_images || []) {
+        if (media.cloudinary_public_id) {
+          await cloudinaryRequest('delete', {
+            publicId: media.cloudinary_public_id,
+            resourceType: media.cloudinary_resource_type || media.media_type || 'image'
+          });
+        }
+      }
+      const { error: deleteError } = await supabase.from('products').delete().eq('id', product.id);
+      if (deleteError) throw new Error(deleteError.message);
+      if (editingId === product.id) resetForm();
+      await loadData();
+      setNotice('Produto excluído.');
+    } catch (deleteError) {
+      setError(`Não foi possível excluir o produto: ${deleteError.message}`);
+    } finally {
+      setBusy(false);
+    }
   }
   async function addCategory(event) {
     event.preventDefault(); const name = categoryName.trim(); const slug = slugify(name);
@@ -374,7 +431,7 @@ export default function DashboardPage() {
           <label>Disponibilidade<select value={form.availability} onChange={e => setForm({...form, availability:e.target.value})}><option value="available">Disponível</option><option value="made_to_order">Sob encomenda</option><option value="unavailable">Indisponível</option></select></label>
           <label>Quantidade em estoque (opcional)<input type="number" min="0" step="1" value={form.stock_quantity} onChange={e => setForm({...form, stock_quantity:e.target.value})} placeholder="Deixe vazio se não controlar"/></label>
           <label className="admin-file-field"><span><ImagePlus size={17}/> Fotos e vídeo do produto</span><input type="file" accept="image/jpeg,image/png,image/webp,image/avif,video/mp4,video/webm" multiple onChange={e => setFiles(Array.from(e.target.files || []))}/><small>{files.length ? files.map(f => f.name).join(', ') : 'Selecione várias imagens (até 5 MB cada) e/ou vídeos MP4/WebM (até 200 MB cada). Novos arquivos serão adicionados à galeria.'}</small></label>
-          {editingId && existingMedia.length > 0 && <div className="admin-existing-media"><strong>Mídias cadastradas</strong><div className="admin-existing-media-grid">{existingMedia.map(media => <div className="admin-existing-media-item" key={media.id}>{media.media_type === 'video' ? <video src={storageImageUrl(media.storage_path)} muted playsInline /> : <img src={storageImageUrl(media.storage_path)} alt={media.alt_text || form.name} /> }<span>{media.media_type === 'video' ? 'Vídeo' : 'Imagem'}</span><button type="button" className="admin-media-remove" onClick={() => removeProductMedia(media)} disabled={busy} aria-label="Remover mídia"><Trash2 size={14}/> Remover</button></div>)}</div></div>}
+          {editingId && existingMedia.length > 0 && <div className="admin-existing-media"><strong>Mídias cadastradas</strong><div className="admin-existing-media-grid">{existingMedia.map(media => <div className="admin-existing-media-item" key={media.id}>{media.media_type === 'video' ? <video src={productMediaUrl(media, 320)} muted playsInline /> : <img src={storageImageUrl(media.storage_path)} alt={media.alt_text || form.name} /> }<span>{media.media_type === 'video' ? 'Vídeo' : 'Imagem'}</span><button type="button" className="admin-media-remove" onClick={() => removeProductMedia(media)} disabled={busy} aria-label="Remover mídia"><Trash2 size={14}/> Remover</button></div>)}</div></div>}
         </div>
         <label>Descrição<textarea rows="4" maxLength={3000} value={form.description} onChange={e => setForm({...form, description:e.target.value})} placeholder="Descreva materiais, dimensões e opções de personalização."/></label>
         <label>Cores disponíveis<input value={form.available_colors} onChange={e => setForm({...form, available_colors:e.target.value})} placeholder="Ex.: Preto, Branco, Verde oliva, Rosa"/><small>Separe as cores por vírgula. Elas serão exibidas no anúncio.</small></label>
@@ -418,7 +475,7 @@ export default function DashboardPage() {
           items={filteredProducts.filter(item => item.featured).map(item => item.id)}
           strategy={verticalListSortingStrategy}>
           <div className="admin-product-list">{filteredProducts.map(p => p.featured
-            ? <SortableFeaturedRow key={p.id} product={p}><label className="publication-row-check" onClick={event => event.stopPropagation()}><input type="checkbox" checked={selectedProducts.includes(p.id)} onChange={() => toggleProductSelection(p.id)} aria-label={"Selecionar " + p.name}/></label><div className="admin-product-thumb">{p.product_images?.[0]?.storage_path ? <img src={storageImageUrl(p.product_images[0].storage_path)} alt=""/> : <ImagePlus size={22}/>}</div><div className="admin-product-copy"><strong>{p.name}</strong><small>{p.categories?.name || 'Sem categoria'} · {p.price_mode === 'quote' ? 'Sob consulta' : formatCurrency(p.price)}</small><span className={p.published ? 'admin-status published' : 'admin-status'}>{p.published ? 'Publicado' : 'Oculto'}</span>{(getProductPrintDetails(p)?.makerworld_url || getProductPrintDetails(p)?.filament_weight_g != null || getProductPrintDetails(p)?.print_time_hours != null || getProductPrintDetails(p)?.print_time_minutes != null) && <div className="admin-product-print-summary">{getProductPrintDetails(p)?.makerworld_url && <a href={getProductPrintDetails(p).makerworld_url} target="_blank" rel="noreferrer">Abrir MakerWorld</a>}{getProductPrintDetails(p)?.filament_weight_g != null && <span><strong>{Number(getProductPrintDetails(p).filament_weight_g).toLocaleString('pt-BR', { maximumFractionDigits: 2 })} g</strong> de filamento</span>}{(getProductPrintDetails(p)?.print_time_hours != null || getProductPrintDetails(p)?.print_time_minutes != null) && <span><strong>{Number(getProductPrintDetails(p)?.print_time_hours || 0)}h {String(Number(getProductPrintDetails(p)?.print_time_minutes || 0)).padStart(2, '0')}min</strong> de impressão</span>}</div>}</div><div className="admin-product-actions"><button className="button button-outline" onClick={() => editProduct(p)} disabled={busy}><Pencil size={15}/> Editar</button><button className="button button-outline" onClick={() => setPublished(p, !p.published)} disabled={busy}>{p.published ? 'Ocultar' : 'Publicar'}</button>{p.featured && <><button className="button button-outline featured-order-button" title="Mover para cima" aria-label="Mover destaque para cima" onClick={() => moveFeatured(p,-1)} disabled={busy || products.filter(item=>item.featured).sort((a,b)=>(Number(a.featured_order)||999999)-(Number(b.featured_order)||999999))[0]?.id===p.id}><ArrowUp size={14}/></button><button className="button button-outline featured-order-button" title="Mover para baixo" aria-label="Mover destaque para baixo" onClick={() => moveFeatured(p,1)} disabled={busy || products.filter(item=>item.featured).sort((a,b)=>(Number(a.featured_order)||999999)-(Number(b.featured_order)||999999)).at(-1)?.id===p.id}><ArrowDown size={14}/></button></>}<button className={p.featured ? "button button-featured is-featured" : "button button-featured"} onClick={() => setFeatured(p, !p.featured)} disabled={busy} aria-pressed={!!p.featured}><Star size={14} fill={p.featured ? "currentColor" : "none"}/>{p.featured ? "Em destaque" : "Destacar"}</button><button className="admin-delete-button" aria-label={'Excluir ' + p.name} onClick={() => deleteProduct(p)} disabled={busy}><Trash2 size={16}/></button></div></SortableFeaturedRow>
+            ? <SortableFeaturedRow key={p.id} product={p}><label className="publication-row-check" onClick={event => event.stopPropagation()}><input type="checkbox" checked={selectedProducts.includes(p.id)} onChange={() => toggleProductSelection(p.id)} aria-label={"Selecionar " + p.name}/></label><div className="admin-product-thumb">{productMediaUrl(p.product_images?.[0], 160) ? <img src={productMediaUrl(p.product_images[0], 160)} alt=""/> : <ImagePlus size={22}/>}</div><div className="admin-product-copy"><strong>{p.name}</strong><small>{p.categories?.name || 'Sem categoria'} · {p.price_mode === 'quote' ? 'Sob consulta' : formatCurrency(p.price)}</small><span className={p.published ? 'admin-status published' : 'admin-status'}>{p.published ? 'Publicado' : 'Oculto'}</span>{(getProductPrintDetails(p)?.makerworld_url || getProductPrintDetails(p)?.filament_weight_g != null || getProductPrintDetails(p)?.print_time_hours != null || getProductPrintDetails(p)?.print_time_minutes != null) && <div className="admin-product-print-summary">{getProductPrintDetails(p)?.makerworld_url && <a href={getProductPrintDetails(p).makerworld_url} target="_blank" rel="noreferrer">Abrir MakerWorld</a>}{getProductPrintDetails(p)?.filament_weight_g != null && <span><strong>{Number(getProductPrintDetails(p).filament_weight_g).toLocaleString('pt-BR', { maximumFractionDigits: 2 })} g</strong> de filamento</span>}{(getProductPrintDetails(p)?.print_time_hours != null || getProductPrintDetails(p)?.print_time_minutes != null) && <span><strong>{Number(getProductPrintDetails(p)?.print_time_hours || 0)}h {String(Number(getProductPrintDetails(p)?.print_time_minutes || 0)).padStart(2, '0')}min</strong> de impressão</span>}</div>}</div><div className="admin-product-actions"><button className="button button-outline" onClick={() => editProduct(p)} disabled={busy}><Pencil size={15}/> Editar</button><button className="button button-outline" onClick={() => setPublished(p, !p.published)} disabled={busy}>{p.published ? 'Ocultar' : 'Publicar'}</button>{p.featured && <><button className="button button-outline featured-order-button" title="Mover para cima" aria-label="Mover destaque para cima" onClick={() => moveFeatured(p,-1)} disabled={busy || products.filter(item=>item.featured).sort((a,b)=>(Number(a.featured_order)||999999)-(Number(b.featured_order)||999999))[0]?.id===p.id}><ArrowUp size={14}/></button><button className="button button-outline featured-order-button" title="Mover para baixo" aria-label="Mover destaque para baixo" onClick={() => moveFeatured(p,1)} disabled={busy || products.filter(item=>item.featured).sort((a,b)=>(Number(a.featured_order)||999999)-(Number(b.featured_order)||999999)).at(-1)?.id===p.id}><ArrowDown size={14}/></button></>}<button className={p.featured ? "button button-featured is-featured" : "button button-featured"} onClick={() => setFeatured(p, !p.featured)} disabled={busy} aria-pressed={!!p.featured}><Star size={14} fill={p.featured ? "currentColor" : "none"}/>{p.featured ? "Em destaque" : "Destacar"}</button><button className="admin-delete-button" aria-label={'Excluir ' + p.name} onClick={() => deleteProduct(p)} disabled={busy}><Trash2 size={16}/></button></div></SortableFeaturedRow>
             : <article className="admin-product-row" key={p.id}><label className="publication-row-check" onClick={event => event.stopPropagation()}><input type="checkbox" checked={selectedProducts.includes(p.id)} onChange={() => toggleProductSelection(p.id)} aria-label={"Selecionar " + p.name}/></label><div className="admin-product-thumb">{p.product_images?.[0]?.storage_path ? <img src={storageImageUrl(p.product_images[0].storage_path)} alt=""/> : <ImagePlus size={22}/>}</div><div className="admin-product-copy"><strong>{p.name}</strong><small>{p.categories?.name || 'Sem categoria'} · {p.price_mode === 'quote' ? 'Sob consulta' : formatCurrency(p.price)}</small><span className={p.published ? 'admin-status published' : 'admin-status'}>{p.published ? 'Publicado' : 'Oculto'}</span>{(getProductPrintDetails(p)?.makerworld_url || getProductPrintDetails(p)?.filament_weight_g != null || getProductPrintDetails(p)?.print_time_hours != null || getProductPrintDetails(p)?.print_time_minutes != null) && <div className="admin-product-print-summary">{getProductPrintDetails(p)?.makerworld_url && <a href={getProductPrintDetails(p).makerworld_url} target="_blank" rel="noreferrer">Abrir MakerWorld</a>}{getProductPrintDetails(p)?.filament_weight_g != null && <span><strong>{Number(getProductPrintDetails(p).filament_weight_g).toLocaleString('pt-BR', { maximumFractionDigits: 2 })} g</strong> de filamento</span>}{(getProductPrintDetails(p)?.print_time_hours != null || getProductPrintDetails(p)?.print_time_minutes != null) && <span><strong>{Number(getProductPrintDetails(p)?.print_time_hours || 0)}h {String(Number(getProductPrintDetails(p)?.print_time_minutes || 0)).padStart(2, '0')}min</strong> de impressão</span>}</div>}</div><div className="admin-product-actions"><button className="button button-outline" onClick={() => editProduct(p)} disabled={busy}><Pencil size={15}/> Editar</button><button className="button button-outline" onClick={() => setPublished(p, !p.published)} disabled={busy}>{p.published ? 'Ocultar' : 'Publicar'}</button>{p.featured && <><button className="button button-outline featured-order-button" title="Mover para cima" aria-label="Mover destaque para cima" onClick={() => moveFeatured(p,-1)} disabled={busy || products.filter(item=>item.featured).sort((a,b)=>(Number(a.featured_order)||999999)-(Number(b.featured_order)||999999))[0]?.id===p.id}><ArrowUp size={14}/></button><button className="button button-outline featured-order-button" title="Mover para baixo" aria-label="Mover destaque para baixo" onClick={() => moveFeatured(p,1)} disabled={busy || products.filter(item=>item.featured).sort((a,b)=>(Number(a.featured_order)||999999)-(Number(b.featured_order)||999999)).at(-1)?.id===p.id}><ArrowDown size={14}/></button></>}<button className={p.featured ? "button button-featured is-featured" : "button button-featured"} onClick={() => setFeatured(p, !p.featured)} disabled={busy} aria-pressed={!!p.featured}><Star size={14} fill={p.featured ? "currentColor" : "none"}/>{p.featured ? "Em destaque" : "Destacar"}</button><button className="admin-delete-button" aria-label={'Excluir ' + p.name} onClick={() => deleteProduct(p)} disabled={busy}><Trash2 size={16}/></button></div></article>
           )}</div>
         </SortableContext>
