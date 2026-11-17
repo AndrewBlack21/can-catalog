@@ -8,7 +8,7 @@ import Header from '../../components/Header.jsx';
 import { isSupabaseConfigured, supabase } from '../../lib/supabase.js';
 import { formatCurrency } from '../../utils/formatCurrency.js';
 import { storageImageUrl } from '../../utils/storageImageUrl.js';
-
+import { uploadToCloudinary } from '../../lib/cloudinary.js';
 const blankProduct = {
   name: '', slug: '', category_id: '', description: '', price_mode: 'fixed', price: '',
   availability: 'available', stock_quantity: '', customization_enabled: false,
@@ -226,8 +226,15 @@ export default function DashboardPage() {
       const extension = file.name.split('.').pop()?.toLowerCase();
       const mediaType = file.type.startsWith('video/') || ['mp4','webm'].includes(extension) ? 'video' : 'image';
       const contentType = file.type || (extension === 'mp4' ? 'video/mp4' : extension === 'webm' ? 'video/webm' : 'application/octet-stream');
-      const upload = await supabase.storage.from('product-images').upload(path, file, { contentType, upsert: false });
-      if (upload.error) { setError(`Produto salvo, mas o envio de ${file.name} falhou: ${upload.error.message}`); setBusy(false); await loadData(); return; }
+     let media;
+try {
+  media = await uploadToCloudinary(file);
+} catch (err) {
+  setError(`Produto salvo, mas o envio de ${file.name} falhou: ${err.message}`);
+  setBusy(false);
+  await loadData();
+  return;
+}
       const imageRow = await supabase.from('product_images').insert({ product_id: productId, storage_path: path, alt_text: payload.name, media_type: mediaType, sort_order: nextSortOrder });
       if (imageRow.error) {
         await supabase.storage.from('product-images').remove([path]);

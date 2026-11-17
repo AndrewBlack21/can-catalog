@@ -7,6 +7,7 @@ import DashboardPage from '../features/admin/DashboardPage.jsx';
 import PrintCostPage from '../features/admin/PrintCostPage.jsx';
 import SalesPage from '../features/admin/SalesPage.jsx';
 import ExpensesPage from '../features/admin/ExpensesPage.jsx';
+import { uploadToCloudinary } from '../lib/cloudinary';
 
 function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -34,7 +35,13 @@ function BackToTop() {
     </button>
   );
 }
-
+<input
+  type="file"
+  onChange={async (e) => {
+    const r = await uploadToCloudinary(e.target.files[0]);
+    console.log(r);
+  }}
+/>
 export default function App() {
   return (
     <>

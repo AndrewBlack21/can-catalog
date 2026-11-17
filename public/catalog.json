@@ -1,0 +1,3478 @@
+{
+  "products": [
+    {
+      "id": "24f89534-de28-4f75-9bba-4e43341d4026",
+      "name": "Combo de Natal ( Personalizado )",
+      "slug": "combo-de-natal-personalizado",
+      "price": null,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-06T03:59:51.016503+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-11-06T03:59:51.016503+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Combo de Natal ( Personalizado ) Voce monta seu kit de natal e fazemos o orçamento para voce, monte um kit personalizado com o que voce deseja em nosso catalogo natalino e iremos  fazer",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 1,
+      "product_images": [
+        {
+          "id": "fc511c60-24f5-4256-bb10-ce470656fec9",
+          "alt_text": "Combo de Natal ( Personalizado )",
+          "created_at": "2026-11-10T03:00:30.557627+00:00",
+          "media_type": "image",
+          "product_id": "24f89534-de28-4f75-9bba-4e43341d4026",
+          "sort_order": 0,
+          "storage_path": "24f89534-de28-4f75-9bba-4e43341d4026/1794279629324-95rdn3-7106d692-af6e-4cbb-810d-c4118cb64670.jpeg"
+        },
+        {
+          "id": "e616878f-0118-444f-bc93-dfe703929fa8",
+          "alt_text": "Combo de Natal ( Personalizado )",
+          "created_at": "2026-11-10T03:34:07.366095+00:00",
+          "media_type": "video",
+          "product_id": "24f89534-de28-4f75-9bba-4e43341d4026",
+          "sort_order": 1,
+          "storage_path": "24f89534-de28-4f75-9bba-4e43341d4026/1794281637791-cewxi8-videoinsta.mp4"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "b2904cd4-e8b3-4019-b309-eeff70aab976",
+      "name": "Conjunto 3 Bonecos de trico ( Da sua escolha )",
+      "slug": "conjunto-3-bonecos-de-trico-da-sua-escolha",
+      "price": 40,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-06T03:57:25.577508+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-06T03:57:25.577508+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "3 Bonecos de trico da sua escolha com textura trico e no espirito natalino",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 2,
+      "product_images": [
+        {
+          "id": "e8ede500-132e-4dbb-8fcd-79541013f7f0",
+          "alt_text": "Conjunto 3 Bonecos de trico ( Da sua escolha )",
+          "created_at": "2026-11-06T03:57:26.661453+00:00",
+          "media_type": "image",
+          "product_id": "b2904cd4-e8b3-4019-b309-eeff70aab976",
+          "sort_order": 0,
+          "storage_path": "b2904cd4-e8b3-4019-b309-eeff70aab976/1793937441088-5nllgj-whatsapp-image-2026-11-05-at-19.35.47-1-.jpeg"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "2f818da6-b926-4748-94d3-4861a96b36da",
+      "name": "Conjunto 3 Bonecos trico + Bandeja Luna",
+      "slug": "conjunto-3-bonecos-trico-bandeja-luna",
+      "price": 60,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-06T03:53:34.960752+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-06T03:53:34.960752+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Conjunto de bonecos de trico ( os 3 bonecos sao de sua escolha) + a bandeja luna decorativa para seu ambiente natalino",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 3,
+      "product_images": [
+        {
+          "id": "1754a93a-f34b-4858-aee9-661dd2260966",
+          "alt_text": "Conjunto 3 Bonecos trico + Bandeja Luna",
+          "created_at": "2026-11-06T03:53:40.06035+00:00",
+          "media_type": "image",
+          "product_id": "2f818da6-b926-4748-94d3-4861a96b36da",
+          "sort_order": 0,
+          "storage_path": "2f818da6-b926-4748-94d3-4861a96b36da/1793937210638-3dljmx-whatsapp-image-2026-11-05-at-19.35.46.jpeg"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "1daf9c94-3c0d-46f0-86fe-8f83f5ad8c0a",
+      "name": "Conjunto Bandeja, Rena e Arvore",
+      "slug": "conjunto-bandeja-rena-e-arvore",
+      "price": 55,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-06T03:52:02.900428+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-06T03:52:02.900428+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Conjunto ja pronto para sua sala ou ambiente decorativo de natal incluso \nBandeja Minimalista, Rena e Arvore",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 4,
+      "product_images": [
+        {
+          "id": "16da3400-9ec0-452a-b0bc-e52ad7825ccc",
+          "alt_text": "Conjunto Bandeja, Rena e Arvore",
+          "created_at": "2026-11-06T03:52:04.202239+00:00",
+          "media_type": "image",
+          "product_id": "1daf9c94-3c0d-46f0-86fe-8f83f5ad8c0a",
+          "sort_order": 0,
+          "storage_path": "1daf9c94-3c0d-46f0-86fe-8f83f5ad8c0a/1793937118511-1zibpa-whatsapp-image-2026-11-05-at-19.35.45.jpeg"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "542edaad-b617-4c5d-bbeb-00f16d4f8ed0",
+      "name": "Conjunto Natalino Bandeja, Letreiro, Papai Noel Trico e Arvore",
+      "slug": "conjunto-natalino-bandeja-letreiro-papai-noel-trico-e-arvore",
+      "price": 65,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-06T03:56:21.196344+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-06T03:56:21.196344+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Conjunto Natalino Bandeja canelada, Letreiro, Papai Noel Trico e Arvore decorativo para seu ambiente natalino",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 5,
+      "product_images": [
+        {
+          "id": "4a05e953-a71c-4f1e-b91f-0c15c8f00bc6",
+          "alt_text": "Conjunto Natalino Bandeja, Letreiro, Papai Noel Trico e Arvore",
+          "created_at": "2026-11-06T03:56:22.553974+00:00",
+          "media_type": "image",
+          "product_id": "542edaad-b617-4c5d-bbeb-00f16d4f8ed0",
+          "sort_order": 0,
+          "storage_path": "542edaad-b617-4c5d-bbeb-00f16d4f8ed0/1793937376659-a6b77g-whatsapp-image-2026-11-05-at-19.35.47.jpeg"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "315929bb-900b-4ed9-8bef-8c08e94edc9f",
+      "name": "Conjunto de Natal Bandeja, Presépio e Arvore",
+      "slug": "conjunto-de-natal-bandeja-presepio-e-arvore",
+      "price": 65,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-06T03:55:00.703059+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-06T03:55:00.703059+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Conjunto de Natal Bandeja Minimalista, Presépio e Arvore para sua sala ou ambiente natalino",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 6,
+      "product_images": [
+        {
+          "id": "6f3b567a-a58b-484c-b88f-fdb4047968e1",
+          "alt_text": "Conjunto de Natal Bandeja, Presépio e Arvore",
+          "created_at": "2026-11-06T03:55:01.92079+00:00",
+          "media_type": "image",
+          "product_id": "315929bb-900b-4ed9-8bef-8c08e94edc9f",
+          "sort_order": 0,
+          "storage_path": "315929bb-900b-4ed9-8bef-8c08e94edc9f/1793937296215-wrloxc-whatsapp-image-2026-11-05-at-19.35.46-1-.jpeg"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "dde40368-1e88-4e9a-842e-8d5347f61957",
+      "name": "Arvore de Natal",
+      "slug": "arvore-de-natal",
+      "price": 20,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-28T21:59:03.489259+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-28T21:59:03.489259+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Um moderno de árvores de Natal inspiradas no estilo Japandi, projetadas com nervuras elegantes e fluidas e formas orgânicas suaves.\n perfeitos para criar um arranjo de Natal minimalista em uma prateleira, mesa, lareira ou peitoril da janela.\nO design escultural em camadas fica lindo em cores clássicas de Natal, bem como em tons neutros como bege, marfim, marrom ou branco.\n\n- Uma árvore só imagem meramente ilustrativa",
+      "sales_count": 5,
+      "availability": "available",
+      "featured_order": 7,
+      "product_images": [
+        {
+          "id": "cc625742-54b1-4e3d-aef9-1a7348f001fa",
+          "alt_text": "Arvore de Natal",
+          "created_at": "2026-10-28T21:59:05.058303+00:00",
+          "media_type": "image",
+          "product_id": "dde40368-1e88-4e9a-842e-8d5347f61957",
+          "sort_order": 0,
+          "storage_path": "dde40368-1e88-4e9a-842e-8d5347f61957/1793224730694-arvore-de-natal.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Verde Oliva",
+        "Verde Claro",
+        "Branco"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "f9be1f64-7819-4a70-8bbb-a858fa3647a8",
+      "name": "Árvore de Natal Tricô",
+      "slug": "arvore-de-natal-trico",
+      "price": 15,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-02T21:42:38.620291+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-02T21:42:38.620291+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 8,
+      "product_images": [
+        {
+          "id": "0f03f57e-57d5-4765-84c1-69c581f3a18b",
+          "alt_text": "Árvore de Natal Tricô",
+          "created_at": "2026-11-02T21:46:01.091111+00:00",
+          "media_type": "image",
+          "product_id": "f9be1f64-7819-4a70-8bbb-a858fa3647a8",
+          "sort_order": 0,
+          "storage_path": "f9be1f64-7819-4a70-8bbb-a858fa3647a8/1793655959600-img-5669.jpeg"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Verde Oliva",
+        "Verde Claro",
+        "Branco"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "ff3be7d5-3edf-4a15-a896-267f058f879b",
+      "name": "Bandeja Luna",
+      "slug": "bandeja-japandi",
+      "price": 20,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-28T22:00:24.272861+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-28T22:00:24.272861+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Bandeja Japandi, ótima para exibir decorações ou para ser usada como uma bandeja organizadora. 197 mm de comprimento, 123 mm de largura e 16 mm de altura.",
+      "sales_count": 8,
+      "availability": "available",
+      "featured_order": 9,
+      "product_images": [
+        {
+          "id": "c3fe7ab8-91aa-418e-8f68-023fd75fd17f",
+          "alt_text": "Bandeja Japandi",
+          "created_at": "2026-11-03T16:02:38.386818+00:00",
+          "media_type": "image",
+          "product_id": "ff3be7d5-3edf-4a15-a896-267f058f879b",
+          "sort_order": 1,
+          "storage_path": "ff3be7d5-3edf-4a15-a896-267f058f879b/1793721755718-49v9qx-bandejaluna.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Bege",
+        "Marrom",
+        "Bronze"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "03df2ae8-2c12-4678-bb2e-ff209f90d9da",
+      "name": "Bandeja Oval borda canelada",
+      "slug": "bandeja-oval-borda-canelada",
+      "price": 25,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": null
+      },
+      "created_at": "2026-11-05T00:03:36.401737+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-05T00:03:36.401737+00:00",
+      "category_id": null,
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 10,
+      "product_images": [
+        {
+          "id": "d27c2a24-20d8-4562-9738-63c78d64e599",
+          "alt_text": "Bandeja Oval borda canelada",
+          "created_at": "2026-11-05T00:03:37.557274+00:00",
+          "media_type": "image",
+          "product_id": "03df2ae8-2c12-4678-bb2e-ff209f90d9da",
+          "sort_order": 0,
+          "storage_path": "03df2ae8-2c12-4678-bb2e-ff209f90d9da/1793837012593-hxdfl5-bandeja.webp"
+        },
+        {
+          "id": "2ec96851-3cb6-447f-9a2c-d428d7450c15",
+          "alt_text": "Bandeja Oval borda canelada",
+          "created_at": "2026-11-05T00:03:56.622058+00:00",
+          "media_type": "image",
+          "product_id": "03df2ae8-2c12-4678-bb2e-ff209f90d9da",
+          "sort_order": 1,
+          "storage_path": "03df2ae8-2c12-4678-bb2e-ff209f90d9da/1793837031935-qwsxo9-bandeja2.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Branco",
+        "Bege",
+        "Marrom",
+        "Bronze"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "a2b0f354-15da-4e9b-aab3-5bbfbec2701c",
+      "name": "Biscoito Natalino Trico",
+      "slug": "biscoito-natalino-trico",
+      "price": 15,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-31T00:11:32.719896+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-31T00:11:32.719896+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Biscoito em estilo festivo de natal para decoração em estilo trico",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 11,
+      "product_images": [
+        {
+          "id": "61779242-b983-4824-818f-30f1f1e0f725",
+          "alt_text": "Biscoito Natalino Trico",
+          "created_at": "2026-10-31T00:11:33.767114+00:00",
+          "media_type": "image",
+          "product_id": "a2b0f354-15da-4e9b-aab3-5bbfbec2701c",
+          "sort_order": 0,
+          "storage_path": "a2b0f354-15da-4e9b-aab3-5bbfbec2701c/1793405477552-biscoitotrico-1-.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "9cdf10ab-8797-4652-adad-a5b5952cbc2a",
+      "name": "Boneco de Neve de Tricô - Natal",
+      "slug": "boneco-de-neve-de-trico-natal",
+      "price": 15,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-28T22:06:51.726007+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-28T22:06:51.726007+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Boneco de Neve, estilo trico",
+      "sales_count": 2,
+      "availability": "available",
+      "featured_order": 12,
+      "product_images": [
+        {
+          "id": "27a463dc-3bb0-45c4-8e8f-28547bce816c",
+          "alt_text": "Boneco de Neve de Tricô - Natal",
+          "created_at": "2026-10-28T22:06:54.629486+00:00",
+          "media_type": "image",
+          "product_id": "9cdf10ab-8797-4652-adad-a5b5952cbc2a",
+          "sort_order": 0,
+          "storage_path": "9cdf10ab-8797-4652-adad-a5b5952cbc2a/1793225198934-boneco-de-neve.jpeg"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "339af181-245c-4727-8c21-e223059554bc",
+      "name": "Capivara Natalina Trico",
+      "slug": "capivara-natalina-trico",
+      "price": 50,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-31T00:12:10.777184+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-31T00:12:10.777184+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Capivara Natalina Estilo Trico para sua decoração Natalina ficar mais linda",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 13,
+      "product_images": [
+        {
+          "id": "0ba2d1ef-36b6-4498-88cf-31de5e0c34ad",
+          "alt_text": "Capivara Natalina Trico",
+          "created_at": "2026-10-31T00:12:11.517797+00:00",
+          "media_type": "image",
+          "product_id": "339af181-245c-4727-8c21-e223059554bc",
+          "sort_order": 0,
+          "storage_path": "339af181-245c-4727-8c21-e223059554bc/1793405515479-capivaranatal-1-.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "552cb90d-8b6f-4f73-81b2-dfde4fdfcfb8",
+      "name": "Conjunto de Bolas de Natal para Pintar",
+      "slug": "conjunto-de-bolas-de-natal-para-pintar",
+      "price": 15,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-04T23:48:47.623033+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-04T23:48:47.623033+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Crie suas próprias decorações de Natal coloridas com este Conjunto de Bolas de Natal para Pintar!\n\nEsta coleção apresenta designs de bolas de Natal planas feitas para impressão 3D e decoração com suas próprias cores. Elas são perfeitas para crianças amantes do Natal e qualquer pessoa que goste de atividades criativas e decorações personalizadas.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 14,
+      "product_images": [
+        {
+          "id": "52042619-8fad-4b39-8c93-486b3fa14d94",
+          "alt_text": "Conjunto de Bolas de Natal para Pintar",
+          "created_at": "2026-11-04T23:48:49.071375+00:00",
+          "media_type": "image",
+          "product_id": "552cb90d-8b6f-4f73-81b2-dfde4fdfcfb8",
+          "sort_order": 0,
+          "storage_path": "552cb90d-8b6f-4f73-81b2-dfde4fdfcfb8/1793836123940-0abzwe-bola-de-natal-para-pintar.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "e34e46fb-96be-423e-b13d-b488c7401d16",
+      "name": "Conjunto Enfeites de Flocos de Neve para Árvore de Natal",
+      "slug": "conjunto-de-enfeites-de-flocos-de-neve-para-arvore-de-natal",
+      "price": 20,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-01T22:13:39.355236+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-01T22:13:39.355236+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Flocos de neve 3D impressos com texturização – decoração perfeita para o Natal & projetos de inverno ❄️\n\nConjunto com 6 flocos de neves para enfeite de natal",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 15,
+      "product_images": [
+        {
+          "id": "9f7638c3-2fb2-4dfd-ab3f-56c8363ed8bd",
+          "alt_text": "Conjunto de Enfeites de Flocos de Neve para Árvore de Natal",
+          "created_at": "2026-11-01T22:13:41.525321+00:00",
+          "media_type": "image",
+          "product_id": "e34e46fb-96be-423e-b13d-b488c7401d16",
+          "sort_order": 0,
+          "storage_path": "e34e46fb-96be-423e-b13d-b488c7401d16/1793571218800-2025-11-16-20b33c1451c9.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "88660b09-844d-4b1e-91b0-b74633e8398b",
+      "name": "Feliz Natal  Arvore Floco de Neve",
+      "slug": "feliz-natal-arvore-floco-de-neve",
+      "price": 20,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-01T22:07:46.517612+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-01T22:07:46.517612+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 16,
+      "product_images": [
+        {
+          "id": "e71651ef-3783-4791-9b7e-dace11627729",
+          "alt_text": "Feliz Natal  Arvore Floco de Neve",
+          "created_at": "2026-11-01T22:07:47.272281+00:00",
+          "media_type": "image",
+          "product_id": "88660b09-844d-4b1e-91b0-b74633e8398b",
+          "sort_order": 0,
+          "storage_path": "88660b09-844d-4b1e-91b0-b74633e8398b/1793570865952-feliznatalcarvoreplaca.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "276ae3de-0c1c-472e-8f1d-a2d77db3424a",
+      "name": "Gato de Crochê de Natal Tricotado",
+      "slug": "gato-de-croche-de-natal-tricotado",
+      "price": 15,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-30T23:20:32.020403+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-30T23:20:32.020403+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Adicione um pouco de fofura festiva à sua mesa, prateleira ou decorações de Natal com este adorável Gato de Chapéu de Papai Noel!",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 17,
+      "product_images": [
+        {
+          "id": "25d75255-fc31-4b12-b262-5e9a451fe920",
+          "alt_text": "Gato de Crochê de Natal Tricotado",
+          "created_at": "2026-10-30T23:20:33.151098+00:00",
+          "media_type": "image",
+          "product_id": "276ae3de-0c1c-472e-8f1d-a2d77db3424a",
+          "sort_order": 0,
+          "storage_path": "276ae3de-0c1c-472e-8f1d-a2d77db3424a/1793402416743-gatonatal.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "de6c2eca-d110-41da-8b83-b77eaa176c01",
+      "name": "Letreiro Feliz Natal",
+      "slug": "letreiro-feliz-natal",
+      "price": 10,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-29T14:53:36.066182+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-29T14:53:36.066182+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Letreiro de Feliz Natal para colocar como decoração na sua mesa ou estante",
+      "sales_count": 4,
+      "availability": "available",
+      "featured_order": 18,
+      "product_images": [
+        {
+          "id": "892348c0-d4b7-472f-a468-485cdcd6ee36",
+          "alt_text": "Letreiro Feliz Natal",
+          "created_at": "2026-10-29T14:53:38.716475+00:00",
+          "media_type": "image",
+          "product_id": "de6c2eca-d110-41da-8b83-b77eaa176c01",
+          "sort_order": 0,
+          "storage_path": "de6c2eca-d110-41da-8b83-b77eaa176c01/1793285616188-img-5589.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "806ff430-008f-44e6-8b9a-3fa857ae094c",
+      "name": "Mini Jesus – Sentado no Monitor ou Prateleira",
+      "slug": "mini-jesus-sentado-no-monitor-ou-prateleira",
+      "price": 15,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Biblico"
+      },
+      "created_at": "2026-10-28T22:08:36.633814+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-28T22:08:36.633814+00:00",
+      "category_id": "47b79ea7-a49a-4424-8d0b-e72ddc2c471e",
+      "description": "Uma pequena estatueta estilizada e altamente detalhada, projetada para impressão 3D. Ela se encaixa firmemente em bordas (como um monitor ou prateleira), tornando-a uma peça decorativa perfeita",
+      "sales_count": 2,
+      "availability": "available",
+      "featured_order": 19,
+      "product_images": [
+        {
+          "id": "d17261fd-ae1a-411b-b56c-0fcc3849fcf7",
+          "alt_text": "Mini Jesus – Sentado no Monitor ou Prateleira",
+          "created_at": "2026-10-28T22:08:37.763173+00:00",
+          "media_type": "image",
+          "product_id": "806ff430-008f-44e6-8b9a-3fa857ae094c",
+          "sort_order": 0,
+          "storage_path": "806ff430-008f-44e6-8b9a-3fa857ae094c/1793225303833-jesus-sentando.webp"
+        },
+        {
+          "id": "87495f78-1b7d-49b4-84f6-a6e5f16deba1",
+          "alt_text": "Mini Jesus – Sentado no Monitor ou Prateleira",
+          "created_at": "2026-11-03T16:09:40.437185+00:00",
+          "media_type": "image",
+          "product_id": "806ff430-008f-44e6-8b9a-3fa857ae094c",
+          "sort_order": 1,
+          "storage_path": "806ff430-008f-44e6-8b9a-3fa857ae094c/1793722176526-ka0ao9-mini-jesus.jpeg"
+        },
+        {
+          "id": "18e7333e-bbc2-4e44-a0bc-d5ae6d055e71",
+          "alt_text": "Mini Jesus – Sentado no Monitor ou Prateleira",
+          "created_at": "2026-11-03T16:09:59.45846+00:00",
+          "media_type": "image",
+          "product_id": "806ff430-008f-44e6-8b9a-3fa857ae094c",
+          "sort_order": 2,
+          "storage_path": "806ff430-008f-44e6-8b9a-3fa857ae094c/1793722196271-pcaekb-captura-de-tela-2026-11-03-130754.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "045b7a67-4b44-42d6-92f3-e4c2386d068a",
+      "name": "Papai Noel de Tricô - Natal",
+      "slug": "papai-noel-de-trico-natal",
+      "price": 15,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-28T22:03:01.136187+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-28T22:03:01.136187+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Papai noel em um modelo muito agradavel e bonito em trico",
+      "sales_count": 5,
+      "availability": "available",
+      "featured_order": 20,
+      "product_images": [
+        {
+          "id": "2cd6c23b-75f8-4d80-ac18-1f708f823c5e",
+          "alt_text": "Papai Noel de Tricô - Natal",
+          "created_at": "2026-10-28T22:03:03.240949+00:00",
+          "media_type": "image",
+          "product_id": "045b7a67-4b44-42d6-92f3-e4c2386d068a",
+          "sort_order": 0,
+          "storage_path": "045b7a67-4b44-42d6-92f3-e4c2386d068a/1793224968367-gemini-generated-image-vz93a9vz93a9vz93.jpeg"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "9158a4f7-063e-47bb-bbd8-ff9d76aec5f4",
+      "name": "Pinguim Natalino Trico",
+      "slug": "pinguim-natalino-trico",
+      "price": 15,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-31T00:12:57.378338+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-31T00:12:57.378338+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Pinguim Natalino Trico para sua decoração de sala e arvore de natal no estilo de trico 7cm tem o pinguim",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 21,
+      "product_images": [
+        {
+          "id": "4caec3a7-aff2-4d00-82ae-83fe7b00e0fa",
+          "alt_text": "Pinguim Natalino Trico",
+          "created_at": "2026-10-31T00:12:58.764761+00:00",
+          "media_type": "image",
+          "product_id": "9158a4f7-063e-47bb-bbd8-ff9d76aec5f4",
+          "sort_order": 0,
+          "storage_path": "9158a4f7-063e-47bb-bbd8-ff9d76aec5f4/1793405562114-pinguimtrico-1-.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "ffb50ecd-0a46-464f-9acc-50269087b25c",
+      "name": "Presépio Minimalista – José, Maria e Menino Jesus",
+      "slug": "presepio-minimalista-jose-maria-e-menino-jesus",
+      "price": 25,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-28T23:03:41.426512+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-28T23:03:41.426512+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Um presépio simples, elegante e cheio de significado. ❤️\n\nEste modelo foi criado com um design minimalista e moderno, pensado para transmitir a essência do Natal através de formas suaves e poucos elementos.\n\nJosé, Maria e o Menino Jesus formam uma única peça harmoniosa, com um acabamento limpo e delicado que combina facilmente com diferentes estilos de decoração.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 22,
+      "product_images": [
+        {
+          "id": "4e27066f-bed6-499f-b438-80fd4cbac7a0",
+          "alt_text": "Presépio Minimalista – José, Maria e Menino Jesus",
+          "created_at": "2026-10-28T23:03:43.320581+00:00",
+          "media_type": "image",
+          "product_id": "ffb50ecd-0a46-464f-9acc-50269087b25c",
+          "sort_order": 0,
+          "storage_path": "ffb50ecd-0a46-464f-9acc-50269087b25c/1793228608648-captura-de-tela-2026-10-28-200253.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "59311e68-97ec-449a-9e8d-8319c6fe7c6b",
+      "name": "Rena de Inverno 13cm",
+      "slug": "rena-de-inverno-13cm",
+      "price": 22,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-04T23:57:38.246672+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-04T23:57:38.246672+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Rena Fine é uma figura decorativa de inverno com cachecol e expressão calma e amigável\n13cm a Rena tem",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 23,
+      "product_images": [
+        {
+          "id": "da8e8400-0ea7-4619-9bcd-0e72c693315c",
+          "alt_text": "Rena de Inverno 13cm",
+          "created_at": "2026-11-04T23:57:39.571231+00:00",
+          "media_type": "image",
+          "product_id": "59311e68-97ec-449a-9e8d-8319c6fe7c6b",
+          "sort_order": 0,
+          "storage_path": "59311e68-97ec-449a-9e8d-8319c6fe7c6b/1793836654437-jas0bp-renafofinha.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Branco",
+        "Bege",
+        "Marrom",
+        "Vermelho"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "945c7c19-fa5a-432d-88a7-56f2bf20156e",
+      "name": "Rena de Natal de Crochê",
+      "slug": "rena-de-natal-de-croche",
+      "price": 20,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-29T00:00:14.756309+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-29T00:00:14.756309+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Traga um toque aconchegante e artesanal para suas decorações de Natal! 🎄 Esta linda rena foi projetada em um belo estilo inspirado em crochê, dando a ela a aparência de uma decoração de Natal feita com amor em crochê\n\n- Um alce por pedido",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 24,
+      "product_images": [
+        {
+          "id": "b26ac7d5-b432-4313-bb97-4b8a883c3352",
+          "alt_text": "Rena de Natal de Crochê",
+          "created_at": "2026-10-29T00:00:16.260691+00:00",
+          "media_type": "image",
+          "product_id": "945c7c19-fa5a-432d-88a7-56f2bf20156e",
+          "sort_order": 0,
+          "storage_path": "945c7c19-fa5a-432d-88a7-56f2bf20156e/1793232001928-rena-trico.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "fbb2daa6-0510-4e81-bddd-4fafa56d268c",
+      "name": "Rena Tricotada - Natal",
+      "slug": "rena-tricotada-natal",
+      "price": 15,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-28T23:02:48.564524+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-28T23:02:48.564524+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Rena no estilo de trico para enfeite de natal",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 25,
+      "product_images": [
+        {
+          "id": "c5ace959-dee0-4e0f-8110-81e78be93c7b",
+          "alt_text": "Rena Tricotada - Natal",
+          "created_at": "2026-10-28T23:02:51.243846+00:00",
+          "media_type": "image",
+          "product_id": "fbb2daa6-0510-4e81-bddd-4fafa56d268c",
+          "sort_order": 0,
+          "storage_path": "fbb2daa6-0510-4e81-bddd-4fafa56d268c/1793228555813-rena-tricotada---natal.jpeg"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "1beba130-2934-4b22-90cd-a8efe4ff315c",
+      "name": "Rudori – Rena Grande",
+      "slug": "rudori-rena-grande",
+      "price": 20,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-04T23:52:06.682635+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-04T23:52:06.682635+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Este modelo moderno e de design minimalista foi projetado especialmente para uma impressão 3D simples e descomplicada.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 26,
+      "product_images": [
+        {
+          "id": "e4cc6862-d23d-41c6-8fe4-3291ca7b3554",
+          "alt_text": "Rudori – Rena Grande",
+          "created_at": "2026-11-04T23:52:08.245273+00:00",
+          "media_type": "image",
+          "product_id": "1beba130-2934-4b22-90cd-a8efe4ff315c",
+          "sort_order": 0,
+          "storage_path": "1beba130-2934-4b22-90cd-a8efe4ff315c/1793836323137-aqno30-renapequena.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Branco",
+        "Vermelho",
+        "Azul",
+        "Bege",
+        "Verde"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "4ccd38fd-5e26-4705-b0b0-f77907837344",
+      "name": "Urso Polar de Natal Trico",
+      "slug": "urso-polar-de-natal-trico",
+      "price": 15,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-30T23:19:38.483193+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-30T23:19:38.483193+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Este adorável urso polar de Natal com aparência de tricô é uma decoração encantadora impressa em 3D",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 27,
+      "product_images": [
+        {
+          "id": "13a5631a-e995-44ca-8f08-8bae9efda37f",
+          "alt_text": "Urso Polar de Natal Trico",
+          "created_at": "2026-10-30T23:19:39.447937+00:00",
+          "media_type": "image",
+          "product_id": "4ccd38fd-5e26-4705-b0b0-f77907837344",
+          "sort_order": 0,
+          "storage_path": "4ccd38fd-5e26-4705-b0b0-f77907837344/1793402363241-ursonatal.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "8b44149e-a4a7-4796-bc29-b0b7e53b6896",
+      "name": "Suporte Headset Homem Aranha",
+      "slug": "suporte-headset-homem-aranha",
+      "price": 80,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Personalizados"
+      },
+      "created_at": "2026-11-09T15:23:30.654334+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-09T15:23:30.654334+00:00",
+      "category_id": "2fadf3f9-4eca-49ad-b5ba-ce64e9aa998c",
+      "description": "Decoração de suporte para headset em formato da cabeça do homem aranha",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 29,
+      "product_images": [
+        {
+          "id": "78d1c992-6f39-41b6-ba43-700b918b4bc8",
+          "alt_text": "Suporte Headset Homem Aranha",
+          "created_at": "2026-11-09T22:38:41.216325+00:00",
+          "media_type": "video",
+          "product_id": "8b44149e-a4a7-4796-bc29-b0b7e53b6896",
+          "sort_order": 0,
+          "storage_path": "8b44149e-a4a7-4796-bc29-b0b7e53b6896/1794263911955-u9gk68-videohomemaranha.mp4"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "9ac9b5da-ee1c-4cc5-88a4-b43301cd17c7",
+      "name": "Anjo em Malha (Vela)",
+      "slug": "anjo-em-malha-vela",
+      "price": 20,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-11T23:49:02.482146+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-11T23:49:02.482146+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "ANJO PARA DECORAÇÃO, PARA VELA EM LED\nTAMANHO DO ANJO 18,5CM \n- VELA NAO INCLUSA",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 30,
+      "product_images": [
+        {
+          "id": "5f4b1b94-45ad-472c-a839-7496d3132e9b",
+          "alt_text": "Anjo em Malha (Vela)",
+          "created_at": "2026-11-11T23:49:03.396386+00:00",
+          "media_type": "image",
+          "product_id": "9ac9b5da-ee1c-4cc5-88a4-b43301cd17c7",
+          "sort_order": 0,
+          "storage_path": "9ac9b5da-ee1c-4cc5-88a4-b43301cd17c7/1794440932654-7j5n8l-anjoveka.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "825446fc-5d02-4447-adb5-4bd5d25797fd",
+      "name": "Decoração de Presente",
+      "slug": "decoracao-de-presente",
+      "price": 20,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-11T23:45:26.515385+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-11T23:45:26.515385+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Traga o espírito festivo para sua casa – Com esta decoração de presente de Natal em três tamanhos diferentes! \n\nO design minimalista, mas elegante, lembra um presente de Natal cuidadosamente embrulhado e adiciona toques festivos, seja na janela, na prateleira ou na mesa.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 31,
+      "product_images": [
+        {
+          "id": "6fc3c696-f0d8-4483-8baa-d91b057468a3",
+          "alt_text": "Decoração de Presente",
+          "created_at": "2026-11-11T23:45:27.960247+00:00",
+          "media_type": "image",
+          "product_id": "825446fc-5d02-4447-adb5-4bd5d25797fd",
+          "sort_order": 0,
+          "storage_path": "825446fc-5d02-4447-adb5-4bd5d25797fd/1794440716985-jsd7mi-presente.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "b83c5f07-fedc-44af-8112-6894cefcee49",
+      "name": "Treno Para Papai Noel",
+      "slug": "treno-para-papai-noel",
+      "price": 8,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-11T23:36:54.429397+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-11T23:36:54.429397+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Treino para decoração para o seu papai noel",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 32,
+      "product_images": [
+        {
+          "id": "7438249a-cbf2-45e6-8ced-0226d2c654aa",
+          "alt_text": "Treno Para Papai Noel",
+          "created_at": "2026-11-11T23:36:55.473431+00:00",
+          "media_type": "image",
+          "product_id": "b83c5f07-fedc-44af-8112-6894cefcee49",
+          "sort_order": 0,
+          "storage_path": "b83c5f07-fedc-44af-8112-6894cefcee49/1794440204622-nrh1j8-trenopequeno.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "e89d85af-5ead-477a-b7f5-b2ec1604b806",
+      "name": "Bandeja de Natal | Suporte Festivo para Doces e Chocolates",
+      "slug": "bandeja-de-natal-suporte-festivo-para-doces-e-chocolates",
+      "price": 30,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-11T23:33:52.013862+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-11T23:33:52.013862+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Traga um pouco da magia do Natal para a sua casa com esta encantadora Bandeja de Vila de Natal",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": 33,
+      "product_images": [
+        {
+          "id": "eb95a6d4-591a-4dd3-a815-4ab7cfae7cff",
+          "alt_text": "Bandeja de Natal | Suporte Festivo para Doces e Chocolates",
+          "created_at": "2026-11-11T23:33:53.224806+00:00",
+          "media_type": "image",
+          "product_id": "e89d85af-5ead-477a-b7f5-b2ec1604b806",
+          "sort_order": 0,
+          "storage_path": "e89d85af-5ead-477a-b7f5-b2ec1604b806/1794440022316-ov0hqk-bandeja-de-natal.webp"
+        },
+        {
+          "id": "a4f2eaa7-a90c-4372-88c0-3fe6e5ac520d",
+          "alt_text": "Bandeja de Natal | Suporte Festivo para Doces e Chocolates",
+          "created_at": "2026-11-11T23:34:58.383653+00:00",
+          "media_type": "image",
+          "product_id": "e89d85af-5ead-477a-b7f5-b2ec1604b806",
+          "sort_order": 1,
+          "storage_path": "e89d85af-5ead-477a-b7f5-b2ec1604b806/1794440086866-1v2pmt-bandejanatal3.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "5d98a66a-0b8b-49ab-b3ee-1a07459fd242",
+      "name": "Árvore de Natal Com Estrela e Decorações",
+      "slug": "arvore-de-natal-com-estrela-e-decoracoes",
+      "price": 25,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-12T23:14:31.832797+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T23:14:31.832797+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Arvore de Natal para decoração",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "25373dbf-cdc9-426e-bd4a-b3c00ccdd8ea",
+          "alt_text": "Árvore de Natal Com Estrela e Decorações",
+          "created_at": "2026-11-12T23:14:34.506788+00:00",
+          "media_type": "image",
+          "product_id": "5d98a66a-0b8b-49ab-b3ee-1a07459fd242",
+          "sort_order": 0,
+          "storage_path": "5d98a66a-0b8b-49ab-b3ee-1a07459fd242/1794525261656-199ayl-arvorenatalenfeitada.jpe"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "73818284-9ce7-4992-bda0-e98c8a2665c6",
+      "name": "Árvore de Natal Moderna",
+      "slug": "arvore-de-natal-moderna",
+      "price": 30,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-12T21:53:52.732031+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T21:53:52.732031+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "dd189854-22ce-4da9-aeb4-8c05ed6c1eeb",
+          "alt_text": "Árvore de Natal Moderna",
+          "created_at": "2026-11-12T21:53:54.23547+00:00",
+          "media_type": "image",
+          "product_id": "73818284-9ce7-4992-bda0-e98c8a2665c6",
+          "sort_order": 0,
+          "storage_path": "73818284-9ce7-4992-bda0-e98c8a2665c6/1794520422309-sn9gx2-arvorenatalespiral.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "b97ea159-079e-4c6d-bde8-764a8337ca87",
+      "name": "Decoração Minimalista de Árvore de Natal (Com estrela ou sem)",
+      "slug": "decoracao-minimalista-de-arvore-de-natal-com-estrela-ou-sem",
+      "price": 15,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-12T23:16:57.172104+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T23:16:57.172104+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Uma árvore de Natal moderna projetada com um formato espiral fluido e textura canelada elegante. O design geométrico limpo cria belas sombras e torna a árvore uma decoração perfeita para interiores modernos escandinavos e minimalistas.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "26f9632c-9c11-4a17-b661-063e5c4aad91",
+      "name": "Enfeite de Natal Personalizado",
+      "slug": "enfeite-de-natal-personalizado",
+      "price": null,
+      "featured": true,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-11T14:37:44.249972+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-11-11T14:37:44.249972+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Deixe o Natal com a sua cara!\nCrie enfeites\ncom nomes personalizados para decorar a árvore, identificar presentes ou presentear alguém especial.\nNo personalizador, você pode ajustar:\n• Nome: escreva o nome desejado.\n• Modelo: escolha entre rena, Papai Noel, boneco de neve, trenó com presentes, boneco de biscoito, anjo ou árvore de Natal.\n• Formato: retangular, redondo ou arqueado.\n• Tipo de letra: escolha entre 4 estilos.\n• Tamanho da letra: pequeno, médio, grande ou extra grande.\n• Cor do nome: selecione uma das cores disponíveis no modelo.\n• Tamanho do enfeite: ajuste a altura total entre\n70 e 90 mm.\nSão 21 combinações",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "5d21d777-1a45-41a6-be21-fef08e178a87",
+          "alt_text": "Enfeite de Natal Personalizado",
+          "created_at": "2026-11-11T14:37:53.625706+00:00",
+          "media_type": "image",
+          "product_id": "26f9632c-9c11-4a17-b661-063e5c4aad91",
+          "sort_order": 0,
+          "storage_path": "26f9632c-9c11-4a17-b661-063e5c4aad91/1794407865628-9r2bex-img-5839.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "dc4a55e8-d8dc-4702-aaa1-9bb85347d908",
+      "name": "Busto de Jesus",
+      "slug": "busto-de-jesus",
+      "price": 80,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Biblico"
+      },
+      "created_at": "2026-10-29T16:35:36.008126+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-29T16:35:36.008126+00:00",
+      "category_id": "47b79ea7-a49a-4424-8d0b-e72ddc2c471e",
+      "description": "Modelo detalhado em alta resolução, pode encaixar uma luz ou ser usado como um busto comum.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "4c0837b5-51db-46c3-b56c-249559e85010",
+          "alt_text": "Busto de Jesus",
+          "created_at": "2026-10-29T16:35:38.255754+00:00",
+          "media_type": "image",
+          "product_id": "dc4a55e8-d8dc-4702-aaa1-9bb85347d908",
+          "sort_order": 0,
+          "storage_path": "dc4a55e8-d8dc-4702-aaa1-9bb85347d908/1793291732922-bustojesus.jpeg"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "2a802a1b-6f54-40c4-a6fa-b9a7c9ecac90",
+      "name": "Capivara do Amor – Chaveiro de Coração Fofo",
+      "slug": "capivara-do-amor-chaveiro-de-coracao-fofo",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-29T00:26:28.62506+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:26:28.62506+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Este chaveiro Capivara do Amor apresenta um design fofo e amigável segurando um coração, perfeito para pequenos presentes, decorações ou acessórios do dia a dia",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "0ea61997-dca4-4aa6-8361-39ce01818475",
+          "alt_text": "Capivara do Amor – Chaveiro de Coração Fofo",
+          "created_at": "2026-10-29T00:26:30.535979+00:00",
+          "media_type": "image",
+          "product_id": "2a802a1b-6f54-40c4-a6fa-b9a7c9ecac90",
+          "sort_order": 0,
+          "storage_path": "2a802a1b-6f54-40c4-a6fa-b9a7c9ecac90/1793233575678-capivaradoamor.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "4640f8de-4fbc-40dc-ad0a-8f2b895e1fbd",
+      "name": "Chaveiro \"Deus é o Nosso Refúgio e Fortaleza\"",
+      "slug": "chaveiro-deus-e-o-nosso-refugio-e-fortaleza",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-28T23:35:21.403027+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-28T23:35:21.403027+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Chaveiro com o versículo/frase  “Deus é o Nosso Refúgio e Fortaleza”, criado em um visual divertido",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "3bc86ba5-f3bb-4b38-94fe-2bbac79e225a",
+          "alt_text": "Chaveiro \"Deus é o Nosso Refúgio e Fortaleza\"",
+          "created_at": "2026-10-28T23:35:22.105809+00:00",
+          "media_type": "image",
+          "product_id": "4640f8de-4fbc-40dc-ad0a-8f2b895e1fbd",
+          "sort_order": 0,
+          "storage_path": "4640f8de-4fbc-40dc-ad0a-8f2b895e1fbd/1793230508486-9d1170f405d2833e.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "d966b77c-a029-42cb-ab6d-41c2338e6e4a",
+      "name": "Chaveiro \"O Senhor é bom em todo o tempo\"",
+      "slug": "chaveiro-o-senhor-e-bom-em-todo-o-tempo",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-28T23:27:17.587385+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-28T23:27:17.587385+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Chaveiro com o versículo/frase “O Senhor é bom em todos os momentos”, criado em um design divertido",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "54c345c3-8f05-474c-a555-e7d604e39b0e",
+          "alt_text": "Chaveiro \"O Senhor é bom em todo o tempo\"",
+          "created_at": "2026-10-28T23:27:18.981703+00:00",
+          "media_type": "image",
+          "product_id": "d966b77c-a029-42cb-ab6d-41c2338e6e4a",
+          "sort_order": 0,
+          "storage_path": "d966b77c-a029-42cb-ab6d-41c2338e6e4a/1793230024659-captura-de-tela-2026-10-28-202611.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "1f39df7e-f6fa-4393-a719-075737abd451",
+      "name": "Chaveiro \"Porque para Deus Nada é Impossível\"",
+      "slug": "chaveiro-porque-para-deus-nada-e-impossivel",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-28T23:27:53.994174+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-28T23:27:53.994174+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Chaveiro com o versículo/frase  “Porque para Deus Nada é Impossível”, criado em um visual divertido",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "be42e638-6f61-4447-9e67-d9bcea4142f4",
+          "alt_text": "Chaveiro \"Porque para Deus Nada é Impossível\"",
+          "created_at": "2026-10-28T23:27:55.949317+00:00",
+          "media_type": "image",
+          "product_id": "1f39df7e-f6fa-4393-a719-075737abd451",
+          "sort_order": 0,
+          "storage_path": "1f39df7e-f6fa-4393-a719-075737abd451/1793230061067-captura-de-tela-2026-10-28-202715.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "84c02d8b-31a7-4d0a-bbbe-8af67121a14a",
+      "name": "Chaveiro \"Um símbolo do amor de Jesus\"",
+      "slug": "chaveiro-um-simbolo-do-amor-de-jesus",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Biblico"
+      },
+      "created_at": "2026-10-28T23:37:30.569516+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-28T23:37:30.569516+00:00",
+      "category_id": "47b79ea7-a49a-4424-8d0b-e72ddc2c471e",
+      "description": "Leve sua fé aonde quer que vá. Um símbolo do amor, paz e guia de Jesus em um chaveiro único que você pode manter por perto todos os dias. 📖✨ Fé no seu bolso, força no seu coração.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "bc0f02c8-15c2-433a-b0b0-3541f3a6e3e1",
+          "alt_text": "Chaveiro \"Um símbolo do amor de Jesus\"",
+          "created_at": "2026-10-28T23:37:31.7993+00:00",
+          "media_type": "image",
+          "product_id": "84c02d8b-31a7-4d0a-bbbe-8af67121a14a",
+          "sort_order": 0,
+          "storage_path": "84c02d8b-31a7-4d0a-bbbe-8af67121a14a/1793230637752-chaveiropomba.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "7d90fd17-c607-4d87-ad9f-dbab06c74aa0",
+      "name": "Chaveiro 3D Totalmente Personalizável",
+      "slug": "chaveiro-3d-totalmente-personalizavel",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-29T00:24:02.623091+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:24:02.623091+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Crie seu próprio design exclusivo de nome 3D personalizado com este modelo paramétrico altamente customizável",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "3338447d-e94a-4846-bab0-73f8c1fbc6c0",
+          "alt_text": "Chaveiro 3D Totalmente Personalizável",
+          "created_at": "2026-10-29T00:24:04.06064+00:00",
+          "media_type": "image",
+          "product_id": "7d90fd17-c607-4d87-ad9f-dbab06c74aa0",
+          "sort_order": 0,
+          "storage_path": "7d90fd17-c607-4d87-ad9f-dbab06c74aa0/1793233429684-chaveiropersonalizado.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": true
+    },
+    {
+      "id": "f201ad81-9ef1-4998-8e8b-887266a9fd5f",
+      "name": "Chaveiro Árvore de Natal",
+      "slug": "chaveiro-arvore-de-natal",
+      "price": 8,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-11T14:28:44.59267+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-11T14:28:44.59267+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Chaveiro pra você carregar o espírito natalino",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "276a2a63-4048-45c7-aac0-f471498309b4",
+          "alt_text": "Chaveiro Árvore de Natal",
+          "created_at": "2026-11-11T14:35:54.289285+00:00",
+          "media_type": "image",
+          "product_id": "f201ad81-9ef1-4998-8e8b-887266a9fd5f",
+          "sort_order": 0,
+          "storage_path": "f201ad81-9ef1-4998-8e8b-887266a9fd5f/1794407751081-6f2zau-img-5836.jpeg"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "8102de01-2224-44fc-9e06-b2992b9b7b82",
+      "name": "Chaveiro Chapéu de Palha",
+      "slug": "chaveiro-chapeu-de-palha",
+      "price": 8,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-11-12T00:03:26.765352+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T00:03:26.765352+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "5a57d3e1-2347-4a76-bec7-e44977680eab",
+          "alt_text": "Chaveiro Chapéu de Palha",
+          "created_at": "2026-11-12T00:03:27.674007+00:00",
+          "media_type": "image",
+          "product_id": "8102de01-2224-44fc-9e06-b2992b9b7b82",
+          "sort_order": 0,
+          "storage_path": "8102de01-2224-44fc-9e06-b2992b9b7b82/1794441796928-absg3e-plalha.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "487c2508-be56-4587-b1f2-7209dd455d08",
+      "name": "Chaveiro com emoji(Personalizado)",
+      "slug": "chaveiro-com-emoji-personalizado",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-29T00:27:32.463904+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:27:32.463904+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Chaveiro de Emoji Personalizado, venda separada de cada emoji",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "a226a047-b80e-4e9b-8b68-f69f70801fc7",
+          "alt_text": "Chaveiro com emoji(Personalizado)",
+          "created_at": "2026-10-29T00:27:33.532035+00:00",
+          "media_type": "image",
+          "product_id": "487c2508-be56-4587-b1f2-7209dd455d08",
+          "sort_order": 0,
+          "storage_path": "487c2508-be56-4587-b1f2-7209dd455d08/1793233639525-chaveroemoji.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "1d7847d3-3bf8-4cb0-bf81-94e6cbfcbfdb",
+      "name": "Chaveiro Coqueteleira - Academia",
+      "slug": "chaveiro-coqueteleira-academia",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Academia"
+      },
+      "created_at": "2026-10-29T00:30:17.539023+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:30:17.539023+00:00",
+      "category_id": "d1df1501-a411-495b-b6d8-f5d06980b946",
+      "description": "Ideal para levar para os treinos uma porção de creatina ou pré-treino de forma prática e chamativa.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "08afb1d4-9918-4059-9f2d-50dd26156dbc",
+          "alt_text": "Chaveiro Coqueteleira - Academia",
+          "created_at": "2026-10-29T00:30:19.457332+00:00",
+          "media_type": "image",
+          "product_id": "1d7847d3-3bf8-4cb0-bf81-94e6cbfcbfdb",
+          "sort_order": 0,
+          "storage_path": "1d7847d3-3bf8-4cb0-bf81-94e6cbfcbfdb/1793233804594-chaveirocoqueteleira.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "8b426d69-832a-474c-8a16-bb61f8a832e3",
+      "name": "Chaveiro de Boca (Abridor de Lata)",
+      "slug": "chaveiro-de-boca-abridor-de-lata",
+      "price": 8,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-29T16:44:07.124252+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-29T16:44:07.124252+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "0ebf5886-f2a3-46b3-a0f4-a08347a9ca64",
+          "alt_text": "Chaveiro de Boca (Abridor de Lata)",
+          "created_at": "2026-10-29T16:44:09.05667+00:00",
+          "media_type": "image",
+          "product_id": "8b426d69-832a-474c-8a16-bb61f8a832e3",
+          "sort_order": 0,
+          "storage_path": "8b426d69-832a-474c-8a16-bb61f8a832e3/1793292244010-chaveiroboca.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "bd1d282b-8be5-4d9b-9bf3-9af875f7342b",
+      "name": "Chaveiro de Cinto de Jiu Jitsu",
+      "slug": "chaveiro-de-cinto-de-jiu-jitsu",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Academia"
+      },
+      "created_at": "2026-10-29T00:13:10.756296+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:13:10.756296+00:00",
+      "category_id": "d1df1501-a411-495b-b6d8-f5d06980b946",
+      "description": "Faixa pode ser personalizada dependendo da cor que voce quer.\nSempre quis exibir sua classificação de faixa para os outros, mas discretamente… Bem, sua oportunidade chegou! Estes pequenos chaveiros de faixa de jiu jitsu farão com que os outros saibam exatamente o quão assustados eles devem estar... com suas chaves!",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "9324d9d2-40a2-4ebb-9416-057b5cb669ec",
+          "alt_text": "Chaveiro de Cinto de Jiu Jitsu",
+          "created_at": "2026-10-29T00:13:11.855914+00:00",
+          "media_type": "image",
+          "product_id": "bd1d282b-8be5-4d9b-9bf3-9af875f7342b",
+          "sort_order": 0,
+          "storage_path": "bd1d282b-8be5-4d9b-9bf3-9af875f7342b/1793232777943-faixajiujitsu.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": true
+    },
+    {
+      "id": "5cb9b66e-e768-4f3d-809c-f496375161a6",
+      "name": "Chaveiro de Peso(Personalizado)",
+      "slug": "chaveiro-de-peso-personalizado",
+      "price": 8,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-29T16:43:38.991417+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-29T16:43:38.991417+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Chaveiro de peso ( personalizando nome e kg)",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "2c1f50af-5616-47c3-874d-99b656447eb9",
+          "alt_text": "Chaveiro de Peso(Personalizado)",
+          "created_at": "2026-10-29T16:43:41.314616+00:00",
+          "media_type": "image",
+          "product_id": "5cb9b66e-e768-4f3d-809c-f496375161a6",
+          "sort_order": 0,
+          "storage_path": "5cb9b66e-e768-4f3d-809c-f496375161a6/1793292215879-pesoimagem.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "3ff2a8a4-c323-4e46-96ad-d2d435eb4830",
+      "name": "Chaveiro Deus Ore e Confie com infinito",
+      "slug": "chaveiro-deus-ore-e-confie-com-infinito",
+      "price": 8,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-28T23:18:20.771751+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-28T23:18:20.771751+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "o chaveiro ORE e Confie é um lembrete diário de fé, esperança e confiança em Deus.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "c0ac8108-9f06-4b47-b1d6-3fdf596b574c",
+          "alt_text": "Chaveiro Deus Ore e Confie com infinito",
+          "created_at": "2026-10-28T23:18:21.627613+00:00",
+          "media_type": "image",
+          "product_id": "3ff2a8a4-c323-4e46-96ad-d2d435eb4830",
+          "sort_order": 0,
+          "storage_path": "3ff2a8a4-c323-4e46-96ad-d2d435eb4830/1793229487847-captura-de-tela-2026-10-28-201723.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "2a23026d-0cb5-4f63-bee3-45062cb575c6",
+      "name": "Chaveiro do Homem-Aranha",
+      "slug": "chaveiro-do-homem-aranha",
+      "price": 8,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-11-12T00:02:03.126684+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T00:02:03.126684+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "8df4dbe6-960f-4ab7-be04-2501d3c955f0",
+          "alt_text": "Chaveiro do Homem-Aranha",
+          "created_at": "2026-11-12T00:02:04.202664+00:00",
+          "media_type": "image",
+          "product_id": "2a23026d-0cb5-4f63-bee3-45062cb575c6",
+          "sort_order": 0,
+          "storage_path": "2a23026d-0cb5-4f63-bee3-45062cb575c6/1794441713265-gbq9t0-homem.webp"
+        },
+        {
+          "id": "3432ecf8-dfba-4219-9eaa-22c588e9fb28",
+          "alt_text": "Chaveiro do Homem-Aranha",
+          "created_at": "2026-11-12T00:02:18.57234+00:00",
+          "media_type": "image",
+          "product_id": "2a23026d-0cb5-4f63-bee3-45062cb575c6",
+          "sort_order": 1,
+          "storage_path": "2a23026d-0cb5-4f63-bee3-45062cb575c6/1794441727586-9gy6rd-homem1.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "d4b14229-e309-45b3-b8eb-6ee2dae6ce77",
+      "name": "Chaveiro Gomu Gomu No Mi",
+      "slug": "chaveiro-gomu-gomu-no-mi",
+      "price": 8,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-11-12T00:04:27.278838+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T00:04:27.278838+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "92ab3a59-2d08-4a66-a6da-56485d7b7835",
+      "name": "Chaveiro Harry Potter Chapéu Seletor HP",
+      "slug": "chaveiro-harry-potter-chapeu-seletor-hp",
+      "price": 8,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-11-11T23:55:40.248279+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-11T23:55:40.248279+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Criado para os amantes do Harry Potter, esse chapéu da vida ao filme do HP.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "a8853052-86e4-4c84-b998-2820fbb6cd82",
+          "alt_text": "Chaveiro Harry Potter Chapéu Seletor HP",
+          "created_at": "2026-11-11T23:55:41.909702+00:00",
+          "media_type": "image",
+          "product_id": "92ab3a59-2d08-4a66-a6da-56485d7b7835",
+          "sort_order": 0,
+          "storage_path": "92ab3a59-2d08-4a66-a6da-56485d7b7835/1794441331009-ccvz9z-chaveirohp.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "c65c4401-86f5-41d5-aa7f-0d2ee36b602c",
+      "name": "chaveiro Kettlebell Anel",
+      "slug": "chaveiro-kettlebell-anel",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Academia"
+      },
+      "created_at": "2026-10-29T00:17:08.032764+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:17:08.032764+00:00",
+      "category_id": "d1df1501-a411-495b-b6d8-f5d06980b946",
+      "description": "Chaveiro Kettlebel para guardar anel durante treinos, para pílulas ou pequenos objetos… Fechamento por rosca.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "b22aa8e5-2d95-4f05-95c6-665ce0d34cf8",
+          "alt_text": "chaveiro Kettlebell Anel",
+          "created_at": "2026-10-29T00:17:08.903753+00:00",
+          "media_type": "image",
+          "product_id": "c65c4401-86f5-41d5-aa7f-0d2ee36b602c",
+          "sort_order": 0,
+          "storage_path": "c65c4401-86f5-41d5-aa7f-0d2ee36b602c/1793233015097-kereball.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "5340be3d-f65d-4abc-aafe-0842ba4a5cb3",
+      "name": "Chaveiro lembrancinha Espírito Santo",
+      "slug": "chaveiro-lembrancinha-espirito-santo",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Biblico"
+      },
+      "created_at": "2026-10-28T23:26:04.764167+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-28T23:26:04.764167+00:00",
+      "category_id": "47b79ea7-a49a-4424-8d0b-e72ddc2c471e",
+      "description": "Chaveiro Lembrancinha Espirito Santo",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "63569aa3-ce27-4d42-97e1-4f9461d29e3c",
+          "alt_text": "Chaveiro lembrancinha Espírito Santo",
+          "created_at": "2026-10-28T23:26:06.429449+00:00",
+          "media_type": "image",
+          "product_id": "5340be3d-f65d-4abc-aafe-0842ba4a5cb3",
+          "sort_order": 0,
+          "storage_path": "5340be3d-f65d-4abc-aafe-0842ba4a5cb3/1793229951868-captura-de-tela-2026-10-28-202522.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "6e12f44a-45b2-4062-bbc5-ae152fa04428",
+      "name": "Chaveiro Marvel (UNIDADE)",
+      "slug": "chaveiro-marvel-unidade",
+      "price": 8,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-11-12T00:00:39.57837+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T00:00:39.57837+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "aec82cd8-f779-4aa5-9023-59524252f55a",
+          "alt_text": "Chaveiro Marvel (UNIDADE)",
+          "created_at": "2026-11-12T00:00:40.792355+00:00",
+          "media_type": "image",
+          "product_id": "6e12f44a-45b2-4062-bbc5-ae152fa04428",
+          "sort_order": 0,
+          "storage_path": "6e12f44a-45b2-4062-bbc5-ae152fa04428/1794441630065-4u2x8u-marvel.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "129f7154-c1dc-4d89-b8ac-1623e56a91ca",
+      "name": "Chaveiro Mini Haltere – Peso de Academia Realista",
+      "slug": "chaveiro-mini-haltere-peso-de-academia-realista",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Academia"
+      },
+      "created_at": "2026-10-29T00:25:36.796182+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:25:36.796182+00:00",
+      "category_id": "d1df1501-a411-495b-b6d8-f5d06980b946",
+      "description": "Leve sua paixão por fitness para todo lugar com este realista Chaveiro de Mini Haltere! Projetado para se assemelhar a um haltere clássico de academia",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "90f8d80c-4720-413c-94b5-00fbd119126e",
+          "alt_text": "Chaveiro Mini Haltere – Peso de Academia Realista",
+          "created_at": "2026-10-29T00:25:38.251407+00:00",
+          "media_type": "image",
+          "product_id": "129f7154-c1dc-4d89-b8ac-1623e56a91ca",
+          "sort_order": 0,
+          "storage_path": "129f7154-c1dc-4d89-b8ac-1623e56a91ca/1793233523852-pesodeacademia.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "7b63f164-0e65-4d03-b7d3-ff42b35db6ad",
+      "name": "Chaveiro Mini Tubarão Articulado",
+      "slug": "chaveiro-mini-tubarao-articulado",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-29T00:29:18.221044+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:29:18.221044+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Chaveiro Mini Tubarão Articulado",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "eb43d6e3-88f3-47dc-95e5-a2be27c9529b",
+          "alt_text": "Chaveiro Mini Tubarão Articulado",
+          "created_at": "2026-10-29T00:29:19.720608+00:00",
+          "media_type": "image",
+          "product_id": "7b63f164-0e65-4d03-b7d3-ff42b35db6ad",
+          "sort_order": 0,
+          "storage_path": "7b63f164-0e65-4d03-b7d3-ff42b35db6ad/1793233745277-tubaraochaveiro.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "e565509c-996d-4c76-aaf5-5e5b7162307b",
+      "name": "Chaveiro Patinha Clicável",
+      "slug": "chaveiro-patinha-clicavel",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-29T00:31:52.310512+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:31:52.310512+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Chaveiro Patinha Clicavel.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "84e8c83c-13cb-4fe6-96e0-04b94efe4718",
+          "alt_text": "Chaveiro Patinha Clicável",
+          "created_at": "2026-10-29T00:31:53.484982+00:00",
+          "media_type": "image",
+          "product_id": "e565509c-996d-4c76-aaf5-5e5b7162307b",
+          "sort_order": 0,
+          "storage_path": "e565509c-996d-4c76-aaf5-5e5b7162307b/1793233899362-chaveiropatinha.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "8eea0b53-54d0-408d-ae7d-d6fc88d4e75f",
+      "name": "Chaveiro Pesos de Academia (Nome Personalizado)",
+      "slug": "chaveiro-pesos-de-academia-nome-personalizado",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Academia"
+      },
+      "created_at": "2026-10-29T00:11:36.967633+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:11:36.967633+00:00",
+      "category_id": "d1df1501-a411-495b-b6d8-f5d06980b946",
+      "description": "Chaveiro Disco, Haltere e Kettlebell - Academia (TEXTO PERSONALIZÁVEL)\nChaveiros sao vendidos separadamente",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "9ef971f0-8b76-4699-8089-e156444391e1",
+          "alt_text": "Chaveiro Pesos de Academia (Nome Personalizado)",
+          "created_at": "2026-10-29T00:11:39.034829+00:00",
+          "media_type": "image",
+          "product_id": "8eea0b53-54d0-408d-ae7d-d6fc88d4e75f",
+          "sort_order": 0,
+          "storage_path": "8eea0b53-54d0-408d-ae7d-d6fc88d4e75f/1793232684164-pesos-de-academia.jpeg"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "573a9e61-ea13-4304-bd0c-94aeaf5aa88b",
+      "name": "Chaveiro Polvinho",
+      "slug": "chaveiro-polvinho",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-29T00:32:50.808983+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:32:50.808983+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Chaveiro de Polvinho Articulado",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "022f8fdb-ba9a-4899-b5eb-8c2c88326c2f",
+          "alt_text": "Chaveiro Polvinho",
+          "created_at": "2026-10-29T00:32:51.856676+00:00",
+          "media_type": "image",
+          "product_id": "573a9e61-ea13-4304-bd0c-94aeaf5aa88b",
+          "sort_order": 0,
+          "storage_path": "573a9e61-ea13-4304-bd0c-94aeaf5aa88b/1793233957868-polvinhochaveiro.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "8fe9dccc-d591-461d-b716-0bedd14a1ecf",
+      "name": "Chaveiro Seja Forte Corajosa",
+      "slug": "chaveiro-seja-forte-corajosa",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-10-28T23:39:23.33836+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-28T23:39:23.33836+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Um chaveiro inspirado nos letreiros cristãos",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "2bbc238d-0b72-4a7f-aee4-01b4d6014b89",
+          "alt_text": "Chaveiro Seja Forte Corajosa",
+          "created_at": "2026-10-28T23:39:24.668305+00:00",
+          "media_type": "image",
+          "product_id": "8fe9dccc-d591-461d-b716-0bedd14a1ecf",
+          "sort_order": 0,
+          "storage_path": "8fe9dccc-d591-461d-b716-0bedd14a1ecf/1793230750418-captura-de-tela-2026-10-28-203813.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "1e2b87c6-620d-4304-a07f-2a14547ca0dc",
+      "name": "Chaveiro/Enfeite do Homem de Ferro Chibi",
+      "slug": "chaveiro-enfeite-do-homem-de-ferro-chibi",
+      "price": 19,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Chaveiro"
+      },
+      "created_at": "2026-11-11T23:57:05.933041+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-11T23:57:05.933041+00:00",
+      "category_id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "description": "Homem de Ferro Chib",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "3e2cae6c-0cb8-4491-9c48-2066c6c7b986",
+          "alt_text": "Chaveiro/Enfeite do Homem de Ferro Chibi",
+          "created_at": "2026-11-11T23:57:07.188344+00:00",
+          "media_type": "image",
+          "product_id": "1e2b87c6-620d-4304-a07f-2a14547ca0dc",
+          "sort_order": 0,
+          "storage_path": "1e2b87c6-620d-4304-a07f-2a14547ca0dc/1794441416339-jiu5by-ironman.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "898c8f68-d86e-45e1-98d8-8d427f5be1c8",
+      "name": "Conjunto de decoração para recipiente com tampa",
+      "slug": "conjunto-de-decoracao-para-recipiente-com-tampa",
+      "price": 80,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Decoração"
+      },
+      "created_at": "2026-10-29T16:17:50.855429+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-29T16:17:50.855429+00:00",
+      "category_id": "351fb038-82d7-4321-bb27-47cdcdcfb42e",
+      "description": "A altura do pote na imagem principal, sem a tampa, é de 50mm\nA bandeja redonda tem 2 tamanhos\nDiâmetro grande: 220mm\nDiâmetro pequeno: 175mm",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "0bc33105-bb63-4171-bf47-41aeb9d756d5",
+          "alt_text": "Conjunto de decoração para recipiente com tampa",
+          "created_at": "2026-10-29T16:17:51.7038+00:00",
+          "media_type": "image",
+          "product_id": "898c8f68-d86e-45e1-98d8-8d427f5be1c8",
+          "sort_order": 0,
+          "storage_path": "898c8f68-d86e-45e1-98d8-8d427f5be1c8/1793290667747-conjuntobandeja.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "a12ef4b3-0530-4581-8a39-8da8ef4195cc",
+      "name": "Conjunto de decoração: Lar aconchegante",
+      "slug": "conjunto-de-decoracao-lar-aconchegante",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Decoração"
+      },
+      "created_at": "2026-10-28T23:59:34.195753+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-28T23:59:34.195753+00:00",
+      "category_id": "351fb038-82d7-4321-bb27-47cdcdcfb42e",
+      "description": "Conjunto de vários objetos de decoração para casa de estilo moderno que apresentam uma atmosfera de vida tranquila e confortável em tons suaves.\nA bandeja redonda combina com um design de listras verticais delicadas com camadas ricas e discretas;\nAs letras tridimensionais HOME simbolizam o calor e o sentimento de pertencimento do lar com um estilo simples e forte.\nCombinando com um vaso de listras verticais da mesma cor e uma vela suave todo o espaço parece quente e sofisticado.\nO design geral é limpo e preciso com uma textura fosca delicada unindo o estilo minimalista moderno e a suavidade do design de interiores nórdico.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "fccb6073-d9c5-416c-84fb-aeb58e48ba7b",
+          "alt_text": "Conjunto de decoração: Lar aconchegante",
+          "created_at": "2026-10-28T23:59:35.125318+00:00",
+          "media_type": "image",
+          "product_id": "a12ef4b3-0530-4581-8a39-8da8ef4195cc",
+          "sort_order": 0,
+          "storage_path": "a12ef4b3-0530-4581-8a39-8da8ef4195cc/1793231961279-conjunto-decora-o.webp"
+        },
+        {
+          "id": "569da161-5028-474f-846b-5aedb1371801",
+          "alt_text": "Conjunto de decoração: Lar aconchegante",
+          "created_at": "2026-11-03T17:13:28.080559+00:00",
+          "media_type": "image",
+          "product_id": "a12ef4b3-0530-4581-8a39-8da8ef4195cc",
+          "sort_order": 1,
+          "storage_path": "a12ef4b3-0530-4581-8a39-8da8ef4195cc/1793726004952-wiyqow-conjunto.webp"
+        },
+        {
+          "id": "b1536b17-1b74-4a02-b524-5aeda7923ae3",
+          "alt_text": "Conjunto de decoração: Lar aconchegante",
+          "created_at": "2026-11-03T17:13:42.947115+00:00",
+          "media_type": "image",
+          "product_id": "a12ef4b3-0530-4581-8a39-8da8ef4195cc",
+          "sort_order": 2,
+          "storage_path": "a12ef4b3-0530-4581-8a39-8da8ef4195cc/1793726020132-8vea83-conjunto2.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "aad646f1-c9bf-4454-abcf-6b74159a49e9",
+      "name": "Conjunto de porta-copos de folha de Monstera com suporte",
+      "slug": "conjunto-de-porta-copos-de-folha-de-monstera-com-suporte",
+      "price": 35,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Decoração"
+      },
+      "created_at": "2026-10-29T16:23:28.123103+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-29T16:23:28.123103+00:00",
+      "category_id": "351fb038-82d7-4321-bb27-47cdcdcfb42e",
+      "description": "Traga a atmosfera tropical para o seu lar com este elegante Conjunto de Porta-Copos Folha de Monstera!\n\nTemos o Conjunto com 4 ou 6 porta copos",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "f75cb803-0c68-4c5e-9d4a-18a90a1d812a",
+          "alt_text": "Conjunto de porta-copos de folha de Monstera com suporte",
+          "created_at": "2026-10-29T16:25:33.034166+00:00",
+          "media_type": "image",
+          "product_id": "aad646f1-c9bf-4454-abcf-6b74159a49e9",
+          "sort_order": 0,
+          "storage_path": "aad646f1-c9bf-4454-abcf-6b74159a49e9/1793291128755-costeladeadaoportacopo.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "97bde745-02a6-42a9-bf65-fcc2088ab6d4",
+      "name": "Cristo Vive Letreiro Decorativo",
+      "slug": "cristo-vive-letreiro-decorativo",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Biblico"
+      },
+      "created_at": "2026-10-28T23:14:45.484745+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-28T23:14:45.484745+00:00",
+      "category_id": "47b79ea7-a49a-4424-8d0b-e72ddc2c471e",
+      "description": "Este é um DECORATIVO CRISTÃO, desenvolvido com foco em vendas online e marketplaces.\nO modelo combina decoração e funcionalidade, sendo ideal para ambientes como sala, quarto ou entrada da casa",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "c7d5ffd9-a8b4-4ae3-98a0-c3d3290ebe60",
+          "alt_text": "Cristo Vive Letreiro Decorativo",
+          "created_at": "2026-10-28T23:14:47.388241+00:00",
+          "media_type": "image",
+          "product_id": "97bde745-02a6-42a9-bf65-fcc2088ab6d4",
+          "sort_order": 0,
+          "storage_path": "97bde745-02a6-42a9-bf65-fcc2088ab6d4/1793229272694-captura-de-tela-2026-10-28-201323.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Branco c/Preto",
+        "Preto c/Branco",
+        "Bronze c/Preto",
+        "Verde c/Branco"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "ee709883-d90f-4014-a3e7-0a5407c5f72c",
+      "name": "Cruz  - Decoração moderna com efeito de fio",
+      "slug": "cruz-decoracao-moderna-com-efeito-de-fio",
+      "price": 25,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Biblico"
+      },
+      "created_at": "2026-10-28T23:08:46.391647+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-28T23:08:46.391647+00:00",
+      "category_id": "47b79ea7-a49a-4424-8d0b-e72ddc2c471e",
+      "description": "Esta cruz de string art é um objeto decorativo com \"strings\" finos, dispostos radialmente, que conferem ao motivo uma profundidade e leveza especiais.\nIdeal como decoração moderna para sala de estar, estante ou aparador.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "ca18ec3e-b3a6-43b1-b156-e6832b790e9e",
+          "alt_text": "Cruz  - Decoração moderna com efeito de fio",
+          "created_at": "2026-10-28T23:08:47.28229+00:00",
+          "media_type": "image",
+          "product_id": "ee709883-d90f-4014-a3e7-0a5407c5f72c",
+          "sort_order": 0,
+          "storage_path": "ee709883-d90f-4014-a3e7-0a5407c5f72c/1793228913482-captura-de-tela-2026-10-28-200641.png"
+        },
+        {
+          "id": "6a6ae1df-8d72-439c-946f-e5077b6218bd",
+          "alt_text": "Cruz  - Decoração moderna com efeito de fio",
+          "created_at": "2026-11-03T16:13:00.671232+00:00",
+          "media_type": "image",
+          "product_id": "ee709883-d90f-4014-a3e7-0a5407c5f72c",
+          "sort_order": 1,
+          "storage_path": "ee709883-d90f-4014-a3e7-0a5407c5f72c/1793722377412-3unh12-cruzfios.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Branco c/Bege",
+        "Preto c/Branco"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "dd463841-acd5-4206-b320-bcb246a543f6",
+      "name": "Decoração frontal do PS5 Fortnite",
+      "slug": "decoracao-frontal-do-ps5-fortnite",
+      "price": 12.99,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Games"
+      },
+      "created_at": "2026-11-12T00:20:39.342746+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T00:20:39.342746+00:00",
+      "category_id": "5c80f161-fc6f-4b02-a65d-63cc18078277",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "8ad25a62-c449-4be1-a1ec-20af4b94f8fd",
+          "alt_text": "Decoração frontal do PS5 Fortnite",
+          "created_at": "2026-11-12T00:20:41.178622+00:00",
+          "media_type": "image",
+          "product_id": "dd463841-acd5-4206-b320-bcb246a543f6",
+          "sort_order": 0,
+          "storage_path": "dd463841-acd5-4206-b320-bcb246a543f6/1794442829828-i3ic93-caseps5fortnite.webp"
+        },
+        {
+          "id": "b90abc9e-230d-49d5-8d0d-da0c640449d9",
+          "alt_text": "Decoração frontal do PS5 Fortnite",
+          "created_at": "2026-11-12T00:20:55.189448+00:00",
+          "media_type": "image",
+          "product_id": "dd463841-acd5-4206-b320-bcb246a543f6",
+          "sort_order": 1,
+          "storage_path": "dd463841-acd5-4206-b320-bcb246a543f6/1794442843704-i5fmqp-ps5fortnite.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "7b4892e6-9a29-4a22-b1a5-a455993b752f",
+      "name": "Elefante em Tricô – Modelo Decorativo",
+      "slug": "elefante-em-trico-modelo-decorativo",
+      "price": 10,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Decoração"
+      },
+      "created_at": "2026-10-29T16:15:47.013536+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-29T16:15:47.013536+00:00",
+      "category_id": "351fb038-82d7-4321-bb27-47cdcdcfb42e",
+      "description": "Um modelo de elefante lindamente trabalhado, com uma textura detalhada em estilo tricotado, projetado para uma decoração elegante impressa em 3D.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "52706e32-acbc-4e78-a4fe-6124c626622e",
+          "alt_text": "Elefante em Tricô – Modelo Decorativo",
+          "created_at": "2026-10-29T16:15:48.159012+00:00",
+          "media_type": "image",
+          "product_id": "7b4892e6-9a29-4a22-b1a5-a455993b752f",
+          "sort_order": 0,
+          "storage_path": "7b4892e6-9a29-4a22-b1a5-a455993b752f/1793290543934-elefatetrico.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Grande(20cm)",
+        "Pequeno"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "2ed33551-5b22-47f0-ad80-eaa5ab56cd73",
+      "name": "Enfeite de Natal de Boneco de Neve de Tricô",
+      "slug": "enfeite-de-natal-de-boneco-de-neve-de-trico",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-10-28T23:40:28.996462+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-28T23:40:28.996462+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Adicione um toque de magia de inverno e elegância à sua árvore de Natal com este lindo enfeite de boneco de neve!",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "3c0acd88-d417-4bc5-81bf-37b2489dcb5f",
+          "alt_text": "Enfeite de Natal de Boneco de Neve de Tricô",
+          "created_at": "2026-10-28T23:40:30.123207+00:00",
+          "media_type": "image",
+          "product_id": "2ed33551-5b22-47f0-ad80-eaa5ab56cd73",
+          "sort_order": 0,
+          "storage_path": "2ed33551-5b22-47f0-ad80-eaa5ab56cd73/1793230816072-bonecodenevearvore.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "8ff19dd3-0bb2-45a9-b37e-7dc791c56063",
+      "name": "Estrela de Natal Topo de Árvore",
+      "slug": "estrela-de-natal-topo-de-arvore",
+      "price": 30,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-01T22:16:41.526267+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-01T22:16:41.526267+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Estrela para colocar no topo da arvore de natal decoração",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "3d564ae2-4fdf-44eb-87dc-359c21d6cd7a",
+          "alt_text": "Estrela de Natal Topo de Árvore",
+          "created_at": "2026-11-01T22:16:42.349306+00:00",
+          "media_type": "image",
+          "product_id": "8ff19dd3-0bb2-45a9-b37e-7dc791c56063",
+          "sort_order": 0,
+          "storage_path": "8ff19dd3-0bb2-45a9-b37e-7dc791c56063/1793571400947-estrelaparaarvore.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "58a995cd-3d6a-4c33-b078-d391c18c064a",
+      "name": "Floco de Neve Efeite para Arvore (Por Unidade)",
+      "slug": "floco-de-neve-efeite-para-arvore",
+      "price": 8,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-01T22:25:17.80709+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-01T22:25:17.80709+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Floco de Neve Efeite para Arvore (Por Unidade)\n\nComprado por unidade",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "e4d490cc-1918-48b3-a602-fa99451048ba",
+          "alt_text": "Floco de Neve Efeite para Arvore",
+          "created_at": "2026-11-01T22:25:18.700679+00:00",
+          "media_type": "image",
+          "product_id": "58a995cd-3d6a-4c33-b078-d391c18c064a",
+          "sort_order": 0,
+          "storage_path": "58a995cd-3d6a-4c33-b078-d391c18c064a/1793571917243-flocodeneveefeite.webp"
+        },
+        {
+          "id": "bb05fc5c-c2ec-44a7-aa75-8fdc777e1fd7",
+          "alt_text": "Floco de Neve Efeite para Arvore (Por Unidade)",
+          "created_at": "2026-11-03T16:27:12.751608+00:00",
+          "media_type": "image",
+          "product_id": "58a995cd-3d6a-4c33-b078-d391c18c064a",
+          "sort_order": 1,
+          "storage_path": "58a995cd-3d6a-4c33-b078-d391c18c064a/1793723229188-dp93x0-floco.jfif"
+        },
+        {
+          "id": "45e9a084-95fe-4fb7-8b9c-7e7e1cb9da89",
+          "alt_text": "Floco de Neve Efeite para Arvore (Por Unidade)",
+          "created_at": "2026-11-03T16:27:23.439557+00:00",
+          "media_type": "image",
+          "product_id": "58a995cd-3d6a-4c33-b078-d391c18c064a",
+          "sort_order": 2,
+          "storage_path": "58a995cd-3d6a-4c33-b078-d391c18c064a/1793723239859-ksy9l3-floco2.jfif"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Branco",
+        "Preto",
+        "Bronze",
+        "Azul",
+        "Verde",
+        "Vermelho"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "89af0a06-1086-4b95-b451-29a8455474aa",
+      "name": "Jesus Trico",
+      "slug": "jesus-tricotada",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Biblico"
+      },
+      "created_at": "2026-10-28T23:11:28.226982+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-28T23:11:28.226982+00:00",
+      "category_id": "47b79ea7-a49a-4424-8d0b-e72ddc2c471e",
+      "description": "Esta pequena e fofa figura de Jesus tem 7 cm de altura e apresenta uma textura de tricô estilizada, conferindo-lhe um visual aconchegante e artesanal único.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "925e1b60-d5b9-4e40-bd52-db2974574e50",
+          "alt_text": "Jesus Tricotada",
+          "created_at": "2026-10-28T23:11:30.082435+00:00",
+          "media_type": "image",
+          "product_id": "89af0a06-1086-4b95-b451-29a8455474aa",
+          "sort_order": 0,
+          "storage_path": "89af0a06-1086-4b95-b451-29a8455474aa/1793229075410-captura-de-tela-2026-10-28-200949.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "1c1425f7-8d37-4579-905b-0f91f026853c",
+      "name": "Kimono de luta \"Personalizado\"",
+      "slug": "kimono-de-luta-personalizado",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Academia"
+      },
+      "created_at": "2026-10-29T00:14:31.834449+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:14:31.834449+00:00",
+      "category_id": "d1df1501-a411-495b-b6d8-f5d06980b946",
+      "description": "Kimono com nome personalizado e faixa tambem voce podendo escolher do seu jeito",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "5bc36862-ff35-4a0e-813f-16eff5c507cf",
+          "alt_text": "Kimono de luta \"Personalizado\"",
+          "created_at": "2026-10-29T00:14:32.515537+00:00",
+          "media_type": "image",
+          "product_id": "1c1425f7-8d37-4579-905b-0f91f026853c",
+          "sort_order": 0,
+          "storage_path": "1c1425f7-8d37-4579-905b-0f91f026853c/1793232858941-kimonopersonalizado.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": true
+    },
+    {
+      "id": "b0b85cc6-9141-4f6c-9a40-8b7882c1a19d",
+      "name": "Letreiro  Deus Acima de Tudo",
+      "slug": "letreiro-deus-acima-de-tudo",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Biblico"
+      },
+      "created_at": "2026-10-29T16:27:47.300072+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T16:27:47.300072+00:00",
+      "category_id": "47b79ea7-a49a-4424-8d0b-e72ddc2c471e",
+      "description": "Uma placa decorativa com a frase “DEUS acima de tudo”, desenvolvida para impressão 3D.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "86f51dff-4a8e-40ab-8d2d-aae602f29dc1",
+          "alt_text": "Letreiro  Deus Acima de Tudo",
+          "created_at": "2026-10-29T16:27:47.994057+00:00",
+          "media_type": "image",
+          "product_id": "b0b85cc6-9141-4f6c-9a40-8b7882c1a19d",
+          "sort_order": 0,
+          "storage_path": "b0b85cc6-9141-4f6c-9a40-8b7882c1a19d/1793291264188-letreirodeus.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "464b6c7e-81f4-4b85-a199-deb18f10094e",
+      "name": "Letreiro Bíblico Ore e Confie",
+      "slug": "letreiro-biblico-ore-e-confie",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Biblico"
+      },
+      "created_at": "2026-10-28T23:58:20.205366+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-28T23:58:20.205366+00:00",
+      "category_id": "47b79ea7-a49a-4424-8d0b-e72ddc2c471e",
+      "description": "Este é um LETREIRO ORE E CONFIE, sendo ideal para ambientes como sala, quarto ou entrada da casa.",
+      "sales_count": 2,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "199a4996-4ec9-42d1-b1e4-2ceae99cdcc9",
+          "alt_text": "Letreiro Bíblico Ore e Confie",
+          "created_at": "2026-10-28T23:58:21.2415+00:00",
+          "media_type": "image",
+          "product_id": "464b6c7e-81f4-4b85-a199-deb18f10094e",
+          "sort_order": 0,
+          "storage_path": "464b6c7e-81f4-4b85-a199-deb18f10094e/1793231887395-oreeconfie.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "79ae4f49-2702-42d9-bbc1-3d6a2dcb7cff",
+      "name": "Letreiro Feliz Natal – Decoração de Natal",
+      "slug": "letreiro-feliz-natal-decoracao-de-natal",
+      "price": 15,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-01T22:09:02.493559+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-01T22:09:02.493559+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Traga um toque festivo para sua casa com esta decoração de Natal “Feliz Natal”. 🎄",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "15393c0c-6280-414c-9c03-823b884ab371",
+          "alt_text": "Letreiro Feliz Natal – Decoração de Natal",
+          "created_at": "2026-11-01T22:09:03.476643+00:00",
+          "media_type": "image",
+          "product_id": "79ae4f49-2702-42d9-bbc1-3d6a2dcb7cff",
+          "sort_order": 0,
+          "storage_path": "79ae4f49-2702-42d9-bbc1-3d6a2dcb7cff/1793570941914-letreirofeliznatal.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "6d491a72-034e-441e-a48c-4deb57533af8",
+      "name": "Luminária Buraco Negro",
+      "slug": "luminaria-buraco-negro",
+      "price": 70,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": null
+      },
+      "created_at": "2026-11-12T00:29:29.888736+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T00:29:29.888736+00:00",
+      "category_id": null,
+      "description": "Esta é uma lâmpada de exibição iluminada que parece um buraco negro. Ela requer apenas duas cores de filamento e um Kit de Lâmpada LED 001",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "8d538a2a-f90e-4e6a-a278-41831963a1c0",
+          "alt_text": "Luminária Buraco Negro",
+          "created_at": "2026-11-12T00:29:31.393667+00:00",
+          "media_type": "image",
+          "product_id": "6d491a72-034e-441e-a48c-4deb57533af8",
+          "sort_order": 0,
+          "storage_path": "6d491a72-034e-441e-a48c-4deb57533af8/1794443360558-704ku8-luminaria.webp"
+        },
+        {
+          "id": "7fcb501e-f251-46dc-8a49-32f728a30aa0",
+          "alt_text": "Luminária Buraco Negro",
+          "created_at": "2026-11-12T00:29:49.648635+00:00",
+          "media_type": "image",
+          "product_id": "6d491a72-034e-441e-a48c-4deb57533af8",
+          "sort_order": 1,
+          "storage_path": "6d491a72-034e-441e-a48c-4deb57533af8/1794443378717-auro9v-luminaria2.webp"
+        },
+        {
+          "id": "54ed4723-c8bd-46f4-af88-f6bc41c2769b",
+          "alt_text": "Luminária Buraco Negro",
+          "created_at": "2026-11-12T00:29:50.293203+00:00",
+          "media_type": "image",
+          "product_id": "6d491a72-034e-441e-a48c-4deb57533af8",
+          "sort_order": 2,
+          "storage_path": "6d491a72-034e-441e-a48c-4deb57533af8/1794443379394-liunbl-luminaria1.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "efecbafb-05eb-4edb-9172-f91118a1ff63",
+      "name": "Miles Morales Figura Sentada em Prateleira",
+      "slug": "miles-morales-figura-sentada-em-prateleira",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Desenho"
+      },
+      "created_at": "2026-10-29T16:19:01.471201+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T16:19:01.471201+00:00",
+      "category_id": "7c9f2a84-4ee6-4888-98e5-6a9ca31d15fc",
+      "description": "Traga o estilo do Aranhaverso para sua prateleira com esta figura detalhada do Miles Morales sentado. Desenhada em uma pose relaxada e confiante, esta miniatura captura o visual icônico e a essência do Homem-Aranha moderno.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "8964de45-9c5a-42be-b1f4-dd76aabac672",
+          "alt_text": "Miles Morales Figura Sentada em Prateleira",
+          "created_at": "2026-10-29T16:19:02.465578+00:00",
+          "media_type": "image",
+          "product_id": "efecbafb-05eb-4edb-9172-f91118a1ff63",
+          "sort_order": 0,
+          "storage_path": "efecbafb-05eb-4edb-9172-f91118a1ff63/1793290738357-milesaranha.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "8effea81-ed83-41da-8ec7-94ba6502b142",
+      "name": "Placa ELE VIVE com a coroa de espinhos",
+      "slug": "placa-ele-vive-com-a-coroa-de-espinhos",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Biblico"
+      },
+      "created_at": "2026-10-28T23:06:36.461025+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-28T23:06:36.461025+00:00",
+      "category_id": "47b79ea7-a49a-4424-8d0b-e72ddc2c471e",
+      "description": "Placa ELE VIVE com a coroa de espinhos\n\n- Mini Jesus nao esta incluso",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "d70107a0-2d74-4e76-90f6-03af802a033b",
+          "alt_text": "Placa ELE VIVE com a coroa de espinhos",
+          "created_at": "2026-10-28T23:06:37.950835+00:00",
+          "media_type": "image",
+          "product_id": "8effea81-ed83-41da-8ec7-94ba6502b142",
+          "sort_order": 0,
+          "storage_path": "8effea81-ed83-41da-8ec7-94ba6502b142/1793228783540-captura-de-tela-2026-10-28-200537.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "0170af0d-aafc-452a-952a-9f5bf30d025a",
+      "name": "Placa Frontal PS5 (Regular e Slim)",
+      "slug": "placa-frontal-ps5-regular-e-slim",
+      "price": 12.99,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Games"
+      },
+      "created_at": "2026-11-12T00:22:48.968748+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T00:22:48.968748+00:00",
+      "category_id": "5c80f161-fc6f-4b02-a65d-63cc18078277",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "a7f1ebd0-5405-4afe-b53e-ff8b40201dcc",
+          "alt_text": "Placa Frontal PS5 (Regular e Slim)",
+          "created_at": "2026-11-12T00:22:51.394005+00:00",
+          "media_type": "image",
+          "product_id": "0170af0d-aafc-452a-952a-9f5bf30d025a",
+          "sort_order": 0,
+          "storage_path": "0170af0d-aafc-452a-952a-9f5bf30d025a/1794442959505-eabqbd-homemcapa.webp"
+        },
+        {
+          "id": "99fce590-3b05-4c15-9f18-a842e38eaa6a",
+          "alt_text": "Placa Frontal PS5 (Regular e Slim)",
+          "created_at": "2026-11-12T00:23:05.332798+00:00",
+          "media_type": "image",
+          "product_id": "0170af0d-aafc-452a-952a-9f5bf30d025a",
+          "sort_order": 1,
+          "storage_path": "0170af0d-aafc-452a-952a-9f5bf30d025a/1794442973998-vrprlu-casehomem.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "ce85348b-5328-433f-b83d-a644bbb1fe56",
+      "name": "Porta Guardanapo Monstera",
+      "slug": "porta-guardanapo-monstera",
+      "price": 20,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Decoração"
+      },
+      "created_at": "2026-10-29T16:22:04.881746+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-29T16:22:04.881746+00:00",
+      "category_id": "351fb038-82d7-4321-bb27-47cdcdcfb42e",
+      "description": "Este porta-guardanapos inspirado na Monstera combina um design limpo com uso prático.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "4ca153e6-0ac5-41fa-af54-c5f2a688c5aa",
+          "alt_text": "Porta Guardanapo Monstera",
+          "created_at": "2026-10-29T16:22:06.07524+00:00",
+          "media_type": "image",
+          "product_id": "ce85348b-5328-433f-b83d-a644bbb1fe56",
+          "sort_order": 0,
+          "storage_path": "ce85348b-5328-433f-b83d-a644bbb1fe56/1793290921774-costeladeadao.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "1ddf7a44-0d28-4076-9b16-40d358458e55",
+      "name": "Prateleira organizadora de entrada moderna com gancho para chaves",
+      "slug": "prateleira-organizadora-de-entrada-moderna-com-gancho-para-chaves",
+      "price": 70,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Decoração"
+      },
+      "created_at": "2026-10-29T16:20:06.724595+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-29T16:20:06.724595+00:00",
+      "category_id": "351fb038-82d7-4321-bb27-47cdcdcfb42e",
+      "description": "A luz e a sombra como pincéis, o tempo como pintura. Isso não é apenas um item de armazenamento, mas sim uma poesia de luz e sombra imortalizada\n\ntemos mod",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "031b9377-a6a5-42e0-bc4d-eeaa1d9cc333",
+          "alt_text": "Prateleira organizadora de entrada moderna com gancho para chaves",
+          "created_at": "2026-10-29T16:20:07.427452+00:00",
+          "media_type": "image",
+          "product_id": "1ddf7a44-0d28-4076-9b16-40d358458e55",
+          "sort_order": 0,
+          "storage_path": "1ddf7a44-0d28-4076-9b16-40d358458e55/1793290803619-portachaves.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Furação",
+        "Dupla Face"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "876655c1-86c2-4362-89fb-0e5330d09bb0",
+      "name": "Quadro Decorativo Coroa de Jesus",
+      "slug": "quadro-decorativo-coroa-de-jesus",
+      "price": 25,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Biblico"
+      },
+      "created_at": "2026-10-28T23:19:59.449709+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-28T23:19:59.449709+00:00",
+      "category_id": "47b79ea7-a49a-4424-8d0b-e72ddc2c471e",
+      "description": "Quadro criado a partir da coroa de espinhos de jesus, decorativo",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "7ec9d7ba-01ce-4c07-b88a-f8018e064d0a",
+          "alt_text": "Quadro Decorativo Coroa de Jesus",
+          "created_at": "2026-10-28T23:20:01.099374+00:00",
+          "media_type": "image",
+          "product_id": "876655c1-86c2-4362-89fb-0e5330d09bb0",
+          "sort_order": 0,
+          "storage_path": "876655c1-86c2-4362-89fb-0e5330d09bb0/1793229586521-captura-de-tela-2026-10-28-201910.png"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "7e588b9d-6fc2-4805-bbff-fd5565a6a1b3",
+      "name": "Rena Moderna",
+      "slug": "rena-moderna",
+      "price": 25,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-01T22:27:15.646238+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-01T22:27:15.646238+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Uma rena de Natal com um design moderno minimalista e elegante criada a pensar tanto na decoração como na facilidade de impressão 3D.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "0bae33c8-2bcd-4d5f-98d5-044890756c0f",
+          "alt_text": "Rena Moderna",
+          "created_at": "2026-11-01T22:27:16.417937+00:00",
+          "media_type": "image",
+          "product_id": "7e588b9d-6fc2-4805-bbff-fd5565a6a1b3",
+          "sort_order": 0,
+          "storage_path": "7e588b9d-6fc2-4805-bbff-fd5565a6a1b3/1793572035062-renaminimalista.webp"
+        },
+        {
+          "id": "deff6ac7-a4e2-488c-b6e3-9a48360d1795",
+          "alt_text": "Rena Moderna",
+          "created_at": "2026-11-03T16:24:52.43542+00:00",
+          "media_type": "image",
+          "product_id": "7e588b9d-6fc2-4805-bbff-fd5565a6a1b3",
+          "sort_order": 1,
+          "storage_path": "7e588b9d-6fc2-4805-bbff-fd5565a6a1b3/1793723089223-w4etw2-renamoderna.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Preto",
+        "Bege",
+        "Bronze",
+        "Branco",
+        "Azul"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "25600aed-f6dc-449c-8800-b422ab9303b1",
+      "name": "Rudori – Rena Minimalista Pequena",
+      "slug": "rudori-rena-minimalista-pequena",
+      "price": 10,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-04T23:50:48.802661+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-04T23:50:48.802661+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Este modelo moderno e de design minimalista foi projetado especialmente para uma impressão 3D simples e descomplicada.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "5fe237fc-9cab-4dd3-96ea-dd2efdfc30bf",
+          "alt_text": "Rudori – Rena Minimalista Pequena",
+          "created_at": "2026-11-04T23:50:59.472705+00:00",
+          "media_type": "image",
+          "product_id": "25600aed-f6dc-449c-8800-b422ab9303b1",
+          "sort_order": 0,
+          "storage_path": "25600aed-f6dc-449c-8800-b422ab9303b1/1793836254622-a5z096-renapequena.webp"
+        }
+      ],
+      "stock_quantity": 0,
+      "available_colors": [
+        "Branco",
+        "Vermelho",
+        "Azul",
+        "Bege",
+        "Verde"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "d38bf524-3c18-4632-a5ba-2419186cf248",
+      "name": "Sagrada Família",
+      "slug": "sagrada-familia",
+      "price": 15,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-03T17:19:12.42934+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-03T17:19:12.42934+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "",
+      "sales_count": 2,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "50e49da1-7aa9-4736-8492-202258fd9ee0",
+          "alt_text": "Sagrada Família",
+          "created_at": "2026-11-03T17:19:14.353937+00:00",
+          "media_type": "image",
+          "product_id": "d38bf524-3c18-4632-a5ba-2419186cf248",
+          "sort_order": 0,
+          "storage_path": "d38bf524-3c18-4632-a5ba-2419186cf248/1793726350956-furvnz-sagrada.webp"
+        },
+        {
+          "id": "d368c47f-b921-4197-bd98-7c1f8f41af23",
+          "alt_text": "Sagrada Família",
+          "created_at": "2026-11-03T17:54:45.03404+00:00",
+          "media_type": "image",
+          "product_id": "d38bf524-3c18-4632-a5ba-2419186cf248",
+          "sort_order": 1,
+          "storage_path": "d38bf524-3c18-4632-a5ba-2419186cf248/1793728482011-9mmhgr-sagrada2.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [
+        "Branco",
+        "Bege",
+        "Bronze"
+      ],
+      "customization_enabled": false
+    },
+    {
+      "id": "7292ffff-6d2f-4159-9efc-b3c93aa39453",
+      "name": "Sagrada Família - Minimalista",
+      "slug": "sagrada-familia-minimalista",
+      "price": 20,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Natal"
+      },
+      "created_at": "2026-11-03T17:17:05.920941+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-03T17:17:05.920941+00:00",
+      "category_id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "description": "Traga o verdadeiro espírito do Natal para a sua casa com esta linda Cena de Natividade Minimalista!\nApresentando Maria segurando o Menino Jesus e José com o cajado de pastor, esta escultura combina simplicidade, elegância e o significado atemporal do Natal.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "d478568e-7273-4977-a496-91df2826add6",
+          "alt_text": "Sagrada Família - Minimalista",
+          "created_at": "2026-11-03T17:17:08.055278+00:00",
+          "media_type": "image",
+          "product_id": "7292ffff-6d2f-4159-9efc-b3c93aa39453",
+          "sort_order": 0,
+          "storage_path": "7292ffff-6d2f-4159-9efc-b3c93aa39453/1793726224698-joqf5h-sagradafamilia.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "b679af12-8fc7-4130-bac4-fbfbc32afd73",
+      "name": "Stitch do Lilo & Stitch em crochê",
+      "slug": "stitch-do-lilo-stitch-em-croche",
+      "price": null,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Desenho"
+      },
+      "created_at": "2026-10-29T00:22:41.364838+00:00",
+      "price_mode": "quote",
+      "updated_at": "2026-10-29T00:22:41.364838+00:00",
+      "category_id": "7c9f2a84-4ee6-4888-98e5-6a9ca31d15fc",
+      "description": "Stitch do Lilo & Stitch em crochê com 6cm de altura",
+      "sales_count": 1,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "111f24de-f6a5-4fec-abf3-0b2ec4181ca8",
+          "alt_text": "Stitch do Lilo & Stitch em crochê",
+          "created_at": "2026-10-29T00:22:42.924995+00:00",
+          "media_type": "image",
+          "product_id": "b679af12-8fc7-4130-bac4-fbfbc32afd73",
+          "sort_order": 0,
+          "storage_path": "b679af12-8fc7-4130-bac4-fbfbc32afd73/1793233348425-stich.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "1d59aebd-455f-4fc2-b14a-bf92d50c3b00",
+      "name": "Suporte de bolo canelado",
+      "slug": "suporte-de-bolo-canelado",
+      "price": 60,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Decoração"
+      },
+      "created_at": "2026-10-29T16:25:09.833537+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-29T16:25:09.833537+00:00",
+      "category_id": "351fb038-82d7-4321-bb27-47cdcdcfb42e",
+      "description": "Hoje trago algo novo para sua mesa de centro ou mesa de piquenique no jardim.\nUm suporte de bolo moderno com nervuras – a peça certa para apresentar e servir seus doces e assados caseiros.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "314468af-3ea9-4367-b45a-5c686801e630",
+          "alt_text": "Suporte de bolo canelado",
+          "created_at": "2026-10-29T16:25:10.968874+00:00",
+          "media_type": "image",
+          "product_id": "1d59aebd-455f-4fc2-b14a-bf92d50c3b00",
+          "sort_order": 0,
+          "storage_path": "1d59aebd-455f-4fc2-b14a-bf92d50c3b00/1793291106748-boleiracanelada.webp"
+        },
+        {
+          "id": "c441ed64-fc87-4636-b563-aaf0a04f34ce",
+          "alt_text": "Suporte de bolo canelado",
+          "created_at": "2026-11-03T17:07:28.613486+00:00",
+          "media_type": "image",
+          "product_id": "1d59aebd-455f-4fc2-b14a-bf92d50c3b00",
+          "sort_order": 1,
+          "storage_path": "1d59aebd-455f-4fc2-b14a-bf92d50c3b00/1793725645683-wh3t2a-base.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "66bb04c8-f9fe-4013-97dd-6589dd3e4250",
+      "name": "Suporte de Toalha Travado por Pressão",
+      "slug": "suporte-de-toalha-travado-por-pressao",
+      "price": 5,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Utilidades"
+      },
+      "created_at": "2026-11-12T00:31:52.883507+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T00:31:52.883507+00:00",
+      "category_id": "076a57a1-5032-4083-b402-537406866fec",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "31fe25ac-7799-446e-a02d-fa7fb6eff208",
+          "alt_text": "Suporte de Toalha Travado por Pressão",
+          "created_at": "2026-11-12T00:32:19.763786+00:00",
+          "media_type": "image",
+          "product_id": "66bb04c8-f9fe-4013-97dd-6589dd3e4250",
+          "sort_order": 0,
+          "storage_path": "66bb04c8-f9fe-4013-97dd-6589dd3e4250/1794443528648-ogdkpc-toalha1.webp"
+        },
+        {
+          "id": "efe77348-1755-4837-a0ff-669cb662234c",
+          "alt_text": "Suporte de Toalha Travado por Pressão",
+          "created_at": "2026-11-12T00:32:20.631437+00:00",
+          "media_type": "image",
+          "product_id": "66bb04c8-f9fe-4013-97dd-6589dd3e4250",
+          "sort_order": 1,
+          "storage_path": "66bb04c8-f9fe-4013-97dd-6589dd3e4250/1794443529535-ky3odo-toalha.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "f4fc5e3e-52e3-48cf-ac4d-33d50597ca55",
+      "name": "Suporte Para Controle Ps5 Frutas da Gomu Gomu",
+      "slug": "suporte-para-controle-ps5-frutas-da-gomu-gomu",
+      "price": 35,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Games"
+      },
+      "created_at": "2026-11-12T00:08:19.519655+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T00:08:19.519655+00:00",
+      "category_id": "5c80f161-fc6f-4b02-a65d-63cc18078277",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "a58a369e-d2d7-4894-b8c3-f0bcc4af97e3",
+          "alt_text": "Suporte Para Controle Ps5 Frutas da Gomu Gomu",
+          "created_at": "2026-11-12T00:08:21.851566+00:00",
+          "media_type": "image",
+          "product_id": "f4fc5e3e-52e3-48cf-ac4d-33d50597ca55",
+          "sort_order": 0,
+          "storage_path": "f4fc5e3e-52e3-48cf-ac4d-33d50597ca55/1794442090225-3heywl-suportegomu.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "84a71941-73ef-4b8f-9720-d36a47cca996",
+      "name": "Suporte para Controle Remoto ( 4 Slots )",
+      "slug": "suporte-para-controle-remoto-4-slots",
+      "price": 35,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Utilidades"
+      },
+      "created_at": "2026-11-12T00:33:41.538886+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-11-12T00:33:41.538886+00:00",
+      "category_id": "076a57a1-5032-4083-b402-537406866fec",
+      "description": "",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "a410c202-1e49-43dc-aa9b-d84d3e34d6b2",
+          "alt_text": "Suporte para Controle Remoto ( 4 Slots )",
+          "created_at": "2026-11-12T00:33:42.990948+00:00",
+          "media_type": "image",
+          "product_id": "84a71941-73ef-4b8f-9720-d36a47cca996",
+          "sort_order": 0,
+          "storage_path": "84a71941-73ef-4b8f-9720-d36a47cca996/1794443611919-kuer0d-controle.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    },
+    {
+      "id": "a9348275-c331-403b-943a-a003a724a821",
+      "name": "Tigela de Folha de Monstera | Bandeja Decorativa Organizadora",
+      "slug": "tigela-de-folha-de-monstera-bandeja-decorativa-organizadora",
+      "price": 55,
+      "featured": false,
+      "published": true,
+      "categories": {
+        "name": "Decoração"
+      },
+      "created_at": "2026-10-29T12:32:59.814656+00:00",
+      "price_mode": "fixed",
+      "updated_at": "2026-10-29T12:32:59.814656+00:00",
+      "category_id": "351fb038-82d7-4321-bb27-47cdcdcfb42e",
+      "description": "Traga um toque de elegância tropical para sua casa com esta Tigela de Folha de Monstera. Perfeita para guardar chaves, joias, moedas, doces, ou simplesmente como uma elegante peça central decorativa. Um belo design inspirado na natureza para qualquer interior moderno.",
+      "sales_count": 0,
+      "availability": "available",
+      "featured_order": null,
+      "product_images": [
+        {
+          "id": "e232ff00-d634-4d26-a8c1-b341e69ab7d7",
+          "alt_text": "Tigela de Folha de Monstera | Bandeja Decorativa Organizadora",
+          "created_at": "2026-10-29T12:33:00.470006+00:00",
+          "media_type": "image",
+          "product_id": "a9348275-c331-403b-943a-a003a724a821",
+          "sort_order": 0,
+          "storage_path": "a9348275-c331-403b-943a-a003a724a821/1793277166674-01dcea8f1b596779.webp"
+        }
+      ],
+      "stock_quantity": null,
+      "available_colors": [],
+      "customization_enabled": false
+    }
+  ],
+  "categories": [
+    {
+      "id": "74c7822d-a2b2-45dd-ae67-88fabbd0ccca",
+      "name": "Natal",
+      "slug": "natal",
+      "active": true,
+      "created_at": "2026-10-28T21:58:55.775569+00:00",
+      "sort_order": 1
+    },
+    {
+      "id": "47b79ea7-a49a-4424-8d0b-e72ddc2c471e",
+      "name": "Biblico",
+      "slug": "biblico",
+      "active": true,
+      "created_at": "2026-10-28T22:07:12.551944+00:00",
+      "sort_order": 2
+    },
+    {
+      "id": "351fb038-82d7-4321-bb27-47cdcdcfb42e",
+      "name": "Decoração",
+      "slug": "decoracao",
+      "active": true,
+      "created_at": "2026-10-28T23:04:55.622192+00:00",
+      "sort_order": 3
+    },
+    {
+      "id": "6b291d60-a973-4814-bbea-05a9019dae9d",
+      "name": "Chaveiro",
+      "slug": "chaveiro",
+      "active": true,
+      "created_at": "2026-10-28T23:15:18.205385+00:00",
+      "sort_order": 4
+    },
+    {
+      "id": "59427eed-de80-410a-8214-3a903dbf7819",
+      "name": "Anime",
+      "slug": "anime",
+      "active": true,
+      "created_at": "2026-10-29T00:05:17.328756+00:00",
+      "sort_order": 5
+    },
+    {
+      "id": "d1df1501-a411-495b-b6d8-f5d06980b946",
+      "name": "Academia",
+      "slug": "academia",
+      "active": true,
+      "created_at": "2026-10-29T00:05:22.500624+00:00",
+      "sort_order": 6
+    },
+    {
+      "id": "49f3e3bc-965b-4f7f-bd72-82efdfb3b585",
+      "name": "Suporte Copo",
+      "slug": "suporte-copo",
+      "active": true,
+      "created_at": "2026-10-29T00:05:33.904841+00:00",
+      "sort_order": 7
+    },
+    {
+      "id": "2fadf3f9-4eca-49ad-b5ba-ce64e9aa998c",
+      "name": "Personalizados",
+      "slug": "personalizados",
+      "active": true,
+      "created_at": "2026-10-29T00:05:40.532844+00:00",
+      "sort_order": 8
+    },
+    {
+      "id": "7c9f2a84-4ee6-4888-98e5-6a9ca31d15fc",
+      "name": "Desenho",
+      "slug": "desenho",
+      "active": true,
+      "created_at": "2026-10-29T00:22:09.928543+00:00",
+      "sort_order": 9
+    },
+    {
+      "id": "5c80f161-fc6f-4b02-a65d-63cc18078277",
+      "name": "Games",
+      "slug": "games",
+      "active": true,
+      "created_at": "2026-11-12T00:06:05.846607+00:00",
+      "sort_order": 10
+    },
+    {
+      "id": "076a57a1-5032-4083-b402-537406866fec",
+      "name": "Utilidades",
+      "slug": "utilidades",
+      "active": true,
+      "created_at": "2026-11-12T00:30:16.913279+00:00",
+      "sort_order": 11
+    }
+  ]
+}
