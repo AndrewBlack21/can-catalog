@@ -154,7 +154,7 @@ export default function CatalogPage() {
           {!loading && !error && featuredProducts.length > 0 && (
             <section className="catalog-collection catalog-featured-collection" aria-label="Produtos em destaque">
               <div className="catalog-collection-heading"><div><span className="eyebrow"><Star size={13} fill="currentColor"/> ESCOLHAS CAN GROUP</span><h2>Em <em>destaque.</em></h2></div><span>Peças selecionadas pela CAN</span></div>
-              <div className="catalog-collection-grid">{featuredProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p} priority={false}/>)}</div>
+              <div className="catalog-collection-grid">{featuredProducts.slice(0, 8).map((p, index)=><ProductCard key={p.id} product={p} priority={index < 2}/>)}</div>
             </section>
           )}
           {!loading && !error && newProducts.length > 0 && <section className="catalog-collection"><div className="catalog-collection-heading"><div><span className="eyebrow">CHEGARAM AGORA</span><h2>Novidades.</h2></div><span>Adicionados recentemente</span></div><div className="catalog-collection-grid">{newProducts.slice(0, 8).map(p=><ProductCard key={p.id} product={p}/>)}</div></section>}

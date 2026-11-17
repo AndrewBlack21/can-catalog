@@ -2,7 +2,7 @@ import { memo, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/formatCurrency.js";
-import { getProductImage } from "../utils/catalogMediaUrl.js";
+import { getProductImage, getProductImageSrcSet } from "../utils/catalogMediaUrl.js";
 
 function ProductCard({ product, priority = false }) {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
@@ -12,6 +12,8 @@ function ProductCard({ product, priority = false }) {
   const media = useMemo(() => [...(product.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)), [product.product_images]);
   const currentMedia = media[mediaIndex];
   const mediaUrl = getProductImage(currentMedia?.storage_path);
+  const mediaSrcSet = getProductImageSrcSet(currentMedia);
+  const imageSizes = "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw";
   const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
   const isNew = product.created_at && Date.now() - new Date(product.created_at).getTime() <= 30 * 24 * 60 * 60 * 1000;
   const availability = {
@@ -36,7 +38,7 @@ function ProductCard({ product, priority = false }) {
             currentIsVideo ? (
               <video src={mediaUrl} muted playsInline preload="none" aria-label={product.name} />
             ) : (
-              <img src={mediaUrl} alt={currentMedia?.alt_text || product.name} loading={priority ? "eager" : "lazy"} decoding="async" fetchPriority={priority ? "high" : "auto"} width="640" height="640" />
+              <img src={mediaUrl} alt={currentMedia?.alt_text || product.name} srcSet={mediaSrcSet} sizes={imageSizes} loading={priority ? "eager" : "lazy"} decoding="async" fetchPriority={priority ? "high" : "auto"} width="640" height="640" />
             )
           ) : (
             <div className="image-placeholder"><span>CAN</span><small>FOTO DO PRODUTO</small></div>

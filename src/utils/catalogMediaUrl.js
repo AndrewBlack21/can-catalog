@@ -44,4 +44,26 @@ export function getProductImage(storagePath) {
   return `/catalog-images/${safePath}`;
 }
 
+/**
+ * Gera srcSet quando o JSON possuir variantes responsivas.
+ * Formato esperado em cada mídia:
+ * variants: [{ width: 400, storage_path: ".../foto-400.webp" }, ...]
+ * Sem variantes, retorna null e o navegador usa a imagem original.
+ */
+export function getProductImageSrcSet(media) {
+  if (!Array.isArray(media?.variants)) return undefined;
+
+  const sources = media.variants
+    .filter((variant) => Number(variant.width) > 0 && variant.storage_path)
+    .map((variant) => ({
+      width: Number(variant.width),
+      url: getProductImage(variant.storage_path),
+    }))
+    .filter((variant) => variant.url)
+    .sort((a, b) => a.width - b.width);
+
+  if (!sources.length) return undefined;
+  return sources.map(({ url, width }) => `${url} ${width}w`).join(", ");
+}
+
 export const getCatalogMediaUrl = getProductImage;
