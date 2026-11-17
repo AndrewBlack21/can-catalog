@@ -6,7 +6,7 @@ import Footer from "../../components/Footer.jsx";
 import { supabase, isSupabaseConfigured } from "../../lib/supabase.js";
 import { formatCurrency } from "../../utils/formatCurrency.js";
 import { productWhatsAppUrl } from "../../utils/whatsapp.js";
-import { storageImageUrl } from "../../utils/storageImageUrl.js";
+import { productMediaUrl } from "../../utils/productMediaUrl.js";
 
 export default function ProductPage() {
   const { slug } = useParams();
@@ -21,7 +21,7 @@ export default function ProductPage() {
   }, [slug]);
   const media = [...(product?.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const currentMedia = media[mediaIndex];
-  const mediaUrl = storageImageUrl(currentMedia?.storage_path);
+  const mediaUrl = productMediaUrl(currentMedia, 1200);
   const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
   const moveMedia = (direction) => setMediaIndex(index => (index + direction + media.length) % media.length);
   return (
@@ -45,7 +45,7 @@ export default function ProductPage() {
                 </>}
               </div>
               {media.length > 1 && <div className="product-gallery-thumbnails">{media.map((item,index) => {
-                const url=storageImageUrl(item.storage_path);
+                const url=productMediaUrl(item, 180);
                 return <button type="button" key={item.id || item.storage_path} className={index===mediaIndex ? "active" : ""} onClick={()=>setMediaIndex(index)} aria-label={`Ver mídia ${index+1}`}>{item.media_type==="video" ? <span>VÍDEO</span> : <img src={url} alt=""/>}</button>;
               })}</div>}
             </div>
