@@ -2,16 +2,16 @@ import { memo, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/formatCurrency.js";
-import { storageImageUrl } from "../utils/storageImageUrl.js";
+import { productMediaUrl } from "../utils/productMediaUrl.js";
 
 function ProductCard({ product, priority = false }) {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
   const [mediaIndex, setMediaIndex] = useState(0);
   const touchStartX = useRef(null);
   const description = product.description || "Uma criação CAN Group feita para você.";
-  const media = useMemo(() => [...(product.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)), [product.product_images]);
+  const media = useMemo(() => [...(product.product_images || [])].filter(item => item.cloudinary_url || (typeof item.storage_path === "string" && (item.storage_path.startsWith("https://") || item.storage_path.startsWith("http://")) )).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)), [product.product_images]);
   const currentMedia = media[mediaIndex];
-  const mediaUrl = storageImageUrl(currentMedia?.storage_path);
+  const mediaUrl = productMediaUrl(currentMedia, 640);
   const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
   const isNew = product.created_at && Date.now() - new Date(product.created_at).getTime() <= 30 * 24 * 60 * 60 * 1000;
   const availability = {

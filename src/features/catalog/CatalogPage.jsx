@@ -37,7 +37,7 @@ export default function CatalogPage() {
       const [productResult, categoryResult] = await Promise.all([
         supabase
           .from("products")
-          .select("id,name,slug,description,price,price_mode,availability,featured,featured_order,customization_enabled,created_at,category_id,sales_count,categories(name),product_images(id,storage_path,media_type,sort_order,alt_text)")
+          .select("id,name,slug,description,price,price_mode,availability,featured,featured_order,customization_enabled,created_at,category_id,sales_count,categories(name),product_images(id,storage_path,cloudinary_url,cloudinary_resource_type,media_type,sort_order,alt_text)")
           .eq("published", true)
           .order("featured", { ascending: false })
           .order("featured_order", { ascending: true, nullsFirst: false })
