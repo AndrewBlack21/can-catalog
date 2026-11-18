@@ -63,11 +63,11 @@ function ProductCard({ product, priority = false }) {
         <p className={descriptionExpanded ? "product-description expanded" : "product-description"}>{description}</p>
         {description.length > 105 && <button type="button" className="product-more" aria-expanded={descriptionExpanded} onClick={() => setDescriptionExpanded(expanded => !expanded)}>{descriptionExpanded ? "Menos" : "Mais"}</button>}
         {product.available_colors?.length > 0 && <div className="product-colors"><small>Cores:</small>{product.available_colors.map(color => <span key={color}>{color}</span>)}</div>}
-        <div className="product-bottom">
+        <div className={`product-bottom${infinitePayUrl && product.availability !== "unavailable" ? " has-infinitepay" : ""}`}>
           <strong>{product.price_mode === "quote" ? "Sob consulta" : formatCurrency(product.price)}</strong>
           <Link className="product-details-link" to={`/produto/${product.slug}`}>Ver detalhes <ArrowUpRight size={15}/></Link>
+          {infinitePayUrl && product.availability !== "unavailable" && <a className="infinitepay-button" href={infinitePayUrl} target="_blank" rel="noopener noreferrer" aria-label={`Comprar ${product.name} pela InfinitePay`}><span className="infinitepay-button-mark" aria-hidden="true">i</span><span className="infinitepay-button-label">Comprar pela InfinitePay</span><ArrowUpRight size={15}/></a>}
         </div>
-        {infinitePayUrl && product.availability !== "unavailable" && <a className="infinitepay-button" href={infinitePayUrl} target="_blank" rel="noopener noreferrer" aria-label={`Comprar ${product.name} pela InfinitePay`}><span className="infinitepay-button-mark" aria-hidden="true">i</span> Comprar pela InfinitePay <ArrowUpRight size={15}/></a>}
       </div>
     </article>
   );
