@@ -6,7 +6,7 @@ import Footer from "../../components/Footer.jsx";
 import { supabase, isSupabaseConfigured } from "../../lib/supabase.js";
 import { formatCurrency } from "../../utils/formatCurrency.js";
 import { productWhatsAppUrl } from "../../utils/whatsapp.js";
-import { storageImageUrl } from "../../utils/storageImageUrl.js";
+import { productMediaUrl } from "../../utils/productMediaUrl.js";
 import { getInfinitePayUrl } from "../../utils/infinitePay.js";
 import "../../styles/infinitepay.css";
 
@@ -21,10 +21,10 @@ export default function ProductPage() {
     supabase.from("products").select("*,product_images(*)").eq("slug", slug).eq("published", true).maybeSingle()
       .then(({ data }) => { setProduct(data); setMediaIndex(0); setLoading(false); });
   }, [slug]);
-  const media = [...(product?.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  const media = [...(product?.product_images || [])].filter(item => item.cloudinary_url || (typeof item.storage_path === "string" && /^https?:\\/\\//i.test(item.storage_path))).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const currentMedia = media[mediaIndex];
   const infinitePayUrl = getInfinitePayUrl(product?.infinitepay_product_url);
-  const mediaUrl = storageImageUrl(currentMedia?.storage_path);
+  const mediaUrl = productMediaUrl(currentMedia, 1200);
   const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
   const moveMedia = (direction) => setMediaIndex(index => (index + direction + media.length) % media.length);
   return (
@@ -48,7 +48,7 @@ export default function ProductPage() {
                 </>}
               </div>
               {media.length > 1 && <div className="product-gallery-thumbnails">{media.map((item,index) => {
-                const url=storageImageUrl(item.storage_path);
+                const url=productMediaUrl(item, 180);
                 return <button type="button" key={item.id || item.storage_path} className={index===mediaIndex ? "active" : ""} onClick={()=>setMediaIndex(index)} aria-label={`Ver mídia ${index+1}`}>{item.media_type==="video" ? <span>VÍDEO</span> : <img src={url} alt=""/>}</button>;
               })}</div>}
             </div>
