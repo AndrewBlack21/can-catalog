@@ -25,7 +25,7 @@ export default function ProductPage() {
   const currentMedia = media[mediaIndex];
   const infinitePayUrl = getInfinitePayUrl(product?.infinitepay_product_url);
   const mediaUrl = productMediaUrl(currentMedia, 1200);
-  const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
+  const currentIsVideo = currentMedia?.media_type === "video" || currentMedia?.cloudinary_resource_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.cloudinary_url || currentMedia?.storage_path || "");
   const moveMedia = (direction) => setMediaIndex(index => (index + direction + media.length) % media.length);
   return (
     <>
