@@ -26,7 +26,7 @@ Após configurar as variáveis, faça um novo deploy para que a função receba 
 
 Antes de usar upload, aplique no projeto Supabase atual a migration:
 
-`supabase/migrations/202611170001_cloudinary_product_media.sql`
+`supabase/migrations/20261117174505_cloudinary_product_media.sql`
 
 Ela preserva os valores antigos de `storage_path`, permite que novos registros usem `storage_path = null` e adiciona os campos Cloudinary. Nenhuma linha antiga é apagada.
 
