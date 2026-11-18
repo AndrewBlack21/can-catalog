@@ -15,7 +15,7 @@ function ProductCard({ product, priority = false }) {
   const currentMedia = media[mediaIndex];
   const infinitePayUrl = getInfinitePayUrl(product.infinitepay_product_url);
   const mediaUrl = productMediaUrl(currentMedia, 640);
-  const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
+  const currentIsVideo = currentMedia?.media_type === "video" || currentMedia?.cloudinary_resource_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.cloudinary_url || currentMedia?.storage_path || "");
   const isNew = product.created_at && Date.now() - new Date(product.created_at).getTime() <= 30 * 24 * 60 * 60 * 1000;
   const availability = {
     available: "Disponível",
