@@ -1,0 +1,29 @@
+.infinitepay-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:42px;padding:11px 13px;border:1px solid #161616;border-radius:7px;background:#171717;color:#fff;font-size:11px;font-weight:750;letter-spacing:.01em;text-decoration:none;transition:transform .18s ease,background .18s ease,box-shadow .18s ease;box-shadow:0 3px 0 #b5e853}
+.infinitepay-button:hover{background:#242424;transform:translateY(-2px);box-shadow:0 5px 0 #b5e853}
+.infinitepay-button:focus-visible{outline:3px solid #b5e853;outline-offset:3px}
+.infinitepay-button-mark{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:5px;background:#b5e853;color:#17210b;font-size:12px;font-weight:900}
+.product-bottom{flex-wrap:wrap}
+.product-bottom .infinitepay-button{flex-basis:100%;margin-top:3px}
+.detail-infinitepay-cta{margin-top:12px}
+.infinitepay-admin .sales-back{display:inline-flex;align-items:center;gap:7px;border:0;background:transparent;color:var(--muted);font-size:11px;padding:0;margin:0 0 20px;cursor:pointer}
+.infinitepay-list{margin-top:28px}
+.infinitepay-toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;margin:20px 0}
+.infinitepay-toolbar .publication-search{flex:1;min-width:220px}
+.infinitepay-filters{display:flex;flex-wrap:wrap;gap:7px}
+.infinitepay-filters button{border:1px solid var(--line);background:transparent;color:var(--muted);padding:9px 12px;font-size:10px}
+.infinitepay-filters button.active{background:#171717;border-color:#171717;color:#fff}
+.infinitepay-product-list{display:flex;flex-direction:column}
+.infinitepay-product-row{display:grid;grid-template-columns:minmax(180px,.75fr) minmax(280px,1.25fr);gap:20px;padding:18px 0;border-top:1px solid var(--line);align-items:center}
+.infinitepay-product-info{display:flex;flex-direction:column;gap:6px;min-width:0}
+.infinitepay-product-info>strong{font-size:13px}
+.infinitepay-product-info>small{font-size:10px;color:var(--muted)}
+.infinitepay-status{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#8b6b28}
+.infinitepay-status.linked{color:#486c39}
+.infinitepay-link-editor{display:flex;flex-direction:column;gap:7px;min-width:0}
+.infinitepay-link-editor>label{font-size:10px;font-weight:700;color:#475342}
+.infinitepay-link-editor input{width:100%;min-width:0;border:1px solid var(--line);background:#fff;padding:11px;font-size:11px;outline-color:#b5e853}
+.infinitepay-row-actions{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap}
+.infinitepay-row-actions a,.infinitepay-clear{display:inline-flex;align-items:center;gap:5px;border:0;background:transparent;color:var(--muted);font-size:10px;text-decoration:none;cursor:pointer}
+.infinitepay-save{border:1px solid #171717;border-radius:5px;background:#171717;color:#fff;padding:10px 14px;font-size:10px;font-weight:700;cursor:pointer}
+.infinitepay-save:disabled{opacity:.4;cursor:not-allowed}
+@media(max-width:650px){.infinitepay-product-row{grid-template-columns:1fr;gap:12px}.infinitepay-toolbar{align-items:stretch}.infinitepay-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.infinitepay-filters button{padding:9px 5px;font-size:9px}.infinitepay-row-actions{justify-content:space-between}.infinitepay-admin .admin-title-row{align-items:flex-start}}
