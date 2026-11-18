@@ -3,6 +3,8 @@ import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, Star } from "lucide-
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/formatCurrency.js";
 import { storageImageUrl } from "../utils/storageImageUrl.js";
+import { getInfinitePayUrl } from "../utils/infinitePay.js";
+import "../styles/infinitepay.css";
 
 function ProductCard({ product, priority = false }) {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
@@ -11,6 +13,7 @@ function ProductCard({ product, priority = false }) {
   const description = product.description || "Uma criação CAN Group feita para você.";
   const media = useMemo(() => [...(product.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)), [product.product_images]);
   const currentMedia = media[mediaIndex];
+  const infinitePayUrl = getInfinitePayUrl(product.infinitepay_product_url);
   const mediaUrl = storageImageUrl(currentMedia?.storage_path);
   const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
   const isNew = product.created_at && Date.now() - new Date(product.created_at).getTime() <= 30 * 24 * 60 * 60 * 1000;
@@ -64,6 +67,7 @@ function ProductCard({ product, priority = false }) {
           <strong>{product.price_mode === "quote" ? "Sob consulta" : formatCurrency(product.price)}</strong>
           <Link className="product-details-link" to={`/produto/${product.slug}`}>Ver detalhes <ArrowUpRight size={15}/></Link>
         </div>
+        {infinitePayUrl && product.availability !== "unavailable" && <a className="infinitepay-button" href={infinitePayUrl} target="_blank" rel="noopener noreferrer" aria-label={`Comprar ${product.name} pela InfinitePay`}><span className="infinitepay-button-mark" aria-hidden="true">i</span> Comprar pela InfinitePay <ArrowUpRight size={15}/></a>}
       </div>
     </article>
   );
