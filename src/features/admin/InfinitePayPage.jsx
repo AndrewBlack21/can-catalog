@@ -66,7 +66,7 @@ export default function InfinitePayPage() {
     setBusyId(product.id); setError(""); setNotice("");
     const { error: saveError } = await supabase
       .from("products")
-      .update({ infinitepay_product_url: validation.value })
+      .update({ infinitepay_product_url: validation.value || null })
       .eq("id", product.id);
     if (saveError) {
       setError("Não foi possível salvar o link de " + product.name + ": " + saveError.message);
