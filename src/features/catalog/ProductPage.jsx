@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft, MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, MessageCircle, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
@@ -7,6 +7,8 @@ import { supabase, isSupabaseConfigured } from "../../lib/supabase.js";
 import { formatCurrency } from "../../utils/formatCurrency.js";
 import { productWhatsAppUrl } from "../../utils/whatsapp.js";
 import { storageImageUrl } from "../../utils/storageImageUrl.js";
+import { getInfinitePayUrl } from "../../utils/infinitePay.js";
+import "../../styles/infinitepay.css";
 
 export default function ProductPage() {
   const { slug } = useParams();
@@ -21,6 +23,7 @@ export default function ProductPage() {
   }, [slug]);
   const media = [...(product?.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const currentMedia = media[mediaIndex];
+  const infinitePayUrl = getInfinitePayUrl(product?.infinitepay_product_url);
   const mediaUrl = storageImageUrl(currentMedia?.storage_path);
   const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
   const moveMedia = (direction) => setMediaIndex(index => (index + direction + media.length) % media.length);
@@ -57,6 +60,7 @@ export default function ProductPage() {
               <span className="availability-text">{product.availability === "made_to_order" ? "Produzido sob encomenda" : product.availability === "unavailable" ? "Indisponível" : "Disponível"}</span>
               {product.available_colors?.length > 0 && <div className="detail-colors"><strong>Cores disponíveis</strong><div>{product.available_colors.map(color=><span key={color}>{color}</span>)}</div></div>}
               {product.customization_enabled && <label className="custom-field">Como você gostaria de personalizar?<textarea value={customization} onChange={e=>setCustomization(e.target.value)} placeholder="Informe nome, cor ou outros detalhes..." rows={4}/></label>}
+              {product.availability !== "unavailable" && infinitePayUrl && <a className="infinitepay-button detail-infinitepay-cta" href={infinitePayUrl} target="_blank" rel="noopener noreferrer"><span className="infinitepay-button-mark" aria-hidden="true">i</span> Comprar pela InfinitePay <ExternalLink size={15}/></a>}
               {product.availability !== "unavailable" && <a className="button button-dark detail-cta" href={productWhatsAppUrl(product, customization)} target="_blank" rel="noreferrer"><MessageCircle size={18}/> Consultar pelo WhatsApp</a>}
               <small className="detail-disclaimer">Disponibilidade final, personalização e prazo de produção serão confirmados no atendimento.</small>
             </div>
