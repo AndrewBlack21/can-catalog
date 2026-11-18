@@ -27,3 +27,53 @@
 .infinitepay-save{border:1px solid #171717;border-radius:5px;background:#171717;color:#fff;padding:10px 14px;font-size:10px;font-weight:700;cursor:pointer}
 .infinitepay-save:disabled{opacity:.4;cursor:not-allowed}
 @media(max-width:650px){.infinitepay-product-row{grid-template-columns:1fr;gap:12px}.infinitepay-toolbar{align-items:stretch}.infinitepay-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.infinitepay-filters button{padding:9px 5px;font-size:9px}.infinitepay-row-actions{justify-content:space-between}.infinitepay-admin .admin-title-row{align-items:flex-start}}
+
+/* Product card checkout: clear hierarchy, no overlap with price/details */
+.product-bottom.has-infinitepay{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px 10px;
+  padding-top:16px;
+}
+.product-bottom.has-infinitepay>strong{min-width:0}
+.product-bottom.has-infinitepay .product-details-link{min-height:36px;padding:8px 10px}
+.product-bottom.has-infinitepay>.infinitepay-button{
+  grid-column:1/-1;
+  display:flex;
+  width:100%;
+  min-height:40px;
+  padding:9px 13px;
+  border:1px solid #263322;
+  border-radius:5px;
+  background:#263322;
+  color:#fff;
+  box-shadow:inset 0 -3px 0 #b5e853;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.015em;
+  line-height:1.2;
+  text-align:center;
+}
+.product-bottom.has-infinitepay>.infinitepay-button:hover{
+  background:#34452e;
+  border-color:#34452e;
+  transform:translateY(-1px);
+  box-shadow:inset 0 -3px 0 #b5e853,0 5px 14px #233a2218;
+}
+.product-bottom.has-infinitepay .infinitepay-button-mark{
+  flex:0 0 20px;
+  width:20px;
+  height:20px;
+  border-radius:4px;
+  background:#b5e853;
+  color:#263322;
+  font-size:12px;
+}
+.product-bottom.has-infinitepay .infinitepay-button-label{flex:1}
+.product-bottom.has-infinitepay>.infinitepay-button svg{flex:0 0 auto}
+@media(max-width:600px){
+  .product-bottom.has-infinitepay{grid-template-columns:minmax(0,1fr);gap:9px;padding-top:13px}
+  .product-bottom.has-infinitepay .product-details-link{width:100%}
+  .product-bottom.has-infinitepay>.infinitepay-button{grid-column:1;min-height:38px;padding:8px 10px;font-size:10px}
+}
