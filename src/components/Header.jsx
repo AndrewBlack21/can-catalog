@@ -12,6 +12,9 @@ export default function Header({ admin = false }) {
       </Link>
       <nav>
         {admin && (
+          <Link className="text-link" to="/adm/infinitepay">InfinitePay ↗</Link>
+        )}
+        {admin && (
           <Link className="text-link" to="/">
             Ver catálogo ↗
           </Link>
