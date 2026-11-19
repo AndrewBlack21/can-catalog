@@ -11,7 +11,7 @@ function ProductCard({ product, priority = false }) {
   const [mediaIndex, setMediaIndex] = useState(0);
   const touchStartX = useRef(null);
   const description = product.description || "Uma criação CAN Group feita para você.";
-  const media = useMemo(() => [...(product.product_images || [])].filter(item => item.cloudinary_url || (typeof item.storage_path === "string" && (/^https?:\\/\\//i.test(item.storage_path)))).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)), [product.product_images]);
+  const media = useMemo(() => [...(product.product_images || [])].filter(item => item.cloudinary_url || (typeof item.storage_path === "string" && (/^https?:\/\//i.test(item.storage_path)))).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)), [product.product_images]);
   const currentMedia = media[mediaIndex];
   const infinitePayUrl = getInfinitePayUrl(product.infinitepay_product_url);
   const mediaUrl = productMediaUrl(currentMedia, 640);
