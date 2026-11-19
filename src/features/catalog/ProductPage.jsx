@@ -21,7 +21,7 @@ export default function ProductPage() {
     supabase.from("products").select("*,product_images(*)").eq("slug", slug).eq("published", true).maybeSingle()
       .then(({ data }) => { setProduct(data); setMediaIndex(0); setLoading(false); });
   }, [slug]);
-  const media = [...(product?.product_images || [])].filter(item => item.cloudinary_url || (typeof item.storage_path === "string" && /^https?:\\/\\//i.test(item.storage_path))).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  const media = [...(product?.product_images || [])].filter(item => item.cloudinary_url || (typeof item.storage_path === "string" && /^https?:\/\//i.test(item.storage_path))).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const currentMedia = media[mediaIndex];
   const infinitePayUrl = getInfinitePayUrl(product?.infinitepay_product_url);
   const mediaUrl = productMediaUrl(currentMedia, 1200);
