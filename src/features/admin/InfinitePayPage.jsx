@@ -4,6 +4,7 @@ import { ArrowLeft, Check, ExternalLink, Link2, LogOut, RefreshCw, Search, Store
 import Header from "../../components/Header.jsx";
 import { isSupabaseConfigured, supabase } from "../../lib/supabase.js";
 import { getInfinitePayUrl, validateInfinitePayUrl } from "../../utils/infinitePay.js";
+import { productMediaUrl } from "../../utils/productMediaUrl.js";
 
 export default function InfinitePayPage() {
   const [session, setSession] = useState(undefined);
@@ -22,7 +23,7 @@ export default function InfinitePayPage() {
     setError("");
     const { data, error: loadError } = await supabase
       .from("products")
-      .select("id,name,slug,published,availability,infinitepay_product_url")
+      .select("id,name,slug,published,availability,infinitepay_product_url,product_images(id,storage_path,cloudinary_url,cloudinary_resource_type,media_type,sort_order,alt_text)")
       .order("name");
     if (loadError) {
       setError("Não foi possível carregar os produtos. Confirme se a migration da InfinitePay já foi aplicada: " + loadError.message);
@@ -126,7 +127,17 @@ export default function InfinitePayPage() {
             const savedUrl = getInfinitePayUrl(product.infinitepay_product_url);
             const draftUrl = drafts[product.id] || "";
             const changed = draftUrl.trim() !== (product.infinitepay_product_url || "");
+            const coverMedia = [...(product.product_images || [])]
+              .filter(item => item.media_type !== "video")
+              .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0))
+              .find(item => productMediaUrl(item, 180));
+            const coverUrl = productMediaUrl(coverMedia, 180);
             return <article className="infinitepay-product-row" key={product.id}>
+              <div className="infinitepay-product-thumb">
+                {coverUrl
+                  ? <img src={coverUrl} alt={coverMedia?.alt_text || product.name} loading="lazy" />
+                  : <span aria-hidden="true">CAN</span>}
+              </div>
               <div className="infinitepay-product-info">
                 <strong>{product.name}</strong>
                 <small>{product.published ? "Publicado" : "Oculto"} · {product.availability === "unavailable" ? "Indisponível" : product.availability === "made_to_order" ? "Sob encomenda" : "Disponível"}</small>
