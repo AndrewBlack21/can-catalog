@@ -77,3 +77,54 @@
   .product-bottom.has-infinitepay .product-details-link{width:100%}
   .product-bottom.has-infinitepay>.infinitepay-button{grid-column:1;min-height:38px;padding:8px 10px;font-size:10px}
 }
+
+
+/* Admin dashboard shortcut for InfinitePay */
+.infinitepay-admin-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:1px solid #b5e853;
+  background:#b5e853;
+  color:#17210b;
+  font-weight:800;
+  box-shadow:inset 0 -3px 0 #8ebd2e;
+}
+.infinitepay-admin-link:hover{
+  background:#c5f36b;
+  border-color:#c5f36b;
+  color:#17210b;
+  transform:translateY(-1px);
+}
+.infinitepay-admin-link .infinitepay-button-mark{
+  background:#17210b;
+  color:#b5e853;
+}
+.infinitepay-product-row{
+  grid-template-columns:76px minmax(180px,.75fr) minmax(280px,1.25fr);
+}
+.infinitepay-product-thumb{
+  display:grid;
+  place-items:center;
+  width:76px;
+  height:76px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:#eef0e8;
+  color:var(--forest);
+  font-size:15px;
+  font-weight:800;
+}
+.infinitepay-product-thumb img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+@media(max-width:650px){
+  .infinitepay-product-row{grid-template-columns:76px minmax(0,1fr);gap:12px}
+  .infinitepay-link-editor{grid-column:1/-1}
+  .admin-title-actions .infinitepay-admin-link{flex:1}
+}
