@@ -6,7 +6,7 @@ export function getInfinitePayUrl(value) {
     const url = new URL(value);
     const hostname = url.hostname.toLowerCase();
     const trustedHost = INFINITEPAY_HOSTS.some(host => hostname === host || hostname.endsWith("." + host));
-    return url.protocol === "https:" && trustedHost ? url.toString() : "";
+    return url.protocol === "https:" && trustedHost && !url.username && !url.password && (!url.port || url.port === "443") ? url.toString() : "";
   } catch {
     return "";
   }
