@@ -4,7 +4,7 @@ alter table public.products
   add constraint products_infinitepay_url_host_check
   check (
     infinitepay_product_url is null
-    or infinitepay_product_url ~* '^https://([a-z0-9-]+\\.)*infinitepay\\.(io|com\\.br)(/|[?#]|$)'
+    or infinitepay_product_url ~* '^https://([a-z0-9-]+\.)*infinitepay\.(io|com\.br)(/|[?#]|$)'
   ) not valid;
 
 alter table public.products
