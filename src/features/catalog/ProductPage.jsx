@@ -5,7 +5,7 @@ import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import { supabase, isSupabaseConfigured } from "../../lib/supabase.js";
 import { formatCurrency } from "../../utils/formatCurrency.js";
-import { productWhatsAppUrl } from "../../utils/whatsapp.js";
+import { productWhatsAppUrl, paymentWhatsAppUrl } from "../../utils/whatsapp.js";
 import { productMediaUrl } from "../../utils/productMediaUrl.js";
 import { getInfinitePayUrl } from "../../utils/infinitePay.js";
 import "../../styles/infinitepay.css";
@@ -60,9 +60,12 @@ export default function ProductPage() {
               <span className="availability-text">{product.availability === "made_to_order" ? "Produzido sob encomenda" : product.availability === "unavailable" ? "Indisponível" : "Disponível"}</span>
               {product.available_colors?.length > 0 && <div className="detail-colors"><strong>Cores disponíveis</strong><div>{product.available_colors.map(color=><span key={color}>{color}</span>)}</div></div>}
               {product.customization_enabled && <label className="custom-field">Como você gostaria de personalizar?<textarea value={customization} onChange={e=>setCustomization(e.target.value)} placeholder="Informe nome, cor ou outros detalhes..." rows={4}/></label>}
-              {product.availability !== "unavailable" && infinitePayUrl && <a className="infinitepay-button detail-infinitepay-cta" href={infinitePayUrl} target="_blank" rel="noopener noreferrer"><span className="infinitepay-button-mark" aria-hidden="true">i</span> Comprar pela InfinitePay <ExternalLink size={15}/></a>}
-              {product.availability !== "unavailable" && <a className="button button-dark detail-cta" href={productWhatsAppUrl(product, customization)} target="_blank" rel="noreferrer"><MessageCircle size={18}/> Consultar pelo WhatsApp</a>}
-              <small className="detail-disclaimer">Disponibilidade final, personalização e prazo de produção serão confirmados no atendimento.</small>
+              {product.availability !== "unavailable" && infinitePayUrl && <>
+                <a className="infinitepay-button detail-infinitepay-cta" href={infinitePayUrl} target="_blank" rel="noopener noreferrer"><span className="infinitepay-button-mark" aria-hidden="true">i</span> Comprar pela InfinitePay <ExternalLink size={15}/></a>
+                <a className="button button-dark detail-cta" href={paymentWhatsAppUrl(product, customization)} target="_blank" rel="noreferrer"><MessageCircle size={18}/> Já realizei o pagamento — enviar dados pelo WhatsApp</a>
+              </>}
+              {product.availability !== "unavailable" && !infinitePayUrl && <a className="button button-dark detail-cta" href={productWhatsAppUrl(product, customization)} target="_blank" rel="noreferrer"><MessageCircle size={18}/> Consultar via WhatsApp</a>}
+              <small className="detail-disclaimer">Disponibilidade final, personalização e prazo de produção serão confirmados no atendimento. Pagamentos pela InfinitePay serão conferidos antes da preparação do pedido.</small>
             </div>
           </div>
         )}
