@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft, MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, MessageCircle, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import { supabase, isSupabaseConfigured } from "../../lib/supabase.js";
 import { formatCurrency } from "../../utils/formatCurrency.js";
-import { productWhatsAppUrl } from "../../utils/whatsapp.js";
-import { storageImageUrl } from "../../utils/storageImageUrl.js";
+import { productWhatsAppUrl, paymentWhatsAppUrl } from "../../utils/whatsapp.js";
+import { productMediaUrl } from "../../utils/productMediaUrl.js";
+import { getInfinitePayUrl } from "../../utils/infinitePay.js";
+import "../../styles/infinitepay.css";
 
 export default function ProductPage() {
   const { slug } = useParams();
@@ -19,10 +21,11 @@ export default function ProductPage() {
     supabase.from("products").select("*,product_images(*)").eq("slug", slug).eq("published", true).maybeSingle()
       .then(({ data }) => { setProduct(data); setMediaIndex(0); setLoading(false); });
   }, [slug]);
-  const media = [...(product?.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  const media = [...(product?.product_images || [])].filter(item => item.cloudinary_url || (typeof item.storage_path === "string" && /^https?:\/\//i.test(item.storage_path))).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
   const currentMedia = media[mediaIndex];
-  const mediaUrl = storageImageUrl(currentMedia?.storage_path);
-  const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
+  const infinitePayUrl = getInfinitePayUrl(product?.infinitepay_product_url);
+  const mediaUrl = productMediaUrl(currentMedia, 1200);
+  const currentIsVideo = currentMedia?.media_type === "video" || currentMedia?.cloudinary_resource_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.cloudinary_url || currentMedia?.storage_path || "");
   const moveMedia = (direction) => setMediaIndex(index => (index + direction + media.length) % media.length);
   return (
     <>
@@ -45,7 +48,7 @@ export default function ProductPage() {
                 </>}
               </div>
               {media.length > 1 && <div className="product-gallery-thumbnails">{media.map((item,index) => {
-                const url=storageImageUrl(item.storage_path);
+                const url=productMediaUrl(item, 180);
                 return <button type="button" key={item.id || item.storage_path} className={index===mediaIndex ? "active" : ""} onClick={()=>setMediaIndex(index)} aria-label={`Ver mídia ${index+1}`}>{item.media_type==="video" ? <span>VÍDEO</span> : <img src={url} alt=""/>}</button>;
               })}</div>}
             </div>
@@ -57,8 +60,12 @@ export default function ProductPage() {
               <span className="availability-text">{product.availability === "made_to_order" ? "Produzido sob encomenda" : product.availability === "unavailable" ? "Indisponível" : "Disponível"}</span>
               {product.available_colors?.length > 0 && <div className="detail-colors"><strong>Cores disponíveis</strong><div>{product.available_colors.map(color=><span key={color}>{color}</span>)}</div></div>}
               {product.customization_enabled && <label className="custom-field">Como você gostaria de personalizar?<textarea value={customization} onChange={e=>setCustomization(e.target.value)} placeholder="Informe nome, cor ou outros detalhes..." rows={4}/></label>}
-              {product.availability !== "unavailable" && <a className="button button-dark detail-cta" href={productWhatsAppUrl(product, customization)} target="_blank" rel="noreferrer"><MessageCircle size={18}/> Consultar pelo WhatsApp</a>}
-              <small className="detail-disclaimer">Disponibilidade final, personalização e prazo de produção serão confirmados no atendimento.</small>
+              {product.availability !== "unavailable" && infinitePayUrl && <>
+                <a className="infinitepay-button detail-infinitepay-cta" href={infinitePayUrl} target="_blank" rel="noopener noreferrer"><span className="infinitepay-button-mark" aria-hidden="true">i</span> Comprar pela InfinitePay <ExternalLink size={15}/></a>
+                <a className="button button-dark detail-cta" href={paymentWhatsAppUrl(product, customization)} target="_blank" rel="noreferrer"><MessageCircle size={18}/> Já realizei o pagamento — enviar dados pelo WhatsApp</a>
+              </>}
+              {product.availability !== "unavailable" && !infinitePayUrl && <a className="button button-dark detail-cta" href={productWhatsAppUrl(product, customization)} target="_blank" rel="noreferrer"><MessageCircle size={18}/> Consultar via WhatsApp</a>}
+              <small className="detail-disclaimer">Disponibilidade final, personalização e prazo de produção serão confirmados no atendimento. Pagamentos pela InfinitePay serão conferidos antes da preparação do pedido.</small>
             </div>
           </div>
         )}

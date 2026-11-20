@@ -2,17 +2,20 @@ import { memo, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/formatCurrency.js";
-import { storageImageUrl } from "../utils/storageImageUrl.js";
+import { productMediaUrl } from "../utils/productMediaUrl.js";
+import { getInfinitePayUrl } from "../utils/infinitePay.js";
+import "../styles/infinitepay.css";
 
 function ProductCard({ product, priority = false }) {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
   const [mediaIndex, setMediaIndex] = useState(0);
   const touchStartX = useRef(null);
   const description = product.description || "Uma criação CAN Group feita para você.";
-  const media = useMemo(() => [...(product.product_images || [])].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)), [product.product_images]);
+  const media = useMemo(() => [...(product.product_images || [])].filter(item => item.cloudinary_url || (typeof item.storage_path === "string" && (/^https?:\/\//i.test(item.storage_path)))).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)), [product.product_images]);
   const currentMedia = media[mediaIndex];
-  const mediaUrl = storageImageUrl(currentMedia?.storage_path);
-  const currentIsVideo = currentMedia?.media_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.storage_path || "");
+  const infinitePayUrl = getInfinitePayUrl(product.infinitepay_product_url);
+  const mediaUrl = productMediaUrl(currentMedia, 640);
+  const currentIsVideo = currentMedia?.media_type === "video" || currentMedia?.cloudinary_resource_type === "video" || /\.(mp4|webm)(\?|$)/i.test(currentMedia?.cloudinary_url || currentMedia?.storage_path || "");
   const isNew = product.created_at && Date.now() - new Date(product.created_at).getTime() <= 30 * 24 * 60 * 60 * 1000;
   const availability = {
     available: "Disponível",
@@ -60,9 +63,10 @@ function ProductCard({ product, priority = false }) {
         <p className={descriptionExpanded ? "product-description expanded" : "product-description"}>{description}</p>
         {description.length > 105 && <button type="button" className="product-more" aria-expanded={descriptionExpanded} onClick={() => setDescriptionExpanded(expanded => !expanded)}>{descriptionExpanded ? "Menos" : "Mais"}</button>}
         {product.available_colors?.length > 0 && <div className="product-colors"><small>Cores:</small>{product.available_colors.map(color => <span key={color}>{color}</span>)}</div>}
-        <div className="product-bottom">
+        <div className={`product-bottom${infinitePayUrl && product.availability !== "unavailable" ? " has-infinitepay" : ""}`}>
           <strong>{product.price_mode === "quote" ? "Sob consulta" : formatCurrency(product.price)}</strong>
           <Link className="product-details-link" to={`/produto/${product.slug}`}>Ver detalhes <ArrowUpRight size={15}/></Link>
+          {infinitePayUrl && product.availability !== "unavailable" && <a className="infinitepay-button" href={infinitePayUrl} target="_blank" rel="noopener noreferrer" aria-label={`Comprar ${product.name} pela InfinitePay`}><span className="infinitepay-button-mark" aria-hidden="true">i</span><span className="infinitepay-button-label">Comprar pela InfinitePay</span><ArrowUpRight size={15}/></a>}
         </div>
       </div>
     </article>
