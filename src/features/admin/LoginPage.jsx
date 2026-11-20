@@ -1,18 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Leaf, LockKeyhole } from "lucide-react";
 import Header from "../../components/Header.jsx";
 import { isSupabaseConfigured, supabase } from "../../lib/supabase.js";
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    let alive = true;
+
+    async function redirectIfAlreadyAuthenticated() {
+      if (!isSupabaseConfigured) return;
+
+      const { data, error: sessionError } = await supabase.auth.getSession();
+      const currentSession = sessionError ? null : data.session;
+      if (!currentSession?.user?.id) return;
+
+      const { data: admin, error: adminError } = await supabase
+        .from("catalog_admins")
+        .select("user_id")
+        .eq("user_id", currentSession.user.id)
+        .maybeSingle();
+
+      if (alive && !adminError && admin) navigate("/adm/painel", { replace: true });
+    }
+
+    redirectIfAlreadyAuthenticated();
+    return () => {
+      alive = false;
+    };
+  }, [navigate]);
+
   if (!isSupabaseConfigured)
     return (
       <>
-        <Header admin />
+        <Header />
         <main className="auth-wrap">
           <div className="auth-card">
             <LockKeyhole size={26} />
@@ -28,35 +55,42 @@ export default function LoginPage() {
         </main>
       </>
     );
+
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
     setBusy(true);
-    const { error: authError } = await supabase.auth.signInWithPassword({
+
+    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-    if (authError) {
+
+    if (authError || !authData.user) {
       setError("Não foi possível entrar. Confira o e-mail e a senha.");
       setBusy(false);
       return;
     }
+
     const { data: admin, error: adminError } = await supabase
       .from("catalog_admins")
       .select("user_id")
-      .eq("user_id", (await supabase.auth.getUser()).data.user.id)
+      .eq("user_id", authData.user.id)
       .maybeSingle();
+
     if (adminError || !admin) {
       await supabase.auth.signOut();
       setError("Esta conta não possui autorização administrativa.");
       setBusy(false);
       return;
     }
-    navigate("/adm/painel");
+
+    navigate("/adm/painel", { replace: true });
   }
+
   return (
     <>
-      <Header admin />
+      <Header />
       <main className="auth-wrap">
         <form className="auth-card" onSubmit={handleSubmit}>
           <span className="auth-icon">
