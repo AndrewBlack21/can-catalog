@@ -8,6 +8,7 @@ export default function Header({ admin = false }) {
   const [isAuthorizedAdmin, setIsAuthorizedAdmin] = useState(false);
 
   useEffect(() => {
+    if (!supabase) return undefined;
     let alive = true;
 
     supabase.auth.getSession().then(({ data, error }) => {
@@ -28,7 +29,7 @@ export default function Header({ admin = false }) {
     let alive = true;
 
     async function verifyAdmin() {
-      if (!session?.user?.id) {
+      if (!supabase || !session?.user?.id) {
         setIsAuthorizedAdmin(false);
         return;
       }
